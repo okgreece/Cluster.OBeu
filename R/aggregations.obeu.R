@@ -29,10 +29,10 @@
 #' @rdname aggregations.obeu
 #' 
 #' @import jsonlite
-#' @import reshape
 #' @import reshape2
 #' @import stringr
 #' 
+#' @export
 #' @export
 ############################################################################
 
@@ -45,7 +45,8 @@ aggregations.obeu<- function(data, what="...", to_what="variable",
 
   molten_data=reshape2::melt(data)
   names(molten_data)=tolower(names(molten_data))
-
+  .Export(molten_data)
+  
   ##Formula
   if(missing(what)==F){
 
