@@ -1,4 +1,4 @@
 # OBeU
 # To install the package
 #install.packages("devtools") if not already
-# install_github("/OBeU")
+# install_github("okgreece/OBeU")
