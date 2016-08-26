@@ -11,5 +11,10 @@ BugReports: https://github.com/okgreece/OBeU/issues
 License: GPL-3
 LazyData: TRUE
 Suggests: testthat
-Imports: forecast, jsonlite, reshape2, stringr, tseries
+Imports: 
+  forecast, 
+  jsonlite, 
+  reshape2, 
+  stringr, 
+  tseries
 RoxygenNote: 5.0.1
