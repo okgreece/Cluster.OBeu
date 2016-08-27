@@ -5,8 +5,8 @@
 
 
 #OpenCPU Short Guide- OBEU in R 
-or open it with google doc:
-https://docs.google.com/document/d/1Ee68KSOOoAbTzsVga8vzw7be7Qz-f9Pu7uyVW3Viiww
+(or open it with google doc:
+https://docs.google.com/document/d/1Ee68KSOOoAbTzsVga8vzw7be7Qz-f9Pu7uyVW3Viiww)
 
 
 Go to: http://okfnrg.math.auth.gr/ocpu/test/
