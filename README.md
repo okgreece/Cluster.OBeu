@@ -1,17 +1,17 @@
 # OBeU R package
-# To install the package:
-#install.packages("devtools") if not already
+##To install the package:
+##install.packages("devtools") if not already
 # install_github("okgreece/OBeU")
 
 
-##OpenCPU Short Guide- OBEU in R 
+#OpenCPU Short Guide- OBEU in R 
 or open it with google doc:
 https://docs.google.com/document/d/1Ee68KSOOoAbTzsVga8vzw7be7Qz-f9Pu7uyVW3Viiww
 
 
 Go to: http://okfnrg.math.auth.gr/ocpu/test/
 
-#How to use functions:
+##How to use functions:
 
 type to the endpoint:
 ../library/{name of the library}/R/{function}
@@ -23,7 +23,7 @@ to run a function:
 select method: post
 
 
-#Time Series Example:
+##Time Series Example:
 
 Go to http://okfnrg.math.auth.gr/ocpu/test/
 
@@ -54,9 +54,9 @@ To see the results: copy the /ocpu/tmp/{something}/R/.val (the first choice on t
 and paste http://okfnrg.math.auth.gr/ocpu/tmp/{something}/R/.val on a new tab.
 
 
-#Aggregation Example:
+##Aggregation Example:
 
-  #Import/Read a dataset (from local repo):
+  ###Import/Read a dataset (from local repo):
 Go to http://okfnrg.math.auth.gr/ocpu/test/
 
  Copy and paste to the endpoint the following:
@@ -77,7 +77,7 @@ To see the dataset: copy the /ocpu/tmp/{something}/R/.val (the first choice on t
 and paste http://okfnrg.math.auth.gr/ocpu/tmp/{something}/R/.val on a new tab. 
 (***KEEP something’s name to use at next step)
 
-  #Aggregate
+  ###Aggregate
 Copy and paste to the endpoint the following
 ../library/OBeU/R/aggregations.obeu
 
@@ -108,17 +108,17 @@ https://www.opencpu.org/jslib.html
 #About the package:
 Three ways to install it in R or RStudio:
 
-#Github directly:
+##Github directly:
 https://github.com/okgreece/OBeU
 
-#Source package:
+##Source package:
 https://github.com/okgreece/OBeU-source-pack
 
-#Binary package:
+##Binary package:
 https://github.com/okgreece/OBeu-binary-R-package
 
-This package is under development so some issues are obvious.
-More functions will be included.
+#This package is under development so some issues are obvious.
+#More functions will be included.
 
 
 
