@@ -1,5 +1,6 @@
 # OBeU R package
 ##To install the package:
+
 a.) library(devtools) or 
 install.packages("devtools") if not already 
 and then library(devtools)
@@ -36,7 +37,9 @@ select method: post
 3.) Select Method: Post
 
 4.) Add parameters and set:
+
   a.)Param Name: tsdata
+  
   b.)Param Value one of the following:
   
       Athens_draft_ts
@@ -52,7 +55,9 @@ select method: post
 
 
 5.)Add another one parameters and set:
+
   a.)Param Name: prediction_steps
+  
   b.)Param Value: 4 (or another number)
 
 6.) Ready! Click on Ajax request!
@@ -64,7 +69,8 @@ select method: post
 
 ##Aggregation Example:
 
-  ##Import/Read a dataset (from local repo):
+  Import/Read a dataset (from local repo):
+  
 1.) Go to http://okfnrg.math.auth.gr/ocpu/test/
 
 2.) Copy and paste to the endpoint the following:
@@ -73,7 +79,9 @@ select method: post
 3.) Select Method: Post
 
 4.) Add file and set:
+
   a.)Param Name: file
+  
   b.)Select the csv file from your local directory
 
 5.) Add if necessary the appropriate parameters and
@@ -85,14 +93,18 @@ select method: post
 8.) and paste http://okfnrg.math.auth.gr/ocpu/tmp/{something}/R/.val on a new tab. 
 (***KEEP something’s name to use at next step)
 
-  ##Aggregate
+
+  Aggregate
+  
 1.) Copy and paste to the endpoint the following
 ../library/OBeU/R/aggregations.obeu
 
 2.) Select Method: Post
 
 3.) Add ile and set:
+
   a.) Param Name: data
+  
   b.) Param Value: copy and paste the {something} of the previous step
 
 4.) Add another parameters if necessary
