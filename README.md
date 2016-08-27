@@ -38,10 +38,15 @@ select method: post
 4.) Add parameters and set:
   a.)Param Name: tsdata
   b.)Param Value one of the following:
+  
       Athens_draft_ts
+      
       Athens_revised_ts
+      
       Athens_reserved_ts
+      
       Athens_approved_ts
+      
       Athens_executed_ts
 
 
