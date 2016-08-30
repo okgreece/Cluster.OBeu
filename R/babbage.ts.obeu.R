@@ -6,10 +6,10 @@
 #' 
 #' @usage babbage.ts.obeu(json_data,time,amount,prediction_step)
 #' 
-#' @param json_data The json output from babbage api.
+#' @param json_data The json string, URL or file from babbage api.
 #' @param time Specify the time label of the json time series data.
 #' @param amount Specify the amount label of the json time series data.
-#' @param prediction_steps The number of prediction steps
+#' @param prediction_steps The number of prediction steps.
 #' 
 #' @details 
 #' 
