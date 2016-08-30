@@ -7,13 +7,13 @@
 babbage.ts.obeu(json_data,time,amount,prediction_step)
 }
 \arguments{
-\item{json_data}{The json output from babbage api.}
+\item{json_data}{The json string, URL or file from babbage api.}
 
 \item{time}{Specify the time label of the json time series data.}
 
 \item{amount}{Specify the amount label of the json time series data.}
 
-\item{prediction_steps}{The number of prediction steps}
+\item{prediction_steps}{The number of prediction steps.}
 }
 \value{
 A json string with the resulted parameters of the ts.obeu.
