@@ -4,7 +4,7 @@
 \alias{babbage.ts.obeu}
 \title{Reading and analyze babbage time series data}
 \usage{
-babbage.ts.obeu(json_data,time,amount,prediction_step)
+babbage.ts.obeu(json_data,time,amount,prediction_steps)
 }
 \arguments{
 \item{json_data}{The json string, URL or file from babbage api.}

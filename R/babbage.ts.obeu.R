@@ -4,7 +4,7 @@
 #' @description
 #' EXtract and analyze the time series data from babbage api, using the ts.obeu function.
 #' 
-#' @usage babbage.ts.obeu(json_data,time,amount,prediction_step)
+#' @usage babbage.ts.obeu(json_data,time,amount,prediction_steps)
 #' 
 #' @param json_data The json string, URL or file from babbage api.
 #' @param time Specify the time label of the json time series data.
@@ -35,7 +35,7 @@
 #' 
 #' @export
 ############################################################################
-babbage.ts.obeu<-function(json_data,time,amount,prediction_step){
+babbage.ts.obeu<-function(json_data,time,amount,prediction_steps){
   
   data <- jsonlite::fromJSON(json_data)
   data<-data$cells[-3]
