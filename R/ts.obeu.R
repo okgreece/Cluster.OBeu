@@ -39,13 +39,13 @@
 #' @export
 ############################################################################
 
-ts.obeu<-function(tsdata,prediction_steps){
+ts.obeu2<-function(tsdata,prediction_steps){
 
   Sys.setlocale(category = "LC_ALL", locale = "Greek")
   
   # Stop if no time series data provided
 
-  if( length(tsdata)<2 ) {
+  if( length(tsdata)<3 ) {
     stop("Invalid time series object.")}
 
   # Stop if no time series data provided
@@ -78,12 +78,12 @@ ts.obeu<-function(tsdata,prediction_steps){
   ## If TS is <20
   ###############################################################################################
 
-  if ( length(tsdata)<=20) {
+  if ( length(tsdata)<=10) {
 
     #Selection of the appropriate model
     aiccc<-list()
     modelss<-list()
-    for(i in 1:8){
+    for(i in 1:(length(tsdata)-3)){
       modelss[[i]]<-forecast::Arima(tsdata,order=c(i,1,1))
       aiccc[[i]]<-c(aic=modelss[[i]]$aic,order=c(i,1,1))
     }
@@ -97,6 +97,26 @@ ts.obeu<-function(tsdata,prediction_steps){
 
     ## Forecasting Time Series
     forecasts<-forecast::forecast(object=ts_model,h = prediction_steps)
+  }
+    else if ( length(tsdata)>10 && length(tsdata)<=20) {
+      
+      #Selection of the appropriate model
+      aiccc<-list()
+      modelss<-list()
+      for(i in 1:5){
+        modelss[[i]]<-forecast::Arima(tsdata,order=c(i,1,1))
+        aiccc[[i]]<-c(aic=modelss[[i]]$aic,order=c(i,1,1))
+      }
+      mat<-data.frame(matrix(unlist(aiccc),ncol=4,byrow = T))
+      colnames(mat)=c("aic","ar","diff","ma")
+      minmat<-mat[mat$aic==min(mat$aic),]
+      x<-c(minmat$ar,minmat$diff,minmat$ma)
+      
+      #Fit the appropriate model
+      ts_model<-forecast::Arima(tsdata,order=x)
+      
+      ## Forecasting Time Series
+      forecasts<-forecast::forecast(object=ts_model,h = prediction_steps)
 
   }else if(length(tsdata)>20 ) {
     ###############################################################################################
@@ -180,9 +200,10 @@ ts.obeu<-function(tsdata,prediction_steps){
               data=tsdata,
               predict_time=stats::time(forecasts$mean),
               predict_values=forecasts$mean,
-              up=forecasts$upper,
-              low=forecasts$lower)
-
+              up80=forecasts$upper[,"80%"],
+              low80=forecasts$lower[,"80%"],
+              up95=forecasts$upper[,"95%"],
+              low95=forecasts$lower[,"95%"] )
   ################  RESULT  ################
 
   parameters<-jsonlite::toJSON(param)
