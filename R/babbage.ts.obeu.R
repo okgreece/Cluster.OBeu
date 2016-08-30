@@ -42,7 +42,7 @@ babbage.ts.obeu<-function(json_data,time,amount,prediction_steps){
   names(data)=c("time","amount")
   data$time<-as.integer(data$time)
   
-  # Check prediction_step
+  # Check prediction_steps
   #if( is.nan(prediction_steps)==T | is.na(prediction_steps)==T |
    #   is.character(prediction_steps)==T | is.numeric(as.numeric(as.character(prediction_steps)))==F){
     #stop("Please give an integer input as 'prediction_steps', e.g. prediction_steps= 3.")}
