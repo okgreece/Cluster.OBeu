@@ -39,7 +39,7 @@
 #' @export
 ############################################################################
 
-ts.obeu2<-function(tsdata,prediction_steps){
+ts.obeu<-function(tsdata,prediction_steps){
 
   Sys.setlocale(category = "LC_ALL", locale = "Greek")
   
