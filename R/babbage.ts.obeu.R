@@ -28,7 +28,7 @@
 #' #Not YET an OBeu Example
 #' 
 #' 
-#' @rdname ts.obeu
+#' @rdname babbage.ts.obeu
 #' 
 #' @import jsonlite
 #' @import lubridate
