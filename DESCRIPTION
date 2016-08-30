@@ -16,4 +16,6 @@ Imports:
   jsonlite, 
   reshape2, 
   stringr, 
-  tseriesRoxygenNote: 5.0.1
+  tseries
+RoxygenNote: 5.0.1
+
