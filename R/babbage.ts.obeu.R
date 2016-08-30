@@ -47,7 +47,7 @@ babbage.ts.obeu<-function(json_data,time,amount,prediction_steps=1){
    #   is.character(prediction_steps)==T | is.numeric(as.numeric(as.character(prediction_steps)))==F){
     #stop("Please give an integer input as 'prediction_steps', e.g. prediction_steps= 3.")}
   
-  # Check time
+  # Check time.
   #if( any(is.nan(data$time)==T) | any(is.na(data$time)==T) |
    #   is.numeric(as.numeric(as.character(data$time)))==F | 
     #  any(data$time>lubridate::year(now()))==T | any(data$time<1990)==T) {
