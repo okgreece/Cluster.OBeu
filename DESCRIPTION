@@ -12,7 +12,8 @@ License: GPL-3
 LazyData: TRUE
 Suggests: testthat
 Imports: 
-  forecast, 
+  forecast,
+  lubridate,
   jsonlite, 
   reshape2, 
   stringr, 

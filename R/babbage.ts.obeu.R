@@ -26,11 +26,7 @@
 #' 
 #' @examples
 #' #Not YET an OBeu Example
-#' ts.obeu(Athens_draft_ts,1)
-#' ts.obeu(Athens_revised_ts,2)
-#' ts.obeu(Athens_reserved_ts,3)
-#' ts.obeu(Athens_approved_ts,4)
-#' ts.obeu(Athens_executed_ts,5)
+#' 
 #' 
 #' @rdname ts.obeu
 #' 
