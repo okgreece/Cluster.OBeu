@@ -35,7 +35,7 @@
 #' 
 #' @export
 ############################################################################
-babbage.ts.obeu2<-function(json_data,time,amount,prediction_steps){
+babbage.ts.obeu<-function(json_data,time,amount,prediction_steps){
   
   data <- jsonlite::fromJSON(json_data)
   data<-data$cells[-3]
