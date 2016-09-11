@@ -33,7 +33,6 @@
 #' @import stringr
 #' 
 #' @export
-#' @export
 ############################################################################
 
 aggregations.obeu<- function(data, what="...", to_what="variable",

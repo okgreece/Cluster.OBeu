@@ -16,7 +16,8 @@ Imports:
   lubridate,
   jsonlite, 
   reshape2, 
-  stringr, 
+  stringr,
+  trend,
   tseries
 RoxygenNote: 5.0.1
 
