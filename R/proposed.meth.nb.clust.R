@@ -41,7 +41,7 @@ proposed.meth.nb.clust<-function(clv){
   tab<-table(tab[,1])
   cluster.details=which.max(tab)
   cluster.details<-names(cluster.details)
-  cluster.details<-strsplit(cluster.method,".",fixed=T)
+  cluster.details<-strsplit(cluster.details,".",fixed=T)
   cluster.details<-list(nb.clust=as.integer(cluster.details[[1]][1]),method.cluster=cluster.details[[1]][2])
   return(cluster.details)
 }
