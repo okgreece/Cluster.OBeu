@@ -24,8 +24,8 @@
 #' 
 #' @rdname cluster.obeu
 #' @export
-############################################################################
-cluster.obeu<-function(cluster.data,cluster.method=NULL,cluster.number=NULL,distance="euclidean"){
+########################################################################################################
+cluster.obeu<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, distance="euclidean"){
   
   if(ncol(cluster.data)<2)
   {
