@@ -4,7 +4,7 @@
 #' @description 
 #' ...
 #' 
-#' @usage cluster.obeu(cluster.data,cluster.method=NULL,cluster.number=NULL,distance="euclidean")
+#' @usage cl.analysis(cluster.data,cluster.method=NULL,cluster.number=NULL,distance="euclidean")
 #' @param cluster.data The input data
 #' @param cluster.method The clustering algorithm
 #' @param cluster.number The number of clusters
@@ -20,12 +20,12 @@
 #' 
 #' @examples
 #' #OBeu Example
-#' cluster.obeu(Budget_Thessaloniki_2015_Expenditure,"pam",3)
+#' cl.analysis(Budget_Thessaloniki_2015_Expenditure,"pam",3)
 #' 
-#' @rdname cluster.obeu
+#' @rdname cl.analysis
 #' @export
 ########################################################################################################
-cluster.obeu<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, distance="euclidean"){
+cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, distance="euclidean"){
   
   if(ncol(cluster.data)<2)
   {
