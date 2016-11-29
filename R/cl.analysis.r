@@ -69,9 +69,9 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     }  
   
   
-  ########################################################################  
+################################################################################
   ## Hierarchical methods
-  ########################################################################
+################################################################################
   if(cluster.method %in% c("hierarchical","diana","agnes") ){
     # hierarchical
     if(cluster.method == "hierarchical"){
@@ -116,7 +116,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     )
   }
   
-  ##########################################################################
+################################################################################
   
   ## K-Means
   
@@ -124,18 +124,21 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     
     kmeans=kmeans(cluster.data,cluster.number)
     
-    #model parameters
-    
-    modelparam<-list( data=cluster.data,
-                      clusters=kmeans$cluster,
-                      cluster.centers=kmeans$centers,
+    #comparative parameters
+    comp.parameters=list(
                       total.sumOfsquares=kmeans$totss,
                       within.sumofsquares=kmeans$withinss,
                       total.within.sumofsquares=kmeans$tot.withinss,
                       between.sumofsquares=kmeans$betweenss,
                       cluster.size=kmeans$size)
     
-    ##########################################################################
+    #model parameters
+    modelparam<-list( data=cluster.data,
+                      clusters=kmeans$cluster,
+                      cluster.centers=kmeans$centers,
+                      compare=comp.parameters)
+    
+################################################################################
     
     ## Pam (Partitioning Around Medoids)
     
@@ -143,20 +146,22 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     
     pam=cluster::pam(cluster.data,cluster.number, metric = "euclidean")
     
-    #model parameters
-    
-    modelparam<-list( data=cluster.data,
-                      medoids=pam$medoids,
-                      medoids.id=pam$id.med,
-                      clusters=pam$clustering,
-                      cluster.size=pam$clusinfo[,"size"],
+    #comparative parameters
+    comp.parameters<- list(cluster.size=pam$clusinfo[,"size"],
                       cluster.max_diss=pam$clusinfo[,"max_diss"],
                       cluster.av_diss=pam$clusinfo[,"av_diss"],
                       cluster.diameter=pam$clusinfo[,"diameter"],
                       cluster.separation=pam$clusinfo[,"separation"],
                       silhouette.info=pam$silinfo)
     
-    ##########################################################################
+   #model parameters
+    modelparam<-list( data=cluster.data,
+                      medoids=pam$medoids,
+                      medoids.id=pam$id.med,
+                      clusters=pam$clustering,
+                      compare=comp.parameters)
+    
+################################################################################
     
     ## Clara (Clustering Large Applications)
     
@@ -164,19 +169,23 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     
     clara=cluster::clara(cluster.data, cluster.number, metric = "euclidean", samples=100)
     
-    #model parameters
-    
-    modelparam<-list( data=cluster.data,
-                      medoids=clara$medoids,
-                      medoids.id=clara$i.med,
-                      clusters=clara$clustering,
+    #comparative parameters
+    comp.parameters<- list(
                       cluster.size=clara$clusinfo[,"size"],
                       cluster.max_diss=clara$clusinfo[,"max_diss"],
                       cluster.av_diss=clara$clusinfo[,"av_diss"],
                       cluster.diameter=clara$clusinfo[,"isolation"],
                       silhouette.info=clara$silinfo)
+      
     
-    ##########################################################################
+    #model parameters
+    modelparam<-list( data=cluster.data,
+                      medoids=clara$medoids,
+                      medoids.id=clara$i.med,
+                      clusters=clara$clustering,
+                      compare=comp.parameters)
+    
+################################################################################
     
     ## Fanny (Fuzzy Analysis Clustering)
     
@@ -185,19 +194,23 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     
     fanny=cluster::fanny(cluster.data, cluster.number, metric = "euclidean")
     
-    #model parameters
-    
-    modelparam<-list( data=cluster.data,
+    #comparative parameters
+    comp.parameters<- list( 
                       membership=fanny$membership,
                       coeff=fanny$coeff,
                       memb.exp=fanny$memb.exp,
-                      clusters=fanny$clustering,
                       fanny$k.crisp,
                       fanny$objective,
                       fanny$convergence,
                       fanny$silinfo)
+      
+    #model parameters
+    modelparam<-list( 
+                      data=cluster.data,
+                      clusters=fanny$clustering,
+                      compare=comp.parameters)
     
-    ##########################################################################
+################################################################################
     ## SOM (Self-Organizing Maps)
     
   }else if(cluster.method=="som"){
@@ -206,15 +219,15 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     
     modelparam<-list( )  
     
-    ##########################################################################
+################################################################################
     
     ## Model Based Clustering
     
   }else if(cluster.method=="model"){
     mclust=mclust::Mclust(cluster.data, cluster.number)
-    #model parameters
     
-    modelparam<-list( data= acidosis.patients,
+    #comparative parameters
+    comp.parameters<- list(  
                       model.name= mclust$modelName,
                       observations= mclust$n,
                       data.dimension= mclust$d,
@@ -228,13 +241,17 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       mean.component=mclust$parameters$mean,
                       variance.components=mclust$parameters$variance,
                       class.probs=mclust$z,
+                      uncertainty= mclust$uncertainty)
+    #model parameters
+    modelparam<-list( 
+                      data= cluster.data,
                       classification=mclust$classification,
-                      uncertainty= mclust$uncertainty )
+                      compare=comp.parameters)
   }
   
-  ##############################################################
+################################################################################
   ## JSON Output
-  ##############################################################
+################################################################################
   
   parameters<- jsonlite::toJSON(modelparam)
   return(parameters)
