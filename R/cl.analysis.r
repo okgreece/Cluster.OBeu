@@ -253,6 +253,9 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
   ## JSON Output
 ################################################################################
   
+  # extend model parameters
+  modelparam <- modifyList(list(cluster.method=cluster.method, cluster.number=cluster.number), modelparam)
+  
   parameters<- jsonlite::toJSON(modelparam)
   return(parameters)
 }
