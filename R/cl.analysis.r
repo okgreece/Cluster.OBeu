@@ -138,6 +138,14 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       cluster.centers=kmeans$centers,
                       compare=comp.parameters)
     
+    # PCA
+    data.pca <- prcomp(cluster.data, scale. = T, center = T)
+    # ellipses + convex hulls
+    cluster.ellipses <- .ellipses(modelparam, data.pca)
+    cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
+    # model parameters
+    modelparam <- modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+    
 ################################################################################
     
     ## Pam (Partitioning Around Medoids)
