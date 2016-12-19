@@ -14,7 +14,7 @@
 #'  
 #' @return ...
 #' 
-#' @author Kleanthis Koupidis
+#' @author Kleanthis Koupidis, Jaroslav Kuchar
 #' 
 #' @seealso ...
 #' 
@@ -168,6 +168,13 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       medoids.id=pam$id.med,
                       clusters=pam$clustering,
                       compare=comp.parameters)
+    # PCA
+    data.pca <- prcomp(cluster.data, scale. = T, center = T)
+    # ellipses + convex hulls
+    cluster.ellipses <- .ellipses(modelparam, data.pca)
+    cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
+    # model parameters
+    modelparam <- modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
@@ -192,6 +199,13 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       medoids.id=clara$i.med,
                       clusters=clara$clustering,
                       compare=comp.parameters)
+    # PCA
+    data.pca <- prcomp(cluster.data, scale. = T, center = T)
+    # ellipses + convex hulls
+    cluster.ellipses <- .ellipses(modelparam, data.pca)
+    cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
+    # model parameters
+    modelparam <- modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
@@ -217,16 +231,15 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       data=cluster.data,
                       clusters=fanny$clustering,
                       compare=comp.parameters)
+    # PCA
+    data.pca <- prcomp(cluster.data, scale. = T, center = T)
+    # ellipses + convex hulls
+    cluster.ellipses <- .ellipses(modelparam, data.pca)
+    cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
+    # model parameters
+    modelparam <- modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
-################################################################################
-    ## SOM (Self-Organizing Maps)
-    
-  }else if(cluster.method=="som"){
-    
-    #model parameters
-    
-    modelparam<-list( )  
-    
+
 ################################################################################
     
     ## Model Based Clustering
@@ -255,6 +268,9 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       data= cluster.data,
                       classification=mclust$classification,
                       compare=comp.parameters)
+    
+    plot(Mclust(cluster.data, cluster.number), what ="classification")
+    
   }
   
 ################################################################################
