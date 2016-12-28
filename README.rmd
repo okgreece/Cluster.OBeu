@@ -1,6 +1,6 @@
 ---
 title: Cluster.OBeu <img src="obeu_logo.png" align="right" />
-author: "Kleanthis Koupidis, Charalampos Bratsas"
+author: "Kleanthis Koupidis, Charalampos Bratsas","Jaroslav Kuchar" 
 date: "November 9, 2016"
 output:
   github_document:
