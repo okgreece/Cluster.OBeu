@@ -14,7 +14,7 @@
 #' inputs.data <- scale(iris[,1:4])
 #' inputs.clustering <- cl.analysis(inputs.data,"kmeans",3)
 #' plot.clustering.model(inputs.clustering, parameters = list(convex.hulls=TRUE))
-#'
+#' @import car
 #' @export
 plot.clustering.model <- function(clustering.model, parameters = list()) {
   # convert json to list if passed as json

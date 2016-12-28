@@ -21,6 +21,7 @@ r_packages:
  - jsonlite
  - reshape
  - graphics
+ - car
 apt_packages:
   - libxml2-dev
 sudo: required

@@ -80,19 +80,21 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     if(cluster.method == "hierarchical"){
       
       tree <- stats::hclust(stats::dist(cluster.data), method = "ward.D2")
-      
+      stats::plot.hclust(tree)
     }   
     # Diana (DIvisive ANAlysis Clustering)
     
     else if(cluster.method == "diana") {
       
       tree <- cluster::diana(cluster.data)
+      cluster::plot.diana(tree)
     }
     # Agnes (Agglomerative Nesting- Hierarchical Clustering)
     
     else if(cluster.method == "agnes") {
       
       tree <- cluster::agnes(cluster.data, method = "ward")
+      cluster::plot.agnes(tree)
     }  
     
     ## Create Clusters
@@ -124,7 +126,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     merge=tree$merge,
     labels=tree$labels
   )
-  plot(tree)
+  
   
   compare= list(
     method= tree$dist.method)
