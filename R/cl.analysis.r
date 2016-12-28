@@ -12,7 +12,7 @@
 #' 
 #' @details ...
 #'  
-#' @return ...
+#' @return This function returns the graphical paremeters of the selected algorithm. 
 #' 
 #' @author Kleanthis Koupidis, Jaroslav Kuchar
 #' 
@@ -37,7 +37,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
   if(is.null(cluster.method) & is.null(cluster.number)){
     
     method_clvalid<-clValid::clValid(as.matrix(cluster.data),2:5,
-                            clMethods=c("hierarchical","diana","agnes","kmeans", "pam", "clara","fanny", "som", "model", "sota"),
+                            clMethods=c("hierarchical","diana","agnes","kmeans", "pam", "clara","fanny", "model"),
                             validation=c("internal","stability"),
                             metric = "euclidean")
     
@@ -50,7 +50,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
   if(is.null(cluster.method)){
     
     method_clvalid<-clValid::clValid(as.matrix(cluster.data),cluster.number,
-                            clMethods=c("hierarchical","diana","agnes","kmeans", "pam", "clara","fanny", "som", "model", "sota"),
+                            clMethods=c("hierarchical","diana","agnes","kmeans", "pam", "clara","fanny", "model"),
                             validation=c("internal","stability"),
                             metric = "euclidean")	
     cluster.method<- proposed.methclust(method_clvalid)
@@ -76,29 +76,29 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     # hierarchical
     if(cluster.method == "hierarchical"){
       
-      hierarchical <- stats::hclust(dist(cluster.data), method = "ward.D2")
+      tree <- stats::hclust(dist(cluster.data), method = "ward.D2")
       
     }   
     # Diana (DIvisive ANAlysis Clustering)
     
     else if(cluster.method == "diana") {
       
-      hierarchical <- cluster::diana(cluster.data)
+      tree <- cluster::diana(cluster.data)
     }
     # Agnes (Agglomerative Nesting- Hierarchical Clustering)
     
     else if(cluster.method == "agnes") {
       
-      hierarchical <- cluster::agnes(cluster.data, method = "ward")
+      tree <- cluster::agnes(cluster.data, method = "ward")
     }  
     
     ## Create Clusters
-    create.clust <- stats::cutree(hierarchical, k = cluster.number)
+    create.clust <- stats::cutree(tree, k = cluster.number)
     
     ## Add properties to the hierarchical model
-    hierarchical$cluster = create.clust
-    hierarchical$nb.clust <- cluster.number
-    hierarchical$size <- as.vector(table(create.clust))
+    tree$cluster = create.clust
+    tree$nb.clust <- cluster.number
+    tree$size <- as.vector(table(create.clust))
     
     ## Define model class
     class(cluster.method) <- c(class(cluster.method), "hcut.clust")
@@ -106,16 +106,25 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     # Model Parameters
     
     modelparam<-list( data=cluster.data,
-                      clusters=hierarchical$cluster,
-                      hierarchical$nb.clust <- cluster.number,
-                      size=hierarchical$size,
-                      cluster_merging=hierarchical$merge,
-                      clustering_height=hierarchical$height,
-                      order=hierarchical$order,
-                      clusters=hierarchical$labels
+                      clusters=tree$cluster,
+                      tree$nb.clust <- cluster.number,
+                      size=tree$size,
+                      cluster_merging=tree$merge,
+                      clustering_height=tree$height,
+                      order=tree$order,
+                      clusters=tree$labels
     )
   }
+  model_parameters= list( 
+    height= hc$height,
+    order=hc$order,
+    merge=hc$merge,
+    labels=hc$labels
+  )
+  plot(hc)
   
+  compare= list(
+    method= hc$dist.method)
 ################################################################################
   
   ## K-Means
