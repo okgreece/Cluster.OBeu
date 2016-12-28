@@ -11,9 +11,11 @@ output:
   number_sections: yes
 subtitle: A Short Guide in R and OpenCPU environments
 ---
-
+[![Build Status](https://travis-ci.org/okgreece/Cluster.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/Cluster.OBeu)
 [![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/pulls.svg)](https://github.com/okgreece/Cluster.OBeu/pulls)
 [![Github Issues](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/issues.svg)](https://github.com/okgreece/Cluster.OBeu/issues)
+
+
 
 This document describes the use of the functions implemented in DescriptiveStats.OBeu package both in R and OpenCPU
 environments. 
