@@ -20,6 +20,7 @@ r_packages:
  - devtools
  - jsonlite
  - reshape
+ - graphics
 apt_packages:
   - libxml2-dev
 sudo: required

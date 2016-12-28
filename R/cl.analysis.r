@@ -79,7 +79,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     # hierarchical
     if(cluster.method == "hierarchical"){
       
-      tree <- stats::hclust(dist(cluster.data), method = "ward.D2")
+      tree <- stats::hclust(stats::dist(cluster.data), method = "ward.D2")
       
     }   
     # Diana (DIvisive ANAlysis Clustering)
@@ -119,15 +119,15 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     )
   
   model_parameters= list( 
-    height= hc$height,
-    order=hc$order,
-    merge=hc$merge,
-    labels=hc$labels
+    height= tree$height,
+    order=tree$order,
+    merge=tree$merge,
+    labels=tree$labels
   )
-  plot(hc)
+  plot(tree)
   
   compare= list(
-    method= hc$dist.method)
+    method= tree$dist.method)
 ################################################################################
   
   ## K-Means
@@ -281,7 +281,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       classification=mclust$classification,
                       compare=comp.parameters)
     
-    plot(Mclust(cluster.data, cluster.number), what ="classification")
+    mclust::plot.Mclust(mclust::Mclust(cluster.data, cluster.number), what ="classification")
     
   }
   
@@ -290,7 +290,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
 ################################################################################
   
   # extend model parameters
-  modelparam <- modifyList(list(cluster.method=cluster.method, cluster.number=cluster.number), modelparam)
+  modelparam <- utils::modifyList(list(cluster.method=cluster.method, cluster.number=cluster.number), modelparam)
   
   parameters<- jsonlite::toJSON(modelparam)
   return(parameters)

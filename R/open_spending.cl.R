@@ -83,10 +83,10 @@ open_spending.ds <- function(json_data,
   
   dt2 <- stats::na.omit(dt2) 
   
-  ds.result <- ds.analysis(dt2, c.out=coef.outl,outliers=box.outliers,box.width=box.wdth, 
-                           corr.method= cor.method, fr.select=freq.select) 
+  #ds.result <- ds.analysis(dt2, c.out=coef.outl,outliers=box.outliers,box.width=box.wdth, 
+                           #corr.method= cor.method, fr.select=freq.select) 
   
-  ds.results <- jsonlite::toJSON(ds.result)
+ # ds.results <- jsonlite::toJSON(ds.result)
   
   return(ds.results)
 } 

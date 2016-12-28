@@ -15,6 +15,7 @@ Imports:
   clValid,
   jsonlite, 
   mclust,
+  RCurl,
   reshape2, 
   utils,
 RoxygenNote: 5.0.1
