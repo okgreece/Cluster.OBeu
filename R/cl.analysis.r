@@ -21,11 +21,15 @@
 #' 
 #' @examples
 #' cl.analysis(Budget_Thessaloniki_2015_Expenditure,"pam",3)
+#' 
 #' @import cluster
-#' @import factoextra
+#' @import clvalid
+#' @import dendextend
 #' @import mclust
-#' @import graphics
+#' @import utils
+#' 
 #' @rdname cl.analysis
+#' 
 #' @export
 ########################################################################################################
 cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, distance="euclidean"){
@@ -80,56 +84,53 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     if(cluster.method == "hierarchical"){
       
       tree <- stats::hclust(stats::dist(cluster.data), method = "ward.D2")
-      stats::plot.hclust(tree)
+      
     }   
     # Diana (DIvisive ANAlysis Clustering)
     
     else if(cluster.method == "diana") {
       
       tree <- cluster::diana(cluster.data)
-      cluster::plot.diana(tree)
     }
     # Agnes (Agglomerative Nesting- Hierarchical Clustering)
     
     else if(cluster.method == "agnes") {
       
       tree <- cluster::agnes(cluster.data, method = "ward")
-      cluster::plot.agnes(tree)
     }  
     
     ## Create Clusters
     create.clust <- stats::cutree(tree, k = cluster.number)
     
     ## Add properties to the hierarchical model
-    tree$cluster = create.clust
-    tree$nb.clust <- cluster.number
-    tree$size <- as.vector(table(create.clust))
+    #size <- as.matrix(table(create.clust), c )
     
     ## Define model class
-    class(cluster.method) <- c(class(cluster.method), "hcut.clust")
+    #class(cluster.method) <- c(class(cluster.method), "hcut.clust")
+    
+    #Convert to dendrogram
+    dendr<-stats::as.dendrogram(tree)
+    
+    # Tree Graphical Parameters
+    node.coordinates = dendextend::get_nodes_xy(dendr)
+    node.names = dendextend:: partition_leaves(dendr)
+
+    #a<-lapply(node.names,as.character)
+    #aa<-lapply(a,paste,collapse=",")
+    #pr=data.frame(cbind(node.coordinates,unlist(aa)))
     
     # Model Parameters
     
     modelparam<-list( data=cluster.data,
-                      clusters=tree$cluster,
-                      tree$nb.clust <- cluster.number,
-                      size=tree$size,
-                      cluster_merging=tree$merge,
-                      clustering_height=tree$height,
-                      order=tree$order,
-                      clusters=tree$labels
+                      clustered.data=create.clust,
+                      #cluster.table=size,
+                      x.coordinates = node.coordinates[,1],
+                      y.coordinates = node.coordinates[,2],
+                      node.names = node.names,
+                      compare= list(method= tree$dist.method)
     )
   
-  model_parameters= list( 
-    height= tree$height,
-    order=tree$order,
-    merge=tree$merge,
-    labels=tree$labels
-  )
-  
-  
-  compare= list(
-    method= tree$dist.method)
+  compare= list(method= tree$dist.method)
 ################################################################################
   
   ## K-Means
@@ -261,6 +262,10 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
   }else if(cluster.method=="model"){
     mclust=mclust::Mclust(cluster.data, cluster.number)
     
+    data.list = utils::combn(cluster.data, 2,simplify = F)
+    
+    data.list.colnames = lapply(data.list,colnames)
+    
     #comparative parameters
     comp.parameters<- list(  
                       model.name= mclust$modelName,
@@ -277,13 +282,15 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       variance.components=mclust$parameters$variance,
                       class.probs=mclust$z,
                       uncertainty= mclust$uncertainty)
-    #model parameters
-    modelparam<-list( 
-                      data= cluster.data,
-                      classification=mclust$classification,
-                      compare=comp.parameters)
     
-    mclust::plot.Mclust(mclust::Mclust(cluster.data, cluster.number), what ="classification")
+    
+    
+    #model parameters
+    modelparam<-list(
+                      data.list = data.list,
+                      data.list.colnames = data.list.colnames,
+                      classification = mclust$classification,
+                      compare = comp.parameters)
     
   }
   
