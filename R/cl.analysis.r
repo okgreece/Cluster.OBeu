@@ -114,7 +114,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       order=tree$order,
                       clusters=tree$labels
     )
-  }
+  
   model_parameters= list( 
     height= hc$height,
     order=hc$order,
@@ -129,7 +129,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
   
   ## K-Means
   
-  else if(cluster.method=="kmeans"){
+ } else if(cluster.method=="kmeans"){
     
     kmeans=kmeans(cluster.data,cluster.number)
     
