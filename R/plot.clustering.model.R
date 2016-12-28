@@ -25,9 +25,9 @@ plot.clustering.model <- function(clustering.model, parameters = list()) {
   # kmeans
   if(clustering.model$cluster.method == "kmeans") {
     # initialize
-    parameters <- modifyList(list(ellipses=FALSE, convex.hulls=FALSE), parameters)
+    parameters <- utils::modifyList(list(ellipses=FALSE, convex.hulls=FALSE), parameters)
     # PCA
-    inputs.pca <- prcomp(clustering.model$data, scale. = T, center = T)
+    inputs.pca <- stats::prcomp(clustering.model$data, scale. = T, center = T)
     message("PCA summary:")
     print(summary(inputs.pca))
     par(oma=c(0, 0, 0, 5))

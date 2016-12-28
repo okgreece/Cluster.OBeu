@@ -2,7 +2,8 @@
 #' Cluster OBEU
 #' 
 #' @description 
-#' ...
+#' Clustering Methods for OBEU datasets.
+#' 
 #' 
 #' @usage cl.analysis(cluster.data,cluster.method=NULL,cluster.number=NULL,distance="euclidean")
 #' @param cluster.data The input data
@@ -12,16 +13,18 @@
 #' 
 #' @details ...
 #'  
-#' @return This function returns the graphical paremeters of the selected algorithm. 
+#' @return This function returns the graphical and evaluation paremeters of the selected algorithm. 
 #' 
 #' @author Kleanthis Koupidis, Jaroslav Kuchar
 #' 
 #' @seealso ...
 #' 
 #' @examples
-#' #OBeu Example
 #' cl.analysis(Budget_Thessaloniki_2015_Expenditure,"pam",3)
-#' 
+#' @import cluster
+#' @import factoextra
+#' @import mclust
+#' @import graphics
 #' @rdname cl.analysis
 #' @export
 ########################################################################################################
@@ -148,12 +151,12 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       compare=comp.parameters)
     
     # PCA
-    data.pca <- prcomp(cluster.data, scale. = T, center = T)
+    data.pca <- stats::prcomp(cluster.data, scale. = T, center = T)
     # ellipses + convex hulls
     cluster.ellipses <- .ellipses(modelparam, data.pca)
     cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
     # model parameters
-    modelparam <- modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+    modelparam <- utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
@@ -178,12 +181,12 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       clusters=pam$clustering,
                       compare=comp.parameters)
     # PCA
-    data.pca <- prcomp(cluster.data, scale. = T, center = T)
+    data.pca <- stats::prcomp(cluster.data, scale. = T, center = T)
     # ellipses + convex hulls
     cluster.ellipses <- .ellipses(modelparam, data.pca)
     cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
     # model parameters
-    modelparam <- modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+    modelparam <- utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
@@ -209,12 +212,12 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       clusters=clara$clustering,
                       compare=comp.parameters)
     # PCA
-    data.pca <- prcomp(cluster.data, scale. = T, center = T)
+    data.pca <- stats::prcomp(cluster.data, scale. = T, center = T)
     # ellipses + convex hulls
     cluster.ellipses <- .ellipses(modelparam, data.pca)
     cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
     # model parameters
-    modelparam <- modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+    modelparam <- utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
@@ -241,12 +244,12 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       clusters=fanny$clustering,
                       compare=comp.parameters)
     # PCA
-    data.pca <- prcomp(cluster.data, scale. = T, center = T)
+    data.pca <- stats::prcomp(cluster.data, scale. = T, center = T)
     # ellipses + convex hulls
     cluster.ellipses <- .ellipses(modelparam, data.pca)
     cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
     # model parameters
-    modelparam <- modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+    modelparam <- utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 
 ################################################################################
