@@ -3,8 +3,8 @@
 #' @description 
 #' ...
 #'
-#' @param clustering.model
-#' @param parameters
+#' @param clustering.model ...
+#' @param parameters ...
 #' @return ...
 #'
 #' @author Jaroslav Kuchar <https://github.com/jaroslav-kuchar>
@@ -24,7 +24,7 @@ plot.clustering.model <- function(clustering.model, parameters = list()) {
   }
   message(clustering.model$cluster.method)
   # kmeans
-  if(clustering.model$cluster.method == "kmeans") {
+  if(clustering.model$cluster.method %in% c("kmeans","pam","clara","funny")) {
     # initialize
     parameters <- utils::modifyList(list(ellipses=FALSE, convex.hulls=FALSE), parameters)
     # PCA
