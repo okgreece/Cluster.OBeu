@@ -18,7 +18,9 @@ Imports:
   jsonlite, 
   mclust,
   RCurl,
+  reshape,
   reshape2, 
+  stringr,
   utils,
 RoxygenNote: 5.0.1
 

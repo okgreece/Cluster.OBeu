@@ -17,13 +17,14 @@
 #' 
 #' @author Kleanthis Koupidis, Jaroslav Kuchar
 #' 
-#' @seealso ...
+#' @seealso \code{\link{cl.feature}}
 #' 
 #' @examples
-#' cl.analysis(Budget_Thessaloniki_2015_Expenditure,"pam",3)
+#' cl.analysis(Budget_Thessaloniki_2015_Expenditure, cl_feature=NULL, measured.dimension="variable", cl.aggregate="sum",
+#'                cluster.method="pam", cluster.number=3, distance="euclidean")
 #' 
 #' @import cluster
-#' @import clvalid
+#' @import clValid
 #' @import dendextend
 #' @import mclust
 #' @import utils
@@ -32,21 +33,25 @@
 #' 
 #' @export
 ########################################################################################################
-cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, distance="euclidean"){
+cl.analysis=function(cluster.data, cl_feature=NULL, measured.dimension="variable", cl.aggregate="sum",
+                     cluster.method=NULL, cluster.number=NULL, distance="euclidean"){
   
   if(ncol(cluster.data)<2)
   {
     stop("The dimension (number of columns) of dataset must be at least 2.")
   }
+  # Select clustering feature
   
+  clusterr.data = cl.feature(cluster.data, feature=cl_feature, measured=measured.dimension, aggregate=cl.aggregate)
+  cluster.data = nums(clusterr.data)
   ## If method and number of clusters is not provided
   
   if(is.null(cluster.method) & is.null(cluster.number)){
     
-    method_clvalid<-clValid::clValid(as.matrix(cluster.data),2:5,
-                            clMethods=c("hierarchical","diana","agnes","kmeans", "pam", "clara","fanny", "model"),
+    method_clvalid=clValid::clValid(as.matrix(cluster.data),2:5,
+                            clMethods=c("hierarchical","kmeans", "pam", "clara","fanny", "model"),
                             validation=c("internal","stability"),
-                            metric = "euclidean")
+                            metric = "euclidean",maxitems = nrow(cluster.data))
     
     cluster.number=proposed.meth.nb.clust(method_clvalid)$nb.clust
     cluster.method=proposed.meth.nb.clust(method_clvalid)$method.cluster
@@ -56,23 +61,23 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
   
   if(is.null(cluster.method)){
     
-    method_clvalid<-clValid::clValid(as.matrix(cluster.data),cluster.number,
-                            clMethods=c("hierarchical","diana","agnes","kmeans", "pam", "clara","fanny", "model"),
+    method_clvalid=clValid::clValid(as.matrix(cluster.data),cluster.number,
+                            clMethods=c("hierarchical","kmeans", "pam", "clara","fanny", "model"),
                             validation=c("internal","stability"),
                             metric = "euclidean")	
-    cluster.method<- proposed.methclust(method_clvalid)
+    cluster.method= proposed.methclust(method_clvalid)
   }
   
   ## If number of clusters is not provided
   
   if(is.null(cluster.number)){
     
-    method_clvalid<-clValid::clValid(as.matrix(cluster.data),2:10,
+    method_clvalid=clValid::clValid(as.matrix(cluster.data),2:10,
                             clMethods=cluster.method ,
                             validation=c("internal","stability"),
                             metric = "euclidean")	
     
-    cluster.number<-proposed.nbclust(method_clvalid)
+    cluster.number=proposed.nbclust(method_clvalid)
     }  
   
   
@@ -83,45 +88,46 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     # hierarchical
     if(cluster.method == "hierarchical"){
       
-      tree <- stats::hclust(stats::dist(cluster.data), method = "ward.D2")
+      tree = stats::hclust(stats::dist(cluster.data), method = "ward.D2")
       
     }   
     # Diana (DIvisive ANAlysis Clustering)
     
     else if(cluster.method == "diana") {
       
-      tree <- cluster::diana(cluster.data)
+      tree = cluster::diana(cluster.data)
     }
     # Agnes (Agglomerative Nesting- Hierarchical Clustering)
     
     else if(cluster.method == "agnes") {
       
-      tree <- cluster::agnes(cluster.data, method = "ward")
+      tree = cluster::agnes(cluster.data, method = "ward")
     }  
+    #Convert to dendrogram
+    dendr=stats::as.dendrogram(tree)
     
     ## Create Clusters
-    create.clust <- stats::cutree(tree, k = cluster.number)
+    create.clust = dendextend::cutree(dendr, k = cluster.number)
     
     ## Add properties to the hierarchical model
-    #size <- as.matrix(table(create.clust), c )
+    #size = as.matrix(table(create.clust), c )
     
     ## Define model class
-    #class(cluster.method) <- c(class(cluster.method), "hcut.clust")
+    #class(cluster.method) = c(class(cluster.method), "hcut.clust")
     
-    #Convert to dendrogram
-    dendr<-stats::as.dendrogram(tree)
+    
     
     # Tree Graphical Parameters
     node.coordinates = dendextend::get_nodes_xy(dendr)
     node.names = dendextend:: partition_leaves(dendr)
 
-    #a<-lapply(node.names,as.character)
-    #aa<-lapply(a,paste,collapse=",")
+    #a=lapply(node.names,as.character)
+    #aa=lapply(a,paste,collapse=",")
     #pr=data.frame(cbind(node.coordinates,unlist(aa)))
     
     # Model Parameters
     
-    modelparam<-list( data=cluster.data,
+    modelparam=list( data=cluster.data,
                       clustered.data=create.clust,
                       #cluster.table=size,
                       x.coordinates = node.coordinates[,1],
@@ -129,10 +135,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       node.names = node.names,
                       compare= list(method= tree$dist.method)
     )
-  
-  compare= list(method= tree$dist.method)
 ################################################################################
-  
   ## K-Means
   
  } else if(cluster.method=="kmeans"){
@@ -148,18 +151,18 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       cluster.size=kmeans$size)
     
     #model parameters
-    modelparam<-list( data=cluster.data,
+    modelparam=list( data=cluster.data,
                       clusters=kmeans$cluster,
                       cluster.centers=kmeans$centers,
                       compare=comp.parameters)
     
     # PCA
-    data.pca <- stats::prcomp(cluster.data, scale. = T, center = T)
+    data.pca = stats::prcomp(cluster.data, scale. = T, center = T)
     # ellipses + convex hulls
-    cluster.ellipses <- .ellipses(modelparam, data.pca)
-    cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
+    cluster.ellipses = .ellipses(modelparam, data.pca)
+    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
     # model parameters
-    modelparam <- utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+    modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
@@ -170,7 +173,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     pam=cluster::pam(cluster.data,cluster.number, metric = "euclidean")
     
     #comparative parameters
-    comp.parameters<- list(cluster.size=pam$clusinfo[,"size"],
+    comp.parameters= list(cluster.size=pam$clusinfo[,"size"],
                       cluster.max_diss=pam$clusinfo[,"max_diss"],
                       cluster.av_diss=pam$clusinfo[,"av_diss"],
                       cluster.diameter=pam$clusinfo[,"diameter"],
@@ -178,18 +181,18 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       silhouette.info=pam$silinfo)
     
    #model parameters
-    modelparam<-list( data=cluster.data,
+    modelparam=list( data=cluster.data,
                       medoids=pam$medoids,
                       medoids.id=pam$id.med,
                       clusters=pam$clustering,
                       compare=comp.parameters)
     # PCA
-    data.pca <- stats::prcomp(cluster.data, scale. = T, center = T)
+    data.pca = stats::prcomp(cluster.data, scale. = T, center = T)
     # ellipses + convex hulls
-    cluster.ellipses <- .ellipses(modelparam, data.pca)
-    cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
+    cluster.ellipses = .ellipses(modelparam, data.pca)
+    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
     # model parameters
-    modelparam <- utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+    modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
@@ -200,7 +203,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     clara=cluster::clara(cluster.data, cluster.number, metric = "euclidean", samples=100)
     
     #comparative parameters
-    comp.parameters<- list(
+    comp.parameters= list(
                       cluster.size=clara$clusinfo[,"size"],
                       cluster.max_diss=clara$clusinfo[,"max_diss"],
                       cluster.av_diss=clara$clusinfo[,"av_diss"],
@@ -209,18 +212,18 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
       
     
     #model parameters
-    modelparam<-list( data=cluster.data,
+    modelparam=list( data=cluster.data,
                       medoids=clara$medoids,
                       medoids.id=clara$i.med,
                       clusters=clara$clustering,
                       compare=comp.parameters)
     # PCA
-    data.pca <- stats::prcomp(cluster.data, scale. = T, center = T)
+    data.pca = stats::prcomp(cluster.data, scale. = T, center = T)
     # ellipses + convex hulls
-    cluster.ellipses <- .ellipses(modelparam, data.pca)
-    cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
+    cluster.ellipses = .ellipses(modelparam, data.pca)
+    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
     # model parameters
-    modelparam <- utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+    modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
@@ -232,7 +235,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     fanny=cluster::fanny(cluster.data, cluster.number, metric = "euclidean")
     
     #comparative parameters
-    comp.parameters<- list( 
+    comp.parameters= list( 
                       membership=fanny$membership,
                       coeff=fanny$coeff,
                       memb.exp=fanny$memb.exp,
@@ -242,17 +245,17 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
                       fanny$silinfo)
       
     #model parameters
-    modelparam<-list( 
+    modelparam=list( 
                       data=cluster.data,
                       clusters=fanny$clustering,
                       compare=comp.parameters)
     # PCA
-    data.pca <- stats::prcomp(cluster.data, scale. = T, center = T)
+    data.pca = stats::prcomp(cluster.data, scale. = T, center = T)
     # ellipses + convex hulls
-    cluster.ellipses <- .ellipses(modelparam, data.pca)
-    cluster.convex.hulls <- .convex.hulls(modelparam, data.pca)
+    cluster.ellipses = .ellipses(modelparam, data.pca)
+    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
     # model parameters
-    modelparam <- utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+    modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 
 ################################################################################
@@ -267,7 +270,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     data.list.colnames = lapply(data.list,colnames)
     
     #comparative parameters
-    comp.parameters<- list(  
+    comp.parameters= list(  
                       model.name= mclust$modelName,
                       observations= mclust$n,
                       data.dimension= mclust$d,
@@ -286,7 +289,7 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
     
     
     #model parameters
-    modelparam<-list(
+    modelparam=list(
                       data.list = data.list,
                       data.list.colnames = data.list.colnames,
                       classification = mclust$classification,
@@ -299,9 +302,9 @@ cl.analysis<-function(cluster.data, cluster.method=NULL, cluster.number=NULL, di
 ################################################################################
   
   # extend model parameters
-  modelparam <- utils::modifyList(list(cluster.method=cluster.method, cluster.number=cluster.number), modelparam)
+  modelparam = utils::modifyList(list(cluster.method=cluster.method, cluster.number=cluster.number), modelparam)
   
-  parameters<- jsonlite::toJSON(modelparam)
+  parameters= jsonlite::toJSON(modelparam)
   return(parameters)
 }
 
