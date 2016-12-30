@@ -12,7 +12,7 @@
 #' @examples 
 #' data("iris")
 #' inputs.data <- scale(iris[,1:4])
-#' inputs.clustering <- cl.analysis(inputs.data, cluster.method="kmeans", cluster.number=3)
+#' inputs.clustering <- cl.analysis(inputs.data, cl.meth="kmeans", clust.numb=3)
 #' cl.plot(inputs.clustering, parameters = list(convex.hulls=TRUE))
 #' @import car
 #' @importFrom grDevices chull palette 
@@ -25,9 +25,9 @@ cl.plot <- function(clustering.model, parameters = list()) {
   if(is(clustering.model,"json")){
     clustering.model <- jsonlite::fromJSON(clustering.model)
   }
-  message(clustering.model$cluster.method)
+  message(clustering.model$cl.meth)
   # kmeans
-  if(clustering.model$cluster.method %in% c("kmeans","pam","clara","funny")) {
+  if(clustering.model$cl.meth %in% c("kmeans","pam","clara","funny")) {
     # initialize
     parameters <- utils::modifyList(list(ellipses=FALSE, convex.hulls=FALSE), parameters)
     # PCA
@@ -35,7 +35,7 @@ cl.plot <- function(clustering.model, parameters = list()) {
     message("PCA summary:")
     print(summary(inputs.pca))
     par(oma=c(0, 0, 0, 5))
-    plot(inputs.pca$x[,1:2], main = clustering.model$cluster.method)
+    graphics::plot(inputs.pca$x[,1:2], main = clustering.model$cl.meth)
     sapply(seq_along(unique(clustering.model$clusters)), function(clId) points(inputs.pca$x[which(clustering.model$clusters==unique(clustering.model$clusters)[clId]),1:2],col=palette()[clId]))
     legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA,
            unique(clustering.model$clusters), lwd = 1, lty = 1, pch = 1, col = palette()[unique(clustering.model$clusters)])

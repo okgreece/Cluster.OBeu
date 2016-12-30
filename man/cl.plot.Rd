@@ -20,7 +20,7 @@ cl.plot(clustering.model, parameters = list())
 \examples{
 data("iris")
 inputs.data <- scale(iris[,1:4])
-inputs.clustering <- cl.analysis(inputs.data, cluster.method="kmeans", cluster.number=3)
+inputs.clustering <- cl.analysis(inputs.data, cl.meth="kmeans", clust.numb=3)
 cl.plot(inputs.clustering, parameters = list(convex.hulls=TRUE))
 }
 \author{
