@@ -15,6 +15,7 @@ Imports:
   cluster,
   clValid,
   dendextend,
+  graphics,
   jsonlite, 
   mclust,
   RCurl,

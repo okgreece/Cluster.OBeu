@@ -1,5 +1,2 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-.travis.yml
-README.rmd
-obeu_logo.png
