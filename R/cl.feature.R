@@ -20,8 +20,6 @@
 #' 
 #' @seealso \code{\link{cl.analysis}}
 #' 
-#' @examples
-#' cl.feature(Budget_Thessaloniki_2015_Revenue, feature=NULL, measured="variable", aggregate="sum")
 #' 
 #' @import reshape
 #' @import stringr

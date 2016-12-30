@@ -4,20 +4,20 @@
 #' @description
 #' Extract and analyze the input data provided from Open Spending API, using the \code{\link{cl.analysis}} function.
 #' 
-#' @usage open_spending.ds(json_data, dimensions=NULL, amounts=NULL, measured.dimensions=NULL,
-#'                         cl_feature=NULL, cl.measured.dimension="variable", cl.aggregate="sum",
-#'                         cl.method=NULL, cl.number=NULL, cl.distance="euclidean")
+#' @usage open_spending.cl(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
+#'                         cl.feature=NULL, cl.measured.dim="variable", cl.aggregate="sum",
+#'                         cl.method=NULL, cl.num=NULL, cl.dist="euclidean")
 #' 
 #' @param json_data The json string, URL or file from Open Spending API
 #' @param dimensions The dimensions of the input data
 #' @param amounts The measures of the input data
-#' @param measured.dimensions The dimensions to which correspond amount/numeric variables
+#' @param measured.dim The dimensions to which correspond amount/numeric variables
 #' @param cl.feature ...
-#' @param cl.measured.dimension ...
+#' @param cl.measured.dim ...
 #' @param cl.aggregate ...
 #' @param cl.method ...
-#' @param cl.number ...
-#' @param cl.distance ...
+#' @param cl.num ...
+#' @param cl.dist ...
 #' 
 #' @details 
 #' This function is used to read data in json format from Open Spending API, in order to implement 
@@ -37,9 +37,9 @@
 #' @export
 ############################################################################################################
 
-open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.dimensions=NULL,
-                             cl.feature=NULL, cl.measured.dimension="variable", cl.aggregate="sum",
-                             cl.method=NULL, cl.number=NULL, cl.distance="euclidean"){  
+open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
+                             cl.feature=NULL, cl.measured.dim="variable", cl.aggregate="sum",
+                             cl.method=NULL, cl.num=NULL, cl.dist="euclidean"){  
   
   if (RCurl::url.exists(json_data)){
   json_data<-RCurl::getURL( json_data, ssl.verifyhost=FALSE )
@@ -70,7 +70,7 @@ open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.
     
     melt <- reshape::melt.data.frame(dt)
     
-    formula <- paste(dimensions,measured.dimensions,sep="~") 
+    formula <- paste(dimensions,measured.dim,sep="~") 
     
     dt2 <- reshape::cast(melt,formula,sum,
                          subset=melt$variable==amounts) 
@@ -78,8 +78,8 @@ open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.
   
   dt2 <- stats::na.omit(dt2) 
   
-  cl.result <- cl.analysis(cluster.data= dt2, cl_feature=cl.feature, measured.dimension=cl.measured.dimension, cl.aggregate=cl.aggregate,
-                     cluster.method=cl.method, cluster.number=cl.number, distance=cl.distance)
+  cl.result <- cl.analysis(cl.data= dt2, cl_feature=cl.feature, measured.dim=cl.measured.dim, cl.aggregate=cl.aggregate,
+                           cl.meth=cl.method, clust.numb=cl.num, dist=cl.dist)
  
   cl.results <- jsonlite::toJSON(cl.result)
   
