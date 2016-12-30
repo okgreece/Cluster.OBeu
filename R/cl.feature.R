@@ -24,7 +24,6 @@
 #' cl.feature(Budget_Thessaloniki_2015_Revenue, feature=NULL, measured="variable", aggregate="sum")
 #' 
 #' @import reshape
-#' @import reshape2
 #' @import stringr
 #' 
 #' @rdname cl.feature
@@ -57,7 +56,7 @@ cl.feature = function(data, feature=NULL, measured="variable", aggregate="sum") 
       feature = stringr::str_c(names(sel), collapse = "+")
       
       # Melt data
-      molten_data=reshape2::melt(data)
+      molten_data=reshape::melt.data.frame(data)
       
       # Expression
       expression = stringr::str_c(feature,"~", measured, collapse = " ")
