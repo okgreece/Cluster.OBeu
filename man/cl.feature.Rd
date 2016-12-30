@@ -25,10 +25,6 @@ Select clustering characteristic of OBEU datasets.
 This function adapts the dataset according to the selected dimension of the dataset 
 and the aggregation function.
 }
-\examples{
-cl.feature(Budget_Thessaloniki_2015_Revenue, feature=NULL, measured="variable", aggregate="sum")
-
-}
 \author{
 Kleanthis Koupidis
 }

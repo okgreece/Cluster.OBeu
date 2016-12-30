@@ -4,9 +4,9 @@
 \alias{open_spending.cl}
 \title{Read and Calculate the Basic Information for Cluster Analysis Tasks from Open Spending API}
 \usage{
-open_spending.ds(json_data, dimensions=NULL, amounts=NULL, measured.dimensions=NULL,
-                        cl_feature=NULL, cl.measured.dimension="variable", cl.aggregate="sum",
-                        cl.method=NULL, cl.number=NULL, cl.distance="euclidean")
+open_spending.cl(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
+                        cl.feature=NULL, cl.measured.dim="variable", cl.aggregate="sum",
+                        cl.method=NULL, cl.num=NULL, cl.dist="euclidean")
 }
 \arguments{
 \item{json_data}{The json string, URL or file from Open Spending API}
@@ -15,19 +15,19 @@ open_spending.ds(json_data, dimensions=NULL, amounts=NULL, measured.dimensions=N
 
 \item{amounts}{The measures of the input data}
 
-\item{measured.dimensions}{The dimensions to which correspond amount/numeric variables}
+\item{measured.dim}{The dimensions to which correspond amount/numeric variables}
 
 \item{cl.feature}{...}
 
-\item{cl.measured.dimension}{...}
+\item{cl.measured.dim}{...}
 
 \item{cl.aggregate}{...}
 
 \item{cl.method}{...}
 
-\item{cl.number}{...}
+\item{cl.num}{...}
 
-\item{cl.distance}{...}
+\item{cl.dist}{...}
 }
 \value{
 A json string with the resulted parameters of the \code{\link{cl.analysis}} function.

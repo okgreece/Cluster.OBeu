@@ -4,23 +4,23 @@
 \alias{cl.analysis}
 \title{Cluster OBEU}
 \usage{
-cl.analysis(cluster.data, cl_feature=NULL, measured.dimension="variable", cl.aggregate="sum",
-                     cluster.method=NULL, cluster.number=NULL, distance="euclidean")
+cl.analysis(cl.data, cl_feature=NULL, measured.dim="variable", cl.aggregate="sum",
+cl.meth=NULL, clust.numb=NULL, dist="euclidean")
 }
 \arguments{
-\item{cluster.data}{The input data}
+\item{cl.data}{The input data}
 
 \item{cl_feature}{...}
 
-\item{measured.dimension}{...}
+\item{measured.dim}{...}
 
 \item{cl.aggregate}{...}
 
-\item{cluster.method}{The clustering method algorithm}
+\item{cl.meth}{The clustering method algorithm}
 
-\item{cluster.number}{The number of clusters}
+\item{clust.numb}{The number of clusters}
 
-\item{distance}{The distance metric}
+\item{dist}{The dist metric}
 }
 \value{
 This function returns the graphical and evaluation paremeters of the selected algorithm.
@@ -30,11 +30,6 @@ Clustering Analysis for OBEU datasets.
 }
 \details{
 ...
-}
-\examples{
-cl.analysis(Budget_Thessaloniki_2015_Expenditure, cl_feature=NULL, measured.dimension="variable", cl.aggregate="sum",
-               cluster.method="pam", cluster.number=3, distance="euclidean")
-
 }
 \author{
 Kleanthis Koupidis, Jaroslav Kuchar

@@ -18,11 +18,6 @@ proposed.methclust(clv)
 \details{
 ...
 }
-\examples{
-#OBeu Example
-...
-
-}
 \author{
 Kleanthis Koupidis
 }
