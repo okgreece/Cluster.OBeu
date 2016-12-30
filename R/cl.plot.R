@@ -12,12 +12,15 @@
 #' @examples 
 #' data("iris")
 #' inputs.data <- scale(iris[,1:4])
-#' inputs.clustering <- cl.analysis(inputs.data,"kmeans",3)
-#' plot.clustering.model(inputs.clustering, parameters = list(convex.hulls=TRUE))
+#' inputs.clustering <- cl.analysis(inputs.data, cluster.method="kmeans", cluster.number=3)
+#' cl.plot(inputs.clustering, parameters = list(convex.hulls=TRUE))
 #' @import car
-#' @rdname plot.clustering.model
+#' @importFrom grDevices chull palette 
+#' @importFrom graphics legend lines par plot points
+#' @importFrom methods is
+#' @rdname cl.plot
 #' @export
-plot.clustering.model <- function(clustering.model, parameters = list()) {
+cl.plot <- function(clustering.model, parameters = list()) {
   # convert json to list if passed as json
   if(is(clustering.model,"json")){
     clustering.model <- jsonlite::fromJSON(clustering.model)
@@ -69,7 +72,7 @@ plot.clustering.model <- function(clustering.model, parameters = list()) {
     unique(clustering.model$clusters),
     function(clId){
       dat <- data.pca$x[which(clustering.model$clusters==clId),1:2]
-      pts <- chull(dat)
+      pts <- grDevices::chull(dat)
       return(dat[c(pts, pts[1]), 1:2])
     }
   )

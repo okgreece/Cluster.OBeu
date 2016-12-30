@@ -22,5 +22,6 @@ Imports:
   reshape2, 
   stringr,
   utils,
+  methods,
 RoxygenNote: 5.0.1
 
