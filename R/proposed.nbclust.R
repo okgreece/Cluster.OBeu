@@ -15,10 +15,6 @@
 #' 
 #' @seealso proposed.meth.nb.clust, proposed.methclust
 #' 
-#' @examples
-#' #OBeu Example
-#' ...
-#' 
 #' @rdname proposed.nbclust
 #' @export
 ############################################################################
