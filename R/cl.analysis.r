@@ -2,12 +2,17 @@
 #' Cluster OBEU
 #' 
 #' @description 
-#' Clustering Methods for OBEU datasets.
+#' Clustering Analysis for OBEU datasets.
 #' 
 #' 
-#' @usage cl.analysis(cluster.data,cluster.method=NULL,cluster.number=NULL,distance="euclidean")
+#' @usage cl.analysis(cluster.data, cl_feature=NULL, measured.dimension="variable", cl.aggregate="sum",
+#'                      cluster.method=NULL, cluster.number=NULL, distance="euclidean")
+#'                      
 #' @param cluster.data The input data
-#' @param cluster.method The clustering algorithm
+#' @param cl_feature ...
+#' @param measured.dimension ...
+#' @param cl.aggregate ...
+#' @param cluster.method The clustering method algorithm
 #' @param cluster.number The number of clusters
 #' @param distance The distance metric
 #' 
@@ -36,14 +41,20 @@
 cl.analysis=function(cluster.data, cl_feature=NULL, measured.dimension="variable", cl.aggregate="sum",
                      cluster.method=NULL, cluster.number=NULL, distance="euclidean"){
   
-  if(ncol(cluster.data)<2)
+  if( ncol(cluster.data)< 2 ) 
   {
-    stop("The dimension (number of columns) of dataset must be at least 2.")
+    stop("The dimension (number of columns) of dataset must be at least 2 numeric variables.")
   }
+  if ( ncol(nums(cluster.data))< 2 )
+  {
+    stop("The dimension (number of columns) of dataset must be at least 2 numeric variables.")
+  }
+  
   # Select clustering feature
   
   clusterr.data = cl.feature(cluster.data, feature=cl_feature, measured=measured.dimension, aggregate=cl.aggregate)
   cluster.data = nums(clusterr.data)
+  
   ## If method and number of clusters is not provided
   
   if(is.null(cluster.method) & is.null(cluster.number)){
@@ -304,7 +315,7 @@ cl.analysis=function(cluster.data, cl_feature=NULL, measured.dimension="variable
   # extend model parameters
   modelparam = utils::modifyList(list(cluster.method=cluster.method, cluster.number=cluster.number), modelparam)
   
-  parameters= jsonlite::toJSON(modelparam)
-  return(parameters)
+  #parameters= jsonlite::toJSON(modelparam)
+  return(modelparam)
 }
 

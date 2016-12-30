@@ -4,12 +4,19 @@
 \alias{cl.analysis}
 \title{Cluster OBEU}
 \usage{
-cl.analysis(cluster.data,cluster.method=NULL,cluster.number=NULL,distance="euclidean")
+cl.analysis(cluster.data, cl_feature=NULL, measured.dimension="variable", cl.aggregate="sum",
+                     cluster.method=NULL, cluster.number=NULL, distance="euclidean")
 }
 \arguments{
 \item{cluster.data}{The input data}
 
-\item{cluster.method}{The clustering algorithm}
+\item{cl_feature}{...}
+
+\item{measured.dimension}{...}
+
+\item{cl.aggregate}{...}
+
+\item{cluster.method}{The clustering method algorithm}
 
 \item{cluster.number}{The number of clusters}
 
@@ -19,7 +26,7 @@ cl.analysis(cluster.data,cluster.method=NULL,cluster.number=NULL,distance="eucli
 This function returns the graphical and evaluation paremeters of the selected algorithm.
 }
 \description{
-Clustering Methods for OBEU datasets.
+Clustering Analysis for OBEU datasets.
 }
 \details{
 ...
