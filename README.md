@@ -190,7 +190,7 @@ dimensions
 # to add
 ```
 
-Define the to.what parameter:
+Define the measured dimensions parameter (e.g. budgetPhase dimension includes variables that are measurable/numeric variables):
 
 -   *Param Name*:
 
