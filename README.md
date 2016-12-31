@@ -3,7 +3,7 @@ Cluster.OBeu <img src="obeu_logo.png" align="right" />
 Kleanthis Koupidis, Charalampos Bratsas, Jaroslav Kuchar
 November 9, 2016
 
-[![Build Status](https://travis-ci.org/okgreece/Cluster.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/Cluster.OBeu) [![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/pulls.svg)](https://github.com/okgreece/Cluster.OBeu/pulls) [![Github Issues](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/issues.svg)](https://github.com/okgreece/Cluster.OBeu/issues)
+[![Build Status](https://travis-ci.org/okgreece/Cluster.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/Cluster.OBeu) [![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/pulls.svg)](https://github.com/okgreece/Cluster.OBeu/pulls) [![Github Issues](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/issues.svg)](https://github.com/okgreece/Cluster.OBeu/issues) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![packageversion](https://img.shields.io/badge/Package%20version-1.1.5-orange.svg?style=flat-square)](commits/master) [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) [![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1-6666ff.svg)](https://cran.r-project.org/)
 
 This document describes the use of the functions implemented in Cluster.OBeu package in OpenCPU environment.
 
