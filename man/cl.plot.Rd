@@ -2,20 +2,17 @@
 % Please edit documentation in R/cl.plot.R
 \name{cl.plot}
 \alias{cl.plot}
-\title{Plot of clustering model}
+\title{Clustering model plotting}
 \usage{
 cl.plot(clustering.model, parameters = list())
 }
 \arguments{
-\item{clustering.model}{...}
+\item{clustering.model}{Object returned by the \code{\link{cl.analysis}} function.}
 
-\item{parameters}{...}
-}
-\value{
-...
+\item{parameters}{List of parameters to indicate plotting of ellipses or convex hulls. Default values: \code{list(ellipses=FALSE, convex.hulls=FALSE)}.}
 }
 \description{
-...
+\code{cl.plot} function plots the clustering model constructed by the \code{\link{cl.analysis}} function.
 }
 \examples{
 data("iris")
@@ -25,5 +22,8 @@ cl.plot(inputs.clustering, parameters = list(convex.hulls=TRUE))
 }
 \author{
 Jaroslav Kuchar <https://github.com/jaroslav-kuchar>
+}
+\seealso{
+\code{\link{cl.analysis}}
 }
 

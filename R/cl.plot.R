@@ -1,13 +1,13 @@
-#' @title Plot of clustering model
+#' @title Clustering model plotting
 #' 
-#' @description 
-#' ...
+#' @description \code{cl.plot} function plots the clustering model constructed by the \code{\link{cl.analysis}} function.
 #'
-#' @param clustering.model ...
-#' @param parameters ...
-#' @return ...
+#' @param clustering.model Object returned by the \code{\link{cl.analysis}} function.
+#' @param parameters List of parameters to indicate plotting of ellipses or convex hulls. Default values: \code{list(ellipses=FALSE, convex.hulls=FALSE)}.
 #'
 #' @author Jaroslav Kuchar <https://github.com/jaroslav-kuchar>
+#' 
+#' @seealso \code{\link{cl.analysis}}
 #' 
 #' @examples 
 #' data("iris")
@@ -55,6 +55,10 @@ cl.plot <- function(clustering.model, parameters = list()) {
   invisible()
 }
 
+#' @title Computes points to plot an ellipse for each cluster of the clustering model
+#' @param clustering.model Object returned by the \code{\link{cl.analysis}} function.
+#' @param PCA data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
+#' @return List of vectors with points for each ellipse.
 .ellipses <- function(clustering.model, data.pca) {
   lapply(
     unique(clustering.model$clusters), 
@@ -67,6 +71,10 @@ cl.plot <- function(clustering.model, parameters = list()) {
   )
 }
 
+#' @title Computes points to plot a convex hull for each cluster of the clustering model
+#' @param clustering.model Object returned by the \code{\link{cl.analysis}} function.
+#' @param PCA data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
+#' @return List of vectors with points for each convex hull.
 .convex.hulls <- function(clustering.model, data.pca) {
   lapply(
     unique(clustering.model$clusters),
