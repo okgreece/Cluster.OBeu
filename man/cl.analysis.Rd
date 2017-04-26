@@ -4,7 +4,7 @@
 \alias{cl.analysis}
 \title{Cluster OBEU}
 \usage{
-cl.analysis(cl.data, cl_feature=NULL, measured.dim="variable", cl.aggregate="sum",
+cl.analysis(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
 cl.meth=NULL, clust.numb=NULL, dist="euclidean")
 }
 \arguments{
@@ -12,7 +12,7 @@ cl.meth=NULL, clust.numb=NULL, dist="euclidean")
 
 \item{cl_feature}{...}
 
-\item{measured.dim}{...}
+\item{amount}{...}
 
 \item{cl.aggregate}{...}
 
@@ -31,10 +31,9 @@ Clustering Analysis for OBEU datasets.
 \details{
 ...
 }
+\seealso{
+\code{\link{cl.features}}
+}
 \author{
 Kleanthis Koupidis, Jaroslav Kuchar
 }
-\seealso{
-\code{\link{cl.feature}}
-}
-

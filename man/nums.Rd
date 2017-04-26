@@ -18,4 +18,3 @@ Extract and return a data frame with the columns that include only numeric value
 \author{
 Kleanthis Koupidis
 }
-

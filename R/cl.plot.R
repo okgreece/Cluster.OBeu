@@ -10,10 +10,10 @@
 #' @seealso \code{\link{cl.analysis}}
 #' 
 #' @examples 
-#' data("iris")
-#' inputs.data <- scale(iris[,1:4])
-#' inputs.clustering <- cl.analysis(inputs.data, cl.meth="kmeans", clust.numb=3)
-#' cl.plot(inputs.clustering, parameters = list(convex.hulls=TRUE))
+#' #data("iris")
+#' #inputs.data <- scale(iris[,1:4])
+#' #inputs.clustering <- cl.analysis(inputs.data, cl.meth="kmeans", clust.numb=3)
+#' #cl.plot(inputs.clustering, parameters = list(convex.hulls=TRUE))
 #' @import car
 #' @importFrom grDevices chull palette 
 #' @importFrom graphics legend lines par plot points

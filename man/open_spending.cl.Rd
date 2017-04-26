@@ -39,10 +39,9 @@ Extract and analyze the input data provided from Open Spending API, using the \c
 This function is used to read data in json format from Open Spending API, in order to implement 
 some cluster analysis tasks through \code{\link{cl.analysis}} function.
 }
-\author{
-Kleanthis Koupidis
-}
 \seealso{
 \code{\link{cl.analysis}}
 }
-
+\author{
+Kleanthis Koupidis
+}

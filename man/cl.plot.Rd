@@ -15,15 +15,14 @@ cl.plot(clustering.model, parameters = list())
 \code{cl.plot} function plots the clustering model constructed by the \code{\link{cl.analysis}} function.
 }
 \examples{
-data("iris")
-inputs.data <- scale(iris[,1:4])
-inputs.clustering <- cl.analysis(inputs.data, cl.meth="kmeans", clust.numb=3)
-cl.plot(inputs.clustering, parameters = list(convex.hulls=TRUE))
-}
-\author{
-Jaroslav Kuchar <https://github.com/jaroslav-kuchar>
+#data("iris")
+#inputs.data <- scale(iris[,1:4])
+#inputs.clustering <- cl.analysis(inputs.data, cl.meth="kmeans", clust.numb=3)
+#cl.plot(inputs.clustering, parameters = list(convex.hulls=TRUE))
 }
 \seealso{
 \code{\link{cl.analysis}}
 }
-
+\author{
+Jaroslav Kuchar <https://github.com/jaroslav-kuchar>
+}

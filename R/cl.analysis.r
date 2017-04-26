@@ -5,7 +5,7 @@
 #' Clustering Analysis for OBEU datasets.
 #' 
 #' 
-#' @usage cl.analysis(cl.data, cl_feature=NULL, amount="variable", cl.aggregate="sum",
+#' @usage cl.analysis(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
 #'cl.meth=NULL, clust.numb=NULL, dist="euclidean")
 #'                      
 #' @param cl.data The input data 
@@ -22,7 +22,7 @@
 #' 
 #' @author Kleanthis Koupidis, Jaroslav Kuchar
 #' 
-#' @seealso \code{\link{cl.feature}}
+#' @seealso \code{\link{cl.features}}
 #' 
 #' 
 #' @import cluster
@@ -49,14 +49,14 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
   
   # Select clustering feature
   
-  clusterr.data = cl.feature(cl.data, features=cl_feature, amounts=amount, aggregate=cl.aggregate)
+  clusterr.data = cl.features(cl.data, features=cl_feature, amounts=amount, aggregate=cl.aggregate)
   cl.data = nums(clusterr.data)
   
   ## If method and number of clusters is not provided
   
   if(is.null(cl.meth) & is.null(clust.numb)){
     
-    method_clvalid=clValid::clValid(as.matrix(na.omit(cl.data)),2:5,
+    method_clvalid=clValid::clValid(as.matrix(cl.data),2:5,
                             clMethods=c("hierarchical","kmeans", "pam", "clara","fanny", "model"),
                             validation=c("internal","stability"),
                             metric = "euclidean",maxitems = nrow(cl.data))

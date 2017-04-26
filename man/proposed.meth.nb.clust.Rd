@@ -18,10 +18,9 @@ proposed.meth.nb.clust(clv)
 \details{
 ...
 }
-\author{
-Kleanthis Koupidis
-}
 \seealso{
 proposed.methclust, proposed.nbclust
 }
-
+\author{
+Kleanthis Koupidis
+}

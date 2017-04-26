@@ -29,7 +29,7 @@
 #' @export
 ########################################################################################################
 
-cl.feature = function(data, features=NULL, amounts=NULL, aggregate="sum") {
+cl.features = function(data, features=NULL, amounts=NULL, aggregate="sum") {
   
   # Convert to data frame
   
