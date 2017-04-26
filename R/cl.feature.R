@@ -1,20 +1,20 @@
 #' @title
-#' Clustering feature
+#' Clustering features
 #' 
 #' @description 
 #' Select clustering characteristic of OBEU datasets.
 #' 
 #' 
-#' @usage cl.feature(data, feature=NULL, measured="variable",aggregate="sum")
+#' @usage cl.features(data, features=NULL, amounts=NULL, aggregate="sum")
 #' @param data The input data
-#' @param feature The clustering feature
-#' @param measured The measured dimension of dataset
+#' @param features The clustering features
+#' @param amounts The amount measures of the dataset
 #' @param aggregate The function to aggregate
 #' 
 #' @details This function adapts the dataset according to the selected dimension of the dataset 
 #' and the aggregation function. 
 #'
-#' @return This function returns the dataset for cluster analysis adapted to the desired feature. 
+#' @return This function returns the dataset for cluster analysis adapted to the desired features. 
 #' 
 #' @author Kleanthis Koupidis
 #' 
@@ -24,12 +24,12 @@
 #' @import reshape
 #' @import stringr
 #' 
-#' @rdname cl.feature
+#' @rdname cl.features
 #' 
 #' @export
 ########################################################################################################
 
-cl.feature = function(data, feature=NULL, measured="variable", aggregate="sum") {
+cl.feature = function(data, features=NULL, amounts=NULL, aggregate="sum") {
   
   # Convert to data frame
   
@@ -37,35 +37,36 @@ cl.feature = function(data, feature=NULL, measured="variable", aggregate="sum") 
   
   # If all numeric variables 
   
-  if   ( all(sapply(data, is.double) | sapply(data, is.numeric))==T ){
+  #if ( all(sapply(data, is.double) | sapply(data, is.numeric))==T ){
     
-    cluster.data = data
+  #  cluster.data = data
     
-  }else{
+  #}else{
     
-  #If feature is not provided
-    
-  if (is.null(feature)){
+  #If features is not provided
   
-  sel = which(sapply(data, is.factor) | sapply(data, is.character) )
+  #sel = which(sapply(data, is.factor) | sapply(data, is.character) )
+  if ( is.null(features) ) features= names(which(sapply(data, is.factor) | sapply(data, is.character)) ) 
+  if ( is.null(amounts) ) amounts= names(which(sapply(data, is.double) | sapply(data, is.numeric)) ) 
+  # Melt data
+  molten_data=reshape::melt.data.frame( data, id.vars= features, measure.vars= amounts )
   
-    if ( length(names(sel))>1){
-      
-      feature = stringr::str_c(names(sel), collapse = "+")
-      
-      # Melt data
-      molten_data=reshape::melt.data.frame(data)
-      
-      # Expression
-      expression = stringr::str_c(feature,"~", measured, collapse = " ")
-      
-      # Form Dataset
-      cluster.data = reshape::cast(molten_data, expression, fun.aggregate = aggregate)    
-      
-      }else cluster.data=data
+  #features = stringr::str_c(features, collapse = "+")
+  #amounts = stringr::str_c(amounts, collapse = "+")
+  
+  # Expression
+  # expression = stringr::str_c(features,"~", measured, collapse = " ")
+  
+  if ( length(features)>1 ) { 
+    features = stringr::str_c(features, collapse = "+") 
   }
   
-  }
+  # Form Dataset
+  cluster.data = reshape::cast(molten_data, noquote( paste(features, "~" ,"variable")), fun.aggregate = aggregate) # , expression, fun.aggregate = aggregate)    
+      
+  #else cluster.data=data
+  
+  #}
   return(cluster.data)
   
-  }
+}

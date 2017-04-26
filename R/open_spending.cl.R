@@ -64,7 +64,9 @@ open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.
     variables <- c(dimensions,amounts)
     
     dt2 <- dt[variables]
+    
     dt2[dimensions] <- sapply(dt2[dimensions],as.character)
+    
   }  else {
     names(dt) <- gsub("cells.","",names(dt))
     
@@ -78,7 +80,7 @@ open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.
   
   dt2 <- stats::na.omit(dt2) 
   
-  cl.result <- cl.analysis(cl.data= dt2, cl_feature=cl.feature, measured.dim=cl.measured.dim, cl.aggregate=cl.aggregate,
+  cl.result <- cl.analysis(cl.data= dt2, cl_feature=dimensions, amount=amounts, cl.aggregate=cl.aggregate,
                            cl.meth=cl.method, clust.numb=cl.num, dist=cl.dist)
  
   cl.results <- jsonlite::toJSON(cl.result)

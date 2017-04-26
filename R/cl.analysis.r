@@ -5,12 +5,12 @@
 #' Clustering Analysis for OBEU datasets.
 #' 
 #' 
-#' @usage cl.analysis(cl.data, cl_feature=NULL, measured.dim="variable", cl.aggregate="sum",
+#' @usage cl.analysis(cl.data, cl_feature=NULL, amount="variable", cl.aggregate="sum",
 #'cl.meth=NULL, clust.numb=NULL, dist="euclidean")
 #'                      
 #' @param cl.data The input data 
 #' @param cl_feature ...
-#' @param measured.dim ...
+#' @param amount ...
 #' @param cl.aggregate ...
 #' @param cl.meth The clustering method algorithm
 #' @param clust.numb The number of clusters
@@ -35,7 +35,7 @@
 #' 
 #' @export
 ########################################################################################################
-cl.analysis=function(cl.data, cl_feature=NULL, measured.dim="variable", cl.aggregate="sum",
+cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                      cl.meth=NULL, clust.numb=NULL, dist="euclidean"){
   
   if( ncol(cl.data)< 2 ) 
@@ -49,14 +49,14 @@ cl.analysis=function(cl.data, cl_feature=NULL, measured.dim="variable", cl.aggre
   
   # Select clustering feature
   
-  clusterr.data = cl.feature(cl.data, feature=cl_feature, measured=measured.dim, aggregate=cl.aggregate)
+  clusterr.data = cl.feature(cl.data, features=cl_feature, amounts=amount, aggregate=cl.aggregate)
   cl.data = nums(clusterr.data)
   
   ## If method and number of clusters is not provided
   
   if(is.null(cl.meth) & is.null(clust.numb)){
     
-    method_clvalid=clValid::clValid(as.matrix(cl.data),2:5,
+    method_clvalid=clValid::clValid(as.matrix(na.omit(cl.data)),2:5,
                             clMethods=c("hierarchical","kmeans", "pam", "clara","fanny", "model"),
                             validation=c("internal","stability"),
                             metric = "euclidean",maxitems = nrow(cl.data))
@@ -146,7 +146,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, measured.dim="variable", cl.aggre
 ################################################################################
   ## K-Means
   
- } else if(cl.meth=="kmeans"){
+ }else if(cl.meth=="kmeans"){
     
     kmeans=kmeans(cl.data,clust.numb)
     
