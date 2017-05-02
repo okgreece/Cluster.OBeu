@@ -17,10 +17,6 @@ open_spending.cl(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
 
 \item{measured.dim}{The dimensions to which correspond amount/numeric variables}
 
-\item{cl.feature}{...}
-
-\item{cl.measured.dim}{...}
-
 \item{cl.aggregate}{...}
 
 \item{cl.method}{...}
@@ -28,6 +24,10 @@ open_spending.cl(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
 \item{cl.num}{...}
 
 \item{cl.dist}{...}
+
+\item{cl.feature}{...}
+
+\item{cl.measured.dim}{...}
 }
 \value{
 A json string with the resulted parameters of the \code{\link{cl.analysis}} function.

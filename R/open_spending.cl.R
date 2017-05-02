@@ -38,7 +38,7 @@
 ############################################################################################################
 
 open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
-                             cl.feature=NULL, cl.measured.dim="variable", cl.aggregate="sum",
+                             cl.aggregate="sum",
                              cl.method=NULL, cl.num=NULL, cl.dist="euclidean"){  
   
   if (RCurl::url.exists(json_data)){
@@ -65,17 +65,17 @@ open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.
     
     dt2 <- dt[variables]
     
-    dt2[dimensions] <- sapply(dt2[dimensions],as.character)
+      dt2[dimensions] <- sapply(dt2[dimensions],as.character)
     
   }  else {
     names(dt) <- gsub("cells.","",names(dt))
     
-    melt <- reshape::melt.data.frame(dt)
+    melt <- reshape::melt.data.frame(dt, id.vars = c(dimensions,measured.dim))
     
     formula <- paste(dimensions,measured.dim,sep="~") 
     
-    dt2 <- reshape::cast(melt,formula,sum,
-                         subset=melt$variable==amounts) 
+    dt2 <- reshape::cast(melt,formula,sum)
+    amounts=unique(dt[,paste0(measured.dim)])
   }
   
   dt2 <- stats::na.omit(dt2) 

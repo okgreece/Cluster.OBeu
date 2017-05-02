@@ -167,10 +167,10 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     # PCA
     data.pca = stats::prcomp(cl.data, scale. = T, center = T)
     # ellipses + convex hulls
-    cluster.ellipses = .ellipses(modelparam, data.pca)
-    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
-    # model parameters
-    modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+   #cluster.ellipses = .ellipses(modelparam, data.pca)
+   #cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
+   ## model parameters
+   #modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
@@ -196,11 +196,11 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                       compare=comp.parameters)
     # PCA
     data.pca = stats::prcomp(cl.data, scale. = T, center = T)
-    # ellipses + convex hulls
-    cluster.ellipses = .ellipses(modelparam, data.pca)
-    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
-    # model parameters
-    modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+   ## ellipses + convex hulls
+   #cluster.ellipses = .ellipses(modelparam, data.pca)
+   #cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
+   ## model parameters
+   #modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
@@ -228,10 +228,10 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     # PCA
     data.pca = stats::prcomp(cl.data, scale. = T, center = T)
     # ellipses + convex hulls
-    cluster.ellipses = .ellipses(modelparam, data.pca)
-    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
-    # model parameters
-    modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+    #cluster.ellipses = .ellipses(modelparam, data.pca)
+    #cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
+    ## model parameters
+    #modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
@@ -260,10 +260,10 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     # PCA
     data.pca = stats::prcomp(cl.data, scale. = T, center = T)
     # ellipses + convex hulls
-    cluster.ellipses = .ellipses(modelparam, data.pca)
-    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
-    # model parameters
-    modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+    #cluster.ellipses = .ellipses(modelparam, data.pca)
+    #cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
+    ## model parameters
+    #modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 
 ################################################################################
@@ -310,7 +310,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
 ################################################################################
   
   # extend model parameters
-  modelparam = utils::modifyList(list(cl.meth=cl.meth, clust.numb=clust.numb), modelparam)
+ # modelparam = utils::modifyList(list(cl.meth=cl.meth, clust.numb=clust.numb), modelparam)
   
   #parameters= jsonlite::toJSON(modelparam)
   return(modelparam)
