@@ -10,16 +10,13 @@ proposed.meth.nb.clust(clv)
 \item{clv}{A clValid object}
 }
 \value{
-...
+A value that indicates the proposed method and number of clusters.
 }
 \description{
 ...
 }
 \details{
-...
-}
-\seealso{
-proposed.methclust, proposed.nbclust
+This function returns the proposed method or number of clusters or both according to the majority clustering indices of a clValid process
 }
 \author{
 Kleanthis Koupidis

@@ -14,12 +14,16 @@
 #' #inputs.data <- scale(iris[,1:4])
 #' #inputs.clustering <- cl.analysis(inputs.data, cl.meth="kmeans", clust.numb=3)
 #' #cl.plot(inputs.clustering, parameters = list(convex.hulls=TRUE))
+#' 
 #' @import car
 #' @importFrom grDevices chull palette 
 #' @importFrom graphics legend lines par plot points
 #' @importFrom methods is
+#' 
 #' @rdname cl.plot
+#' 
 #' @export
+
 cl.plot <- function(clustering.model, parameters = list()) {
   # convert json to list if passed as json
   if(is(clustering.model,"json")){

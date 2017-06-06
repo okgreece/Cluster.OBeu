@@ -5,23 +5,20 @@
 #' Extract and analyze the input data provided from Open Spending API, using the \code{\link{cl.analysis}} function.
 #' 
 #' @usage open_spending.cl(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
-#'                         cl.feature=NULL, cl.measured.dim="variable", cl.aggregate="sum",
-#'                         cl.method=NULL, cl.num=NULL, cl.dist="euclidean")
+#' cl.aggregate="sum", cl.method=NULL, cl.num=NULL, cl.dist="euclidean")
 #' 
 #' @param json_data The json string, URL or file from Open Spending API
-#' @param dimensions The dimensions of the input data
+#' @param dimensions The dimensions/feature of the input data
 #' @param amounts The measures of the input data
 #' @param measured.dim The dimensions to which correspond amount/numeric variables
-#' @param cl.feature ...
-#' @param cl.measured.dim ...
-#' @param cl.aggregate ...
-#' @param cl.method ...
-#' @param cl.num ...
-#' @param cl.dist ...
+#' @param cl.aggregate The desired aggregation of the input data
+#' @param cl.method The clustering method algorithm
+#' @param cl.num The number of clusters
+#' @param cl.dist The distance metric
 #' 
 #' @details 
 #' This function is used to read data in json format from Open Spending API, in order to implement 
-#' some cluster analysis tasks through \code{\link{cl.analysis}} function.
+#' cluster analysis through \code{\link{cl.analysis}} function.
 #' 
 #' @return A json string with the resulted parameters of the \code{\link{cl.analysis}} function.
 #'
@@ -35,7 +32,7 @@
 #' @import reshape
 #'
 #' @export
-############################################################################################################
+
 
 open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
                              cl.aggregate="sum",
@@ -87,4 +84,4 @@ open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.
   
   return(cl.results)
 } 
-
+#cl.analysis(cl.data= dt2, cl_feature=dimensions, amount=amounts)

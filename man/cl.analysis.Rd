@@ -10,29 +10,42 @@ cl.meth=NULL, clust.numb=NULL, dist="euclidean")
 \arguments{
 \item{cl.data}{The input data}
 
-\item{cl_feature}{...}
+\item{cl_feature}{Select a subset of the input data}
 
-\item{amount}{...}
+\item{amount}{The numeric}
 
-\item{cl.aggregate}{...}
+\item{cl.aggregate}{Select a different aggregation in case of filtering the inpupt data}
 
 \item{cl.meth}{The clustering method algorithm}
 
 \item{clust.numb}{The number of clusters}
 
-\item{dist}{The dist metric}
+\item{dist}{The distance metric}
 }
 \value{
-This function returns the graphical and evaluation paremeters of the selected algorithm.
+The final returns are the parameters needed for visualizing the cluster data depending on the selected algorithm and the specification parameters, 
+as long as some comparison measure matrices.
+
+\itemize{
+\item cl.meth - Label of the clustering algorithm
+\item clust.numb - The number of clusters
+\item data.pca - The principal components to visualize the input data
+\item modelparam - The results of this parameter depend of the selected clustering model
+}
 }
 \description{
 Clustering Analysis for OBEU datasets.
 }
 \details{
-...
+There are different clustering models to be selected through an evaluation process. 
+The user should define the dimensions, measured.dim and amount parameters to form the structure of cluster data. 
+The clustering algorithm, the number of clusters and the distance metric of the clustering model are set
+to the best selection using internal and stability measures. 
+The end user can also interact with the cluster analysis and these parameters by specifying the cl.method, cl.num and cl.dist parameters respectively.
 }
 \seealso{
-\code{\link{cl.features}}
+\code{\link{cl.features}}, \code{\link[clValid]{clValid}}, \code{\link[cluster]{diana}}, \code{\link[cluster]{agnes}},
+\code{\link[cluster]{pam}}, \code{\link[cluster]{clara}}, \code{\link[cluster]{fanny}}, \code{\link[mclust]{Mclust}}
 }
 \author{
 Kleanthis Koupidis, Jaroslav Kuchar

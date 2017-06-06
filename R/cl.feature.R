@@ -6,6 +6,7 @@
 #' 
 #' 
 #' @usage cl.features(data, features=NULL, amounts=NULL, aggregate="sum")
+#' 
 #' @param data The input data
 #' @param features The clustering features
 #' @param amounts The amount measures of the dataset

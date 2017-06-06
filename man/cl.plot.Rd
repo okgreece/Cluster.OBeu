@@ -19,6 +19,7 @@ cl.plot(clustering.model, parameters = list())
 #inputs.data <- scale(iris[,1:4])
 #inputs.clustering <- cl.analysis(inputs.data, cl.meth="kmeans", clust.numb=3)
 #cl.plot(inputs.clustering, parameters = list(convex.hulls=TRUE))
+
 }
 \seealso{
 \code{\link{cl.analysis}}

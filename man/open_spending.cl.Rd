@@ -5,29 +5,24 @@
 \title{Read and Calculate the Basic Information for Cluster Analysis Tasks from Open Spending API}
 \usage{
 open_spending.cl(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
-                        cl.feature=NULL, cl.measured.dim="variable", cl.aggregate="sum",
-                        cl.method=NULL, cl.num=NULL, cl.dist="euclidean")
+cl.aggregate="sum", cl.method=NULL, cl.num=NULL, cl.dist="euclidean")
 }
 \arguments{
 \item{json_data}{The json string, URL or file from Open Spending API}
 
-\item{dimensions}{The dimensions of the input data}
+\item{dimensions}{The dimensions/feature of the input data}
 
 \item{amounts}{The measures of the input data}
 
 \item{measured.dim}{The dimensions to which correspond amount/numeric variables}
 
-\item{cl.aggregate}{...}
+\item{cl.aggregate}{The desired aggregation of the input data}
 
-\item{cl.method}{...}
+\item{cl.method}{The clustering method algorithm}
 
-\item{cl.num}{...}
+\item{cl.num}{The number of clusters}
 
-\item{cl.dist}{...}
-
-\item{cl.feature}{...}
-
-\item{cl.measured.dim}{...}
+\item{cl.dist}{The distance metric}
 }
 \value{
 A json string with the resulted parameters of the \code{\link{cl.analysis}} function.
@@ -37,7 +32,7 @@ Extract and analyze the input data provided from Open Spending API, using the \c
 }
 \details{
 This function is used to read data in json format from Open Spending API, in order to implement 
-some cluster analysis tasks through \code{\link{cl.analysis}} function.
+cluster analysis through \code{\link{cl.analysis}} function.
 }
 \seealso{
 \code{\link{cl.analysis}}

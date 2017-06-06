@@ -9,26 +9,41 @@
 #'cl.meth=NULL, clust.numb=NULL, dist="euclidean")
 #'                      
 #' @param cl.data The input data 
-#' @param cl_feature ...
-#' @param amount ...
-#' @param cl.aggregate ...
+#' @param cl_feature Select a subset of the input data
+#' @param amount The numeric 
+#' @param cl.aggregate Select a different aggregation in case of filtering the inpupt data
 #' @param cl.meth The clustering method algorithm
 #' @param clust.numb The number of clusters
-#' @param dist The dist metric
+#' @param dist The distance metric
 #' 
-#' @details ...
+#' @details There are different clustering models to be selected through an evaluation process. 
+#' The user should define the dimensions, measured.dim and amount parameters to form the structure of cluster data. 
+#' The clustering algorithm, the number of clusters and the distance metric of the clustering model are set
+#' to the best selection using internal and stability measures. 
+#' The end user can also interact with the cluster analysis and these parameters by specifying the cl.method, cl.num and cl.dist parameters respectively.
 #'  
-#' @return This function returns the graphical and evaluation paremeters of the selected algorithm. 
+#' @return The final returns are the parameters needed for visualizing the cluster data depending on the selected algorithm and the specification parameters, 
+#' as long as some comparison measure matrices.
+#' 
+#' \itemize{
+#' \item cl.meth - Label of the clustering algorithm
+#' \item clust.numb - The number of clusters
+#' \item data.pca - The principal components to visualize the input data
+#' \item modelparam - The results of this parameter depend of the selected clustering model
+#' }
+#' 
 #' 
 #' @author Kleanthis Koupidis, Jaroslav Kuchar
 #' 
-#' @seealso \code{\link{cl.features}}
+#' @seealso \code{\link{cl.features}}, \code{\link[clValid]{clValid}}, \code{\link[cluster]{diana}}, \code{\link[cluster]{agnes}},
+#' \code{\link[cluster]{pam}}, \code{\link[cluster]{clara}}, \code{\link[cluster]{fanny}}, \code{\link[mclust]{Mclust}} 
 #' 
 #' 
-#' @import cluster
-#' @import clValid
+#' 
+#' @import cluster 
+#' @importFrom clValid clValid
 #' @import dendextend
-#' @import mclust
+#' @importFrom mclust Mclust
 #' @import utils
 #' 
 #' @rdname cl.analysis
@@ -73,7 +88,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                             clMethods=c("hierarchical","kmeans", "pam", "clara","fanny", "model"),
                             validation=c("internal","stability"),
                             metric = "euclidean")	
-    cl.meth= proposed.methclust(method_clvalid)
+    cl.meth= proposed.meth.nb.clust(method_clvalid)$method.cluster
   }
   
   ## If number of clusters is not provided
@@ -85,7 +100,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                             validation=c("internal","stability"),
                             metric = "euclidean")	
     
-    clust.numb=proposed.nbclust(method_clvalid)
+    clust.numb=proposed.meth.nb.clust(method_clvalid)$nb.clust
     }  
   
   
@@ -271,7 +286,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     ## Model Based Clustering
     
   }else if(cl.meth=="model"){
-    mclust=mclust::Mclust(cl.data, clust.numb)
+    mclust=c(cl.data, clust.numb)
     
     data.list = utils::combn(cl.data, 2,simplify = F)
     
