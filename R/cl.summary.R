@@ -2,9 +2,9 @@
 #' Extract the proposed clustering method and the number of clusters from clvalid method
 #' 
 #' @description 
-#' ...
+#' Extract the most frequent 
 #' 
-#' @usage proposed.meth.nb.clust(clv)
+#' @usage cl.summary(clv)
 #' @param clv A clValid object
 #' 
 #' @details This function returns the proposed method or number of clusters or both according to the majority clustering indices of a clValid process
@@ -13,10 +13,10 @@
 #' 
 #' @author Kleanthis Koupidis
 #' 
-#' @rdname proposed.meth.nb.clust
+#' @rdname cl.summary
 #' @export
 
-proposed.meth.nb.clust<-function(clv){
+cl.summary<-function(clv){
   
   if(!inherits(clv,"clValid")) stop("clValid object should be provided")
   

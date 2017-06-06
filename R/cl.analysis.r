@@ -76,8 +76,8 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                             validation=c("internal","stability"),
                             metric = "euclidean",maxitems = nrow(cl.data))
     
-    clust.numb=proposed.meth.nb.clust(method_clvalid)$nb.clust
-    cl.meth=proposed.meth.nb.clust(method_clvalid)$method.cluster
+    clust.numb=cl.summary(method_clvalid)$nb.clust
+    cl.meth=cl.summary(method_clvalid)$method.cluster
   }
   
   ## If method is not provided
@@ -88,7 +88,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                             clMethods=c("hierarchical","kmeans", "pam", "clara","fanny", "model"),
                             validation=c("internal","stability"),
                             metric = "euclidean")	
-    cl.meth= proposed.meth.nb.clust(method_clvalid)$method.cluster
+    cl.meth= cl.summary(method_clvalid)$method.cluster
   }
   
   ## If number of clusters is not provided
@@ -100,7 +100,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                             validation=c("internal","stability"),
                             metric = "euclidean")	
     
-    clust.numb=proposed.meth.nb.clust(method_clvalid)$nb.clust
+    clust.numb=cl.summary(method_clvalid)$nb.clust
     }  
   
   
