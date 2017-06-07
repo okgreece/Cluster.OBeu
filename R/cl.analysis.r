@@ -66,9 +66,9 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
   clusterr.data = cl.features(cl.data, features=cl_feature, amounts=amount, aggregate=cl.aggregate)
   cl.data = nums(clusterr.data)
   
-  num = sapply(clusterr.data, is.numeric)
-  names = as.data.frame(clusterr.data[!num])
-  rownames(cl.data)=paste(names)
+  #num = sapply(clusterr.data, is.numeric)
+  #names = as.data.frame(clusterr.data[!num])
+  #rownames(cl.data)=paste(names)
   ## If method and number of clusters is not provided
   
   if(is.null(cl.meth) & is.null(clust.numb)){
@@ -131,14 +131,14 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     #Convert to dendrogram
     
     dendr=stats::as.dendrogram(tree)
-    tree2 <- as.Node(dendr)
+    tree2 <- data.tree::as.Node(dendr)
     ## Create Clusters
     create.clust = dendextend::cutree(dendr, k = clust.numb)
-    tree=ToListExplicit(tree2, unname = TRUE,  childrenName = "children")
+    tree=data.tree::ToListExplicit(tree2, unname = TRUE,  childrenName = "children")
     
     # Model Parameters
     
-    modelparam=modifyList( list, list(clusters=create.clust) )
+    modelparam=modifyList( tree, list(clusters=create.clust) )
 
 ################################################################################
   ## K-Means
