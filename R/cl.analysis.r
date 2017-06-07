@@ -42,6 +42,7 @@
 #' 
 #' @import cluster 
 #' @importFrom clValid clValid
+#' @importFrom data.tree as.Node
 #' @import dendextend
 #' @importFrom mclust Mclust
 #' @import utils
@@ -53,12 +54,10 @@
 cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                      cl.meth=NULL, clust.numb=NULL, dist="euclidean"){
   
-  if( ncol(cl.data)< 2 ) 
-  {
+  if( ncol(cl.data)< 2 ) {
     stop("The dimension (number of columns) of dataset must be at least 2 numeric variables.")
   }
-  if ( ncol(nums(cl.data))< 2 )
-  {
+  if ( ncol(nums(cl.data))< 2 )  {
     stop("The dimension (number of columns) of dataset must be at least 2 numeric variables.")
   }
   
@@ -67,6 +66,9 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
   clusterr.data = cl.features(cl.data, features=cl_feature, amounts=amount, aggregate=cl.aggregate)
   cl.data = nums(clusterr.data)
   
+  num = sapply(clusterr.data, is.numeric)
+  names = as.data.frame(clusterr.data[!num])
+  rownames(cl.data)=paste(names)
   ## If method and number of clusters is not provided
   
   if(is.null(cl.meth) & is.null(clust.numb)){
@@ -127,37 +129,17 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
       tree = cluster::agnes(cl.data, method = "ward")
     }  
     #Convert to dendrogram
-    dendr=stats::as.dendrogram(tree)
     
+    dendr=stats::as.dendrogram(tree)
+    tree2 <- as.Node(dendr)
     ## Create Clusters
     create.clust = dendextend::cutree(dendr, k = clust.numb)
-    
-    ## Add properties to the hierarchical model
-    #size = as.matrix(table(create.clust), c )
-    
-    ## Define model class
-    #class(cl.meth) = c(class(cl.meth), "hcut.clust")
-    
-    
-    
-    # Tree Graphical Parameters
-    node.coordinates = dendextend::get_nodes_xy(dendr)
-    node.names = dendextend:: partition_leaves(dendr)
-
-    #a=lapply(node.names,as.character)
-    #aa=lapply(a,paste,collapse=",")
-    #pr=data.frame(cbind(node.coordinates,unlist(aa)))
+    tree=ToListExplicit(tree2, unname = TRUE,  childrenName = "children")
     
     # Model Parameters
     
-    modelparam=list( data=cl.data,
-                      clustered.data=create.clust,
-                      #cluster.table=size,
-                      x.coordinates = node.coordinates[,1],
-                      y.coordinates = node.coordinates[,2],
-                      node.names = node.names,
-                      compare= list(method= tree$dist.method)
-    )
+    modelparam=modifyList( list, list(clusters=create.clust) )
+
 ################################################################################
   ## K-Means
   
@@ -175,6 +157,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     
     #model parameters
     modelparam=list( data=cl.data,
+                      names=names,
                       clusters=kmeans$cluster,
                       cluster.centers=kmeans$centers,
                       compare=comp.parameters)
@@ -205,6 +188,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     
    #model parameters
     modelparam=list( data=cl.data,
+                      names=names,
                       medoids=pam$medoids,
                       medoids.id=pam$id.med,
                       clusters=pam$clustering,
@@ -236,6 +220,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     
     #model parameters
     modelparam=list( data=cl.data,
+                      names=names,
                       medoids=clara$medoids,
                       medoids.id=clara$i.med,
                       clusters=clara$clustering,
@@ -270,6 +255,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     #model parameters
     modelparam=list( 
                       data=cl.data,
+                      names=names,
                       clusters=fanny$clustering,
                       compare=comp.parameters)
     # PCA
@@ -314,6 +300,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     #model parameters
     modelparam=list(
                       data.list = data.list,
+                      names=names,
                       data.list.colnames = data.list.colnames,
                       classification = mclust$classification,
                       compare = comp.parameters)
