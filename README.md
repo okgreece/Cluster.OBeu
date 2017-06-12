@@ -238,4 +238,4 @@ Further Details:
 Github:
 =======
 
--   <https://github.com/okgreece/Cluster.OBeu>
+-   <https://github.com/okgreece/Cluster.OBeu> <img src="okfgr2.png" align="right" />

@@ -263,3 +263,4 @@ copy the */ocpu/tmp/{this}/R/.val* (the first choice on the right panel)
 # Github:
 
 + https://github.com/okgreece/Cluster.OBeu
+<img src="okfgr2.png" align="right" />
