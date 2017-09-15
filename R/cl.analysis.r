@@ -62,7 +62,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
   }
   
   # Select clustering feature
-  
+  data=cl.data
   clusterr.data = cl.features(cl.data, features=cl_feature, amounts=amount, aggregate=cl.aggregate)
   cl.data = nums(clusterr.data)
   
@@ -138,7 +138,9 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     
     # Model Parameters
     
-    modelparam=modifyList( tree, list(clusters=create.clust) )
+    modelparam=modifyList( raw.data= data,
+                           tree, 
+                           list(clusters=create.clust) )
 
 ################################################################################
   ## K-Means
@@ -156,7 +158,8 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                       cluster.size=kmeans$size)
     
     #model parameters
-    modelparam=list( data=cl.data,
+    modelparam=list( raw.data= data,
+                     data=cl.data,
                       names=names,
                       clusters=kmeans$cluster,
                       cluster.centers=kmeans$centers,
@@ -187,7 +190,8 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                       silhouette.info=pam$silinfo)
     
    #model parameters
-    modelparam=list( data=cl.data,
+    modelparam=list( raw.data= data,
+                     data=cl.data,
                       names=names,
                       medoids=pam$medoids,
                       medoids.id=pam$id.med,
@@ -219,7 +223,8 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
       
     
     #model parameters
-    modelparam=list( data=cl.data,
+    modelparam=list( raw.data= data,
+                     data=cl.data,
                       names=names,
                       medoids=clara$medoids,
                       medoids.id=clara$i.med,
@@ -253,7 +258,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                       fanny$silinfo)
       
     #model parameters
-    modelparam=list( 
+    modelparam=list( raw.data= data,
                       data=cl.data,
                       names=names,
                       clusters=fanny$clustering,
@@ -298,7 +303,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     
     
     #model parameters
-    modelparam=list(
+    modelparam=list( raw.data= data,
                       data.list = data.list,
                       names=names,
                       data.list.colnames = data.list.colnames,
