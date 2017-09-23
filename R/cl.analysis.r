@@ -160,7 +160,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     #model parameters
     modelparam=list( raw.data= data,
                      data=cl.data,
-                      names=names,
+                      #names=names,
                       clusters=kmeans$cluster,
                       cluster.centers=kmeans$centers,
                       compare=comp.parameters)
@@ -192,7 +192,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
    #model parameters
     modelparam=list( raw.data= data,
                      data=cl.data,
-                      names=names,
+                      #names=names,
                       medoids=pam$medoids,
                       medoids.id=pam$id.med,
                       clusters=pam$clustering,
@@ -225,7 +225,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     #model parameters
     modelparam=list( raw.data= data,
                      data=cl.data,
-                      names=names,
+                      #names=names,
                       medoids=clara$medoids,
                       medoids.id=clara$i.med,
                       clusters=clara$clustering,
@@ -260,7 +260,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     #model parameters
     modelparam=list( raw.data= data,
                       data=cl.data,
-                      names=names,
+                      #names=names,
                       clusters=fanny$clustering,
                       compare=comp.parameters)
     # PCA
@@ -277,12 +277,12 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     ## Model Based Clustering
     
   }else if(cl.meth=="model"){
-    mclust=c(cl.data, clust.numb)
+    #mclust=c(cl.data, clust.numb)
     
-    data.list = utils::combn(cl.data, 2,simplify = F)
+    #data.list = utils::combn(cl.data, 2,simplify = F)
     
-    data.list.colnames = lapply(data.list,colnames)
-    
+    #data.list.colnames = lapply(data.list,colnames)
+    mclust = mclust::Mclust(cl.data, G = clust.numb)
     #comparative parameters
     comp.parameters= list(  
                       model.name= mclust$modelName,
@@ -304,9 +304,10 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     
     #model parameters
     modelparam=list( raw.data= data,
-                      data.list = data.list,
-                      names=names,
-                      data.list.colnames = data.list.colnames,
+                     data = mclust$data,
+                      #data.list = data.list,
+                      #names=names,
+                      #data.list.colnames = data.list.colnames,
                       classification = mclust$classification,
                       compare = comp.parameters)
     
