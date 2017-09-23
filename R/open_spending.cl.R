@@ -80,7 +80,7 @@ open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.
   
   cl.result <- cl.analysis(cl.data= dt2, cl_feature=dimensions, amount=amounts, cl.aggregate=cl.aggregate,
                            cl.meth=cl.method, clust.numb=cl.num, dist=cl.dist)
- 
+  
   cl.results <- jsonlite::toJSON(cl.result)
   
   return(cl.results)

@@ -81,7 +81,7 @@ cl.plot <- function(clustering.model, parameters = list()) {
 #' @return List of vectors with points for each convex hull.
 .convex.hulls <- function(clustering.model, data.pca) {
   lapply(
-    unique(clustering.model$clusters),
+    sort(unique(clustering.model$clusters),decreasing = FALSE),
     function(clId){
       dat <- data.pca$x[which(clustering.model$clusters==clId),1:2]
       pts <- grDevices::chull(dat)
