@@ -38,9 +38,10 @@ open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.
                              cl.aggregate="sum",
                              cl.method=NULL, cl.num=NULL, cl.dist="euclidean"){  
   
-  if (RCurl::url.exists(json_data)){
-  json_data<-RCurl::getURL( json_data, ssl.verifyhost=FALSE )
-  } 
+  linkexist<-RCurl::url.exists(json_data)
+  if (linkexist){
+    #json_data = RCurl::getURL(json_data)#, ssl.verifyhost=FALSE )
+  } else if (!linkexist) stop("Not valid json data input")
   
   dt <- jsonlite::fromJSON(json_data)
   

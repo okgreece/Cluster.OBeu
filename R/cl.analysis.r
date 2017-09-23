@@ -138,7 +138,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     
     # Model Parameters
     
-    modelparam=modifyList( raw.data= data,
+    modelparam=list( raw.data= data,
                            tree, 
                            list(clusters=create.clust) )
 
