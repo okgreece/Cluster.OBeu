@@ -1,2 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.travis\.yml$
+^NEWS\.rmd$
+^README\.Rmd$
+^obeu_logo\.png$
+^okfgr2\.png$
+^json\.txt$
