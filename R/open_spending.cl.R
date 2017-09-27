@@ -69,10 +69,13 @@ open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.
     names(dt) <- gsub("cells.","",names(dt))
     
     melt <- reshape::melt.data.frame(dt, id.vars = c(dimensions,measured.dim))
+    melt$value=as.numeric(melt$value)
+    if (length(dimensions>1)) dimensions2 = paste(dimensions,collapse = "+") else dimensions2=dimensions
+    if (length(measured.dim>1)) measured.dim2 = paste(measured.dim,collapse = "+") else measured.dim2=measured.dim
     
-    formula <- paste(dimensions,measured.dim,sep="~") 
+    formula <- paste(dimensions2,measured.dim2,sep="~") 
     
-    dt2 <- reshape::cast(melt,formula,sum)
+    dt2 <- reshape::cast(melt,formula, sum)
     amounts=unique(dt[,paste0(measured.dim)])
   }
   
