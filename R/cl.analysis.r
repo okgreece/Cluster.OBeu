@@ -15,6 +15,7 @@
 #' @param cl.meth The clustering method algorithm
 #' @param clust.numb The number of clusters
 #' @param dist The distance metric
+#' @param tojson If TRUE the results are returned in json format, default returns a list
 #' 
 #' @details There are different clustering models to be selected through an evaluation process. 
 #' The user should define the dimensions, measured.dim and amount parameters to form the structure of cluster data. 
@@ -52,7 +53,7 @@
 #' @export
 ########################################################################################################
 cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
-                     cl.meth=NULL, clust.numb=NULL, dist="euclidean"){
+                     cl.meth=NULL, clust.numb=NULL, dist="euclidean", tojson=FALSE){
   
   if( ncol(cl.data)< 2 ) {
     stop("The dimension (number of columns) of dataset must be at least 2 numeric variables.")
@@ -160,7 +161,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     data.pca = stats::prcomp(cl.data, scale. = T, center = T) 
     #model parameters
     modelparam=list( raw.data= cl.data,
-                     data=data.pca,
+                     data=data.pca$x[,1:2],
                       #names=names,
                       clusters=kmeans$cluster,
                       cluster.centers=kmeans$centers,
@@ -192,7 +193,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     data.pca = stats::prcomp(cl.data, scale. = T, center = T)   
    #model parameters
     modelparam=list( raw.data= cl.data,
-                     data=data.pca,
+                     data=data.pca$x[,1:2],
                       #names=names,
                       medoids=pam$medoids,
                       medoids.id=pam$id.med,
@@ -225,7 +226,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     data.pca = stats::prcomp(cl.data, scale. = T, center = T)   
     #model parameters
     modelparam=list( raw.data= cl.data,
-                     data=data.pca,
+                     data=data.pca$x[,1:2],
                       #names=names,
                       medoids=clara$medoids,
                       medoids.id=clara$i.med,
@@ -260,7 +261,7 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     data.pca = stats::prcomp(cl.data, scale. = T, center = T)     
     #model parameters
     modelparam=list( raw.data= cl.data,
-                      data=data.pca,
+                      data=data.pca$x[,1:2],
                       #names=names,
                       clusters=fanny$clustering,
                       compare=comp.parameters)
@@ -313,14 +314,14 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
     
   }
   
-################################################################################
-  ## JSON Output
-################################################################################
-  
+
+  if (tojson==T){
+    
+    modelparam= jsonlite::toJSON(modelparam)
+  }
   # extend model parameters
  # modelparam = utils::modifyList(list(cl.meth=cl.meth, clust.numb=clust.numb), modelparam)
   
-  #parameters= jsonlite::toJSON(modelparam)
   return(modelparam)
 }
 

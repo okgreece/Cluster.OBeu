@@ -21,6 +21,8 @@ cl.meth=NULL, clust.numb=NULL, dist="euclidean")
 \item{clust.numb}{The number of clusters}
 
 \item{dist}{The distance metric}
+
+\item{tojson}{If TRUE the results are returned in json format, default returns a list}
 }
 \value{
 The final returns are the parameters needed for visualizing the cluster data depending on the selected algorithm and the specification parameters, 
