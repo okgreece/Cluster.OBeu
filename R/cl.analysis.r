@@ -156,17 +156,17 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                       total.within.sumofsquares=kmeans$tot.withinss,
                       between.sumofsquares=kmeans$betweenss,
                       cluster.size=kmeans$size)
-    
+    # PCA
+    data.pca = stats::prcomp(cl.data, scale. = T, center = T) 
     #model parameters
-    modelparam=list( raw.data= data,
-                     data=cl.data,
+    modelparam=list( raw.data= cl.data,
+                     data=data.pca,
                       #names=names,
                       clusters=kmeans$cluster,
                       cluster.centers=kmeans$centers,
                       compare=comp.parameters)
     
-    # PCA
-    data.pca = stats::prcomp(cl.data, scale. = T, center = T)
+
    # ellipses + convex hulls
    #cluster.ellipses = .ellipses(modelparam, data.pca)
    #cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
@@ -188,17 +188,17 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                       cluster.diameter=pam$clusinfo[,"diameter"],
                       cluster.separation=pam$clusinfo[,"separation"],
                       silhouette.info=pam$silinfo)
-    
+    # PCA
+    data.pca = stats::prcomp(cl.data, scale. = T, center = T)   
    #model parameters
-    modelparam=list( raw.data= data,
-                     data=cl.data,
+    modelparam=list( raw.data= cl.data,
+                     data=data.pca,
                       #names=names,
                       medoids=pam$medoids,
                       medoids.id=pam$id.med,
                       clusters=pam$clustering,
                       compare=comp.parameters)
-    # PCA
-    data.pca = stats::prcomp(cl.data, scale. = T, center = T)
+
   ### ellipses + convex hulls
   #cluster.ellipses = .ellipses(modelparam, data.pca)
   #cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
@@ -221,17 +221,17 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                       cluster.diameter=clara$clusinfo[,"isolation"],
                       silhouette.info=clara$silinfo)
       
-    
+    # PCA
+    data.pca = stats::prcomp(cl.data, scale. = T, center = T)   
     #model parameters
-    modelparam=list( raw.data= data,
-                     data=cl.data,
+    modelparam=list( raw.data= cl.data,
+                     data=data.pca,
                       #names=names,
                       medoids=clara$medoids,
                       medoids.id=clara$i.med,
                       clusters=clara$clustering,
                       compare=comp.parameters)
-    # PCA
-    data.pca = stats::prcomp(cl.data, scale. = T, center = T)
+
    #  #ellipses + convex hulls
    # cluster.ellipses = .ellipses(modelparam, data.pca)
    # cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
@@ -256,15 +256,15 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                       fanny$objective,
                       fanny$convergence,
                       fanny$silinfo)
-      
+    # PCA
+    data.pca = stats::prcomp(cl.data, scale. = T, center = T)     
     #model parameters
-    modelparam=list( raw.data= data,
-                      data=cl.data,
+    modelparam=list( raw.data= cl.data,
+                      data=data.pca,
                       #names=names,
                       clusters=fanny$clustering,
                       compare=comp.parameters)
-    # PCA
-    data.pca = stats::prcomp(cl.data, scale. = T, center = T)
+
    # #ellipses + convex hulls
    # cluster.ellipses = .ellipses(modelparam, data.pca)
    # cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
