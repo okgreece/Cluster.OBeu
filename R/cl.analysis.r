@@ -201,10 +201,10 @@ cl.analysis=function(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
                       compare=comp.parameters)
 
   ### ellipses + convex hulls
-  #cluster.ellipses = .ellipses(modelparam, data.pca)
-  #cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
+  cluster.ellipses = ellipses(modelparam, data.pca)
+  cluster.convex.hulls = convex.hulls(modelparam, data.pca)
   ## model parameters
-  #modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
+  modelparam = utils::modifyList(list(data.pca=data.pca$x[,1:2], cluster.ellipses=cluster.ellipses, cluster.convex.hulls=cluster.convex.hulls), modelparam)
     
 ################################################################################
     
