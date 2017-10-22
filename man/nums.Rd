@@ -7,7 +7,7 @@
 nums(data)
 }
 \arguments{
-\item{data}{The input data frame}
+\item{data}{The input data frame, matrix}
 }
 \value{
 This function returns a data frame with the numeric columns of the input dataset.

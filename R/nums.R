@@ -6,7 +6,7 @@
 #' 
 #' @usage nums(data)
 #' 
-#' @param data The input data frame
+#' @param data The input data frame, matrix
 #' 
 #' @return This function returns a data frame with the numeric columns of the input dataset.
 #'
@@ -15,18 +15,21 @@
 #' @rdname nums
 #' 
 #' @export
-#####################################################################################################
 
-nums=function(data){
+nums = function(data) {
+  
   data = as.data.frame(data)
   
-  if(ncol(data)>=2){
+  if( ncol(data) >= 2 ) {
+    
     num = sapply(data, is.numeric)
     
     data.num = data[num]
     
     data.num = as.data.frame(data.num)
+    
   } else data.num = data
   
   return(data.num)
+  
 }

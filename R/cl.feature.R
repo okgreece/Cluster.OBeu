@@ -2,15 +2,15 @@
 #' Clustering features
 #' 
 #' @description 
-#' Select clustering characteristic of OBEU datasets.
+#' Select clustering characteristic to form the clustering data 
 #' 
-#' 
-#' @usage cl.features(data, features=NULL, amounts=NULL, aggregate="sum")
+#' @usage cl.features(data, features = NULL, amounts = NULL, aggregate = "sum", tojson = FALSE )
 #' 
 #' @param data The input data
 #' @param features The clustering features
 #' @param amounts The amount measures of the dataset
 #' @param aggregate The function to aggregate
+#' @param tojson If TRUE the results are returned in json format, default returns a list
 #' 
 #' @details This function adapts the dataset according to the selected dimension of the dataset 
 #' and the aggregation function. 
@@ -21,16 +21,12 @@
 #' 
 #' @seealso \code{\link{cl.analysis}}
 #' 
-#' 
-#' @import reshape
-#' @import stringr
-#' 
 #' @rdname cl.features
 #' 
 #' @export
-########################################################################################################
 
-cl.features = function(data, features=NULL, amounts=NULL, aggregate="sum") {
+
+cl.features = function(data, features = NULL, amounts = NULL, aggregate = "sum", tojson = FALSE ) {
   
   # Convert to data frame
   
@@ -47,10 +43,14 @@ cl.features = function(data, features=NULL, amounts=NULL, aggregate="sum") {
   #If features is not provided
   
   #sel = which(sapply(data, is.factor) | sapply(data, is.character) )
-  if ( is.null(features) ) features= names(which(sapply(data, is.factor) | sapply(data, is.character)) ) 
-  if ( is.null(amounts) ) amounts= names(which(sapply(data, is.double) | sapply(data, is.numeric)) ) 
+  
+  if ( is.null(features) ) features = names(which(sapply(data, is.factor) | sapply(data, is.character)) ) 
+  
+  if ( is.null(amounts) ) amounts = names(which(sapply(data, is.double) | sapply(data, is.numeric)) ) 
+  
   # Melt data
-  molten_data=reshape::melt.data.frame( data, id.vars= features, measure.vars= amounts )
+  
+  molten_data = reshape::melt.data.frame(data, id.vars = features, measure.vars = amounts )
   
   #features = stringr::str_c(features, collapse = "+")
   #amounts = stringr::str_c(amounts, collapse = "+")
@@ -58,12 +58,16 @@ cl.features = function(data, features=NULL, amounts=NULL, aggregate="sum") {
   # Expression
   # expression = stringr::str_c(features,"~", measured, collapse = " ")
   
-  if ( length(features)>1 ) { 
-    features = stringr::str_c(features, collapse = "+") 
+  if ( length(features) > 1 ) {
+    
+    features = stringr::str_c(features, collapse = "+")
+    
   }
   
+  
   # Form Dataset
-  cluster.data = reshape::cast(molten_data, noquote( paste(features, "~" ,"variable")), fun.aggregate = aggregate) # , expression, fun.aggregate = aggregate)    
+  
+  cluster.data = reshape::cast(molten_data, noquote( paste(features, "~" , "variable")), fun.aggregate = aggregate) # , expression, fun.aggregate = aggregate)    
       
   #else cluster.data=data
   

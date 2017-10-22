@@ -4,7 +4,7 @@
 \alias{cl.features}
 \title{Clustering features}
 \usage{
-cl.features(data, features=NULL, amounts=NULL, aggregate="sum")
+cl.features(data, features = NULL, amounts = NULL, aggregate = "sum", tojson = FALSE )
 }
 \arguments{
 \item{data}{The input data}
@@ -14,12 +14,14 @@ cl.features(data, features=NULL, amounts=NULL, aggregate="sum")
 \item{amounts}{The amount measures of the dataset}
 
 \item{aggregate}{The function to aggregate}
+
+\item{tojson}{If TRUE the results are returned in json format, default returns a list}
 }
 \value{
 This function returns the dataset for cluster analysis adapted to the desired features.
 }
 \description{
-Select clustering characteristic of OBEU datasets.
+Select clustering characteristic to form the clustering data
 }
 \details{
 This function adapts the dataset according to the selected dimension of the dataset 

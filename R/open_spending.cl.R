@@ -27,65 +27,68 @@
 #' @seealso \code{\link{cl.analysis}}
 #' 
 #' @rdname open_spending.cl
-#' 
-#' @import jsonlite
-#' @import reshape
 #'
 #' @export
 
-
-open_spending.cl <- function(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
-                             cl.aggregate="sum",
-                             cl.method=NULL, cl.num=NULL, cl.dist="euclidean"){  
+open_spending.cl <- function(json_data, dimensions = NULL, amounts = NULL, measured.dim = NULL,
+                             cl.aggregate = "sum", cl.method = NULL, cl.num = NULL, cl.dist = "euclidean") {
   
-  linkexist<-RCurl::url.exists(json_data)
+  linkexist <- RCurl::url.exists(json_data)
+  
   if (linkexist){
+    
     #json_data = RCurl::getURL(json_data)#, ssl.verifyhost=FALSE )
-  } else if (!linkexist) stop("Not valid json data input")
+  } else if ( !linkexist ) stop ("Not valid json data input")
   
-  dt <- jsonlite::fromJSON(json_data)
+  dt = jsonlite::fromJSON(json_data)
   
-  components <- c("data", "cells")
+  components = c("data", "cells")
   
-  select.comp <- match.arg(components, names(dt), several.ok = T)
+  select.comp = match.arg(components, names(dt), several.ok = TRUE)
   
-  dt <- as.data.frame(dt[select.comp])
+  dt = as.data.frame ( dt[select.comp] )
   
-  amounts = unlist(strsplit(amounts,"\\|"))
+  amounts = unlist( strsplit(amounts,"\\|") )
   
-  dimensions = unlist(strsplit(dimensions,"\\|"))
+  dimensions = unlist( strsplit(dimensions,"\\|") )
   
-  if (select.comp== "data") {
+  if ( select.comp == "data" ) {
     
-    names(dt) <- gsub("data.","",names(dt)) 
+    names(dt) = gsub("data.", "", names(dt))
     
-    variables <- c(dimensions,amounts)
+    variables = c(dimensions, amounts)
     
-    dt2 <- dt[variables]
+    dt2 = dt[variables]
     
-      dt2[dimensions] <- sapply(dt2[dimensions],as.character)
+    dt2[dimensions] = sapply(dt2[dimensions],as.character)
     
-  }  else {
-    names(dt) <- gsub("cells.","",names(dt))
+  } else {
     
-    melt <- reshape::melt.data.frame(dt, id.vars = c(dimensions,measured.dim))
-    melt$value=as.numeric(melt$value)
-    if (length(dimensions>1)) dimensions2 = paste(dimensions,collapse = "+") else dimensions2=dimensions
-    if (length(measured.dim>1)) measured.dim2 = paste(measured.dim,collapse = "+") else measured.dim2=measured.dim
+    names(dt) = gsub("cells.", "", names(dt) )
     
-    formula <- paste(dimensions2,measured.dim2,sep="~") 
+    melt = reshape::melt.data.frame(dt, id.vars = c(dimensions,measured.dim))
     
-    dt2 <- reshape::cast(melt,formula, sum)
-    amounts=unique(dt[,paste0(measured.dim)])
+    melt$value = as.numeric(melt$value)
+    
+    if ( length(dimensions > 1) ) dimensions2 = paste(dimensions,collapse = "+" ) else dimensions2 = dimensions
+    
+    if ( length(measured.dim > 1) ) measured.dim2 = paste(measured.dim,collapse = "+") else measured.dim2 = measured.dim
+    
+    formula = paste(dimensions2, measured.dim2, sep = "~") 
+    
+    dt2 = reshape::cast(melt, formula, sum)
+    
+    amounts = unique( dt[,paste0(measured.dim)] )
+    
   }
   
-  dt2 <- stats::na.omit(dt2) 
+  dt2 = stats::na.omit(dt2) 
   
-  cl.result <- cl.analysis(cl.data= dt2, cl_feature=dimensions, amount=amounts, cl.aggregate=cl.aggregate,
-                           cl.meth=cl.method, clust.numb=cl.num, dist=cl.dist)
+  cl.result = cl.analysis(cl.data = dt2, cl_feature = dimensions, amount = amounts, cl.aggregate = cl.aggregate,
+                          cl.meth = cl.method, clust.numb = cl.num, dist = cl.dist)
   
-  cl.results <- jsonlite::toJSON(cl.result)
+  cl.results = jsonlite::toJSON(cl.result)
   
-  return(cl.results)
-} 
-#cl.analysis(cl.data= dt2, cl_feature=dimensions, amount=amounts)
+  return (cl.results)
+  
+}

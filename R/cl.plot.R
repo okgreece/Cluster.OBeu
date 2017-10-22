@@ -59,19 +59,21 @@ cl.plot <- function(clustering.model, parameters = list()) {
   invisible()
 }
 
-#' @title Computes points to plot an ellipse for each cluster of the clustering model
+#' @title Ellipse points
+#' @description 
+#' Computes points to plot an ellipse for each cluster of the clustering model
 #' @param clustering.model Object returned by the \code{\link{cl.analysis}} function.
-#' @param PCA data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
+#' @param data.pca data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
 #' @return List of vectors with points for each ellipse.
-ellipses <- function(clustering.model, data.pca) {
+.ellipses <- function(clustering.model, data.pca) {
   lapply(
     unique(clustering.model$clusters), 
     function(cl) {
       
-      if (length(data.pca$x[which(clustering.model$clusters==2),1])>1)
+      if (length(data.pca$x[which(clustering.model$clusters==cl),1])>1)
         car::dataEllipse(
-          x=data.pca$x[which(clustering.model$clusters==2),1],
-          y=data.pca$x[which(clustering.model$clusters==2),2], 
+          x=data.pca$x[which(clustering.model$clusters==cl),1],
+          y=data.pca$x[which(clustering.model$clusters==cl),2], 
           draw=F, 
           levels=0.95, 
           segments=4) else NULL
@@ -79,16 +81,13 @@ ellipses <- function(clustering.model, data.pca) {
   )
 }
 
-
-
-
-
-
-#' @title Computes points to plot a convex hull for each cluster of the clustering model
+#' @title Convex hull points
+#' @description 
+#' Computes points to plot a convex hull for each cluster of the clustering model
 #' @param clustering.model Object returned by the \code{\link{cl.analysis}} function.
-#' @param PCA data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
+#' @param data.pca data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
 #' @return List of vectors with points for each convex hull.
-convex.hulls <- function(clustering.model, data.pca) {
+.convex.hulls <- function(clustering.model, data.pca) {
   lapply(
     sort(unique(clustering.model$clusters),decreasing = FALSE),
     function(clId){

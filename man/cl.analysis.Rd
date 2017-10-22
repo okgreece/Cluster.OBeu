@@ -2,19 +2,19 @@
 % Please edit documentation in R/cl.analysis.r
 \name{cl.analysis}
 \alias{cl.analysis}
-\title{Cluster OBEU}
+\title{Cluster analusis}
 \usage{
-cl.analysis(cl.data, cl_feature=NULL, amount=NULL, cl.aggregate="sum",
-cl.meth=NULL, clust.numb=NULL, dist="euclidean")
+cl.analysis(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate = "sum",
+cl.meth = NULL, clust.numb = NULL, dist = "euclidean", tojson = FALSE)
 }
 \arguments{
 \item{cl.data}{The input data}
 
-\item{cl_feature}{Select a subset of the input data}
+\item{cl_feature}{The feature to be clustered (nominal variables)}
 
-\item{amount}{The numeric}
+\item{amount}{The numeric variables}
 
-\item{cl.aggregate}{Select a different aggregation in case of filtering the inpupt data}
+\item{cl.aggregate}{Select a different aggregation in case of filtering the input data}
 
 \item{cl.meth}{The clustering method algorithm}
 
@@ -29,10 +29,13 @@ The final returns are the parameters needed for visualizing the cluster data dep
 as long as some comparison measure matrices.
 
 \itemize{
-\item cl.meth - Label of the clustering algorithm
-\item clust.numb - The number of clusters
+
+\item cluster.method - Label of the clustering algorithm
+\item raw.data - Input data
 \item data.pca - The principal components to visualize the input data
 \item modelparam - The results of this parameter depend of the selected clustering model
+\item compare - Clustering measures
+
 }
 }
 \description{
@@ -40,7 +43,7 @@ Clustering Analysis for OBEU datasets.
 }
 \details{
 There are different clustering models to be selected through an evaluation process. 
-The user should define the dimensions, measured.dim and amount parameters to form the structure of cluster data. 
+The user should define the cl_feature, cl.aggregate and amount parameters to form the structure of cluster data. 
 The clustering algorithm, the number of clusters and the distance metric of the clustering model are set
 to the best selection using internal and stability measures. 
 The end user can also interact with the cluster analysis and these parameters by specifying the cl.method, cl.num and cl.dist parameters respectively.
