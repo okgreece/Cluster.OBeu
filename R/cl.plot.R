@@ -70,14 +70,13 @@ cl.plot <- function(clustering.model, parameters = list()) {
     unique(clustering.model$clusters), 
     function(cl) {
       
-      if (length(data.pca$x[which(clustering.model$clusters==cl), 1:2] ) > 2)
-        
+      if (length(data.pca$x[which(clustering.model$clusters==cl), 1] ) > 1) {
         car::dataEllipse(
           x=data.pca$x[which(clustering.model$clusters==cl),1],
           y=data.pca$x[which(clustering.model$clusters==cl),2], 
           draw=F, 
           levels=0.95, 
-          segments=4) else NULL
+          segments=4) } else NULL
     }
   )
 }
