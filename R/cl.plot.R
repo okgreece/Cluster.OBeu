@@ -70,7 +70,8 @@ cl.plot <- function(clustering.model, parameters = list()) {
     unique(clustering.model$clusters), 
     function(cl) {
       
-      if (length(data.pca$x[which(clustering.model$clusters==cl),1])>1)
+      if (length(data.pca$x[which(clustering.model$clusters==cl), 1:2] ) > 2)
+        
         car::dataEllipse(
           x=data.pca$x[which(clustering.model$clusters==cl),1],
           y=data.pca$x[which(clustering.model$clusters==cl),2], 
