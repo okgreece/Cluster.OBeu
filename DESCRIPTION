@@ -11,5 +11,5 @@ BugReports: https://github.com/okgreece/Cluster.OBeu/issues
 License: GPL-2 | file LICENSE
 Encoding: UTF-8
 LazyData: TRUE
-Imports: car, cluster, clValid, data.tree, dendextend, graphics, jsonlite, mclust, RCurl, reshape, stringr, tibble, utils, methods
+Imports: car, cluster, clValid, data.tree, dendextend, graphics, jsonlite, mclust, RCurl, reshape, reshape2, stringr, tibble, utils, methods
 RoxygenNote: 6.0.1

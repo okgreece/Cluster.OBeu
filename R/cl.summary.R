@@ -50,35 +50,27 @@ cl.summary<-function(clv) {
                                )
                     )
   
-  tab$model = gsub("[0-9]\\.", "", tab$model)
+  #tab$model = gsub("[0-9]\\.", "", tab$model)
+  cl_meth = stringr::str_split(tab$model,"\\.",simplify = TRUE)
+  
+  tab$model = cl_meth[,2]
+  
+  tab$clusters = as.numeric(cl_meth[,1])
   
   cl.algorithm = table(tab[,2])
   
-  #tab=a[order(-a)]
+  clusters = table(tab[,4])
   
-  max = which(cl.algorithm == max(cl.algorithm))
+  max.meth = names(which(cl.algorithm == max(cl.algorithm)))
   
-  #i=sample(max,1, replace=TRUE)
+  max.clusters = names(which(clusters == max(clusters)))
   
-  if (length(max) <= 1) {
-    
-    i=max
-    
-  } else {
-    
-    i= sample(max,1)
-    
-  }
+  if (length(max.meth) <= 1) j=max.meth else j = sample(max.meth,1)
   
-  #if (proposed=="both"){
+  if (length(max.clusters) <= 1) i=max.clusters else i = sample(max.clusters,1)
   
-  cl.nb.meth =  data.frame( nb.clust = as.integer(cl.algorithm[i]), method.cluster = names(cl.algorithm[i]) )
+  cl.nb.meth =  data.frame( nb.clust = as.integer(max.clusters), method.cluster = max.meth )
   
-  #} else if (proposed=="method"){
-  #  cl.nb.meth=names(cl.algorithm[i])
-  #} else if (proposed=="nb"){
-  #  cl.nb.meth=as.integer(cl.algorithm[i])
-  #} 
   return (cl.nb.meth)
   
 }

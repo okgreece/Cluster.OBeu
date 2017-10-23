@@ -48,7 +48,7 @@ open_spending.cl <- function(json_data, dimensions = NULL, amounts = NULL, measu
   
   dt = as.data.frame ( dt[select.comp] )
   
-  amounts = unlist( strsplit(amounts,"\\|") )
+  amounts2 = unlist( strsplit(amounts,"\\|") )
   
   dimensions = unlist( strsplit(dimensions,"\\|") )
   
@@ -56,7 +56,7 @@ open_spending.cl <- function(json_data, dimensions = NULL, amounts = NULL, measu
     
     names(dt) = gsub("data.", "", names(dt))
     
-    variables = c(dimensions, amounts)
+    variables = c(dimensions, amounts2)
     
     dt2 = dt[variables]
     
@@ -65,6 +65,8 @@ open_spending.cl <- function(json_data, dimensions = NULL, amounts = NULL, measu
   } else {
     
     names(dt) = gsub("cells.", "", names(dt) )
+    
+    dt = dt[,c(dimensions,measured.dim,amounts)]
     
     melt = reshape::melt.data.frame(dt, id.vars = c(dimensions,measured.dim))
     
@@ -76,15 +78,15 @@ open_spending.cl <- function(json_data, dimensions = NULL, amounts = NULL, measu
     
     formula = paste(dimensions2, measured.dim2, sep = "~") 
     
-    dt2 = reshape::cast(melt, formula, sum)
+    dt2 = reshape2::dcast(data = melt, formula = formula, fun.aggregate = sum, drop = FALSE)
     
-    amounts = unique( dt[,paste0(measured.dim)] )
+    amounts2 = unique( dt[,paste0(measured.dim)] )
     
   }
   
   dt2 = stats::na.omit(dt2) 
   
-  cl.result = cl.analysis(cl.data = dt2, cl_feature = dimensions, amount = amounts, cl.aggregate = cl.aggregate,
+  cl.result = cl.analysis(cl.data = dt2, cl_feature = dimensions, amount = amounts2, cl.aggregate = cl.aggregate,
                           cl.meth = cl.method, clust.numb = cl.num, dist = cl.dist)
   
   cl.results = jsonlite::toJSON(cl.result)

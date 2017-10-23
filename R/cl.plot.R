@@ -73,13 +73,15 @@ cl.plot <- function(clustering.model, parameters = list()) {
       if (length(data.pca$x[which(clustering.model$clusters==cl), 1] ) > 1) {
         car::dataEllipse(
           x=data.pca$x[which(clustering.model$clusters==cl),1],
-          y=data.pca$x[which(clustering.model$clusters==cl),2], 
+          y=data.pca$x[which(clustering.model$clusters==cl),2],
           draw=F, 
           levels=0.95, 
-          segments=4) } else NULL
+          segments=4) } else data.pca$x[which(clustering.model$clusters==cl),1:2]
     }
   )
 }
+
+
 
 #' @title Convex hull points
 #' @description 
@@ -88,12 +90,16 @@ cl.plot <- function(clustering.model, parameters = list()) {
 #' @param data.pca data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
 #' @return List of vectors with points for each convex hull.
 .convex.hulls <- function(clustering.model, data.pca) {
+  
   lapply(
+    
     sort(unique(clustering.model$clusters),decreasing = FALSE),
+    
     function(clId){
-      dat <- data.pca$x[which(clustering.model$clusters==clId),1:2]
+      dat <- data.pca$x[which(clustering.model$clusters==5),1:2]
       pts <- grDevices::chull(dat)
-      if (length(dat[pts])>2) dat[c(pts,pts[1]), 1:2] else dat
+      
+      if (length(dat[pts])>2) dat[c(pts,pts[1]), 1:2] else dat[pts]
       #return(dat[c(pts,pts[1]), 1:2])
     }
   )
