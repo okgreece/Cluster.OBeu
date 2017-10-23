@@ -90,7 +90,8 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
     method_clvalid = clValid::clValid( as.matrix(cl.data), clust.numb,
                                        clMethods = c("hierarchical", "kmeans", "pam", "clara", "fanny", "model"),
                                        validation = c("internal", "stability"),
-                                       metric = "euclidean"
+                                       metric = "euclidean",
+                                       maxitems = nrow(cl.data)
                                      )
     
     cl.meth = cl.summary(method_clvalid)$method.cluster
@@ -104,7 +105,8 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
     method_clvalid = clValid::clValid( as.matrix(cl.data), 2:5,
                                        clMethods = cl.meth,
                                        validation = c("internal", "stability"),
-                                       metric = "euclidean"
+                                       metric = "euclidean",
+                                       maxitems = nrow(cl.data)
                                        )
     
     clust.numb = cl.summary(method_clvalid)$nb.clust
