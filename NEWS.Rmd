@@ -1,28 +1,16 @@
 ---
+title: "NEWS"
 output: md_document
 ---
-Changes in Cluster.OBeu 0.4.0
-======================================
-Extending the function cl.plot to other models plot. Update parameters cl.analysis
-Added new function: open_spending.cl
-update the names of the parameters related with cl.analysis function
+## Cluster.OBeu 1.2.1
 
-Changes in Cluster.OBeu 0.3.0
-======================================
-A new function was added to plot functions for the clustering model. 
-Integration of plotting parameters into the clustering function.
-Change functions' names.
+update manuals, vignettes and small fixes in functions
 
-Changes in Cluster.OBeu 0.2.0
-======================================
-Some data sets were removed. ts.obeu was updated
+## Cluster.OBeu 1.2.0
 
-Changes in Cluster.OBeu 0.1.0
-======================================
-Function babbage.ts.obeu and cluster.obeu were created, and in ts.obeu different alternatives depending on the lenght of data were added.
+Add `open_spending.cl` function to be used in [OpenBudgets.eu tools](http://openbudgets.eu/tools/).
 
-Changes in Cluster.OBeu 0.0.0.9000
-===========================================
-Functions and data sets were added
-data sets: Athens_approved_ts, Athens_draft_ts, Athens_executed_ts, Athens_reserved_ts, Athens_revised_ts, Budget_Thessaloniki_2015_Expenditure, Budget_Thessaloniki_2015_Revenue .
-functions: ts.obeu, aggregations.obeu .
+
+## Cluster.OBeu 0.2.0
+
+First stable version of the library.

@@ -50,7 +50,7 @@ cl.features = function(data, features = NULL, amounts = NULL, aggregate = "sum",
   
   # Melt data
   
-  molten_data = reshape::melt.data.frame(data, id.vars = features, measure.vars = amounts )
+  molten_data = reshape2::melt(data, id.vars = features, measure.vars = amounts )
   
   #features = stringr::str_c(features, collapse = "+")
   #amounts = stringr::str_c(amounts, collapse = "+")
@@ -67,7 +67,7 @@ cl.features = function(data, features = NULL, amounts = NULL, aggregate = "sum",
   
   # Form Dataset
   
-  cluster.data = reshape::cast(molten_data, noquote( paste(features, "~" , "variable")), fun.aggregate = aggregate) # , expression, fun.aggregate = aggregate)    
+  cluster.data = reshape2::dcast(molten_data, noquote( paste(features, "~" , "variable")), fun.aggregate = sum) # , expression, fun.aggregate = aggregate)    
       
   #else cluster.data=data
   

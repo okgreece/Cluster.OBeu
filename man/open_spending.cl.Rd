@@ -4,7 +4,7 @@
 \alias{open_spending.cl}
 \title{Read and Calculate the Basic Information for Cluster Analysis Tasks from Open Spending API}
 \usage{
-open_spending.cl(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
+open_spending.cl(json_data, dimensions=NULL, amounts=NULL, measured.dimensions=NULL,
 cl.aggregate="sum", cl.method=NULL, cl.num=NULL, cl.dist="euclidean")
 }
 \arguments{
@@ -14,7 +14,7 @@ cl.aggregate="sum", cl.method=NULL, cl.num=NULL, cl.dist="euclidean")
 
 \item{amounts}{The measures of the input data}
 
-\item{measured.dim}{The dimensions to which correspond amount/numeric variables}
+\item{measured.dimensions}{The dimensions to which correspond amount/numeric variables}
 
 \item{cl.aggregate}{The desired aggregation of the input data}
 

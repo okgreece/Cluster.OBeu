@@ -1,5 +1,5 @@
 ---
-title: Cluster.OBeu <img src="obeu_logo.png" align="right" />
+title: Cluster.OBeu <img src="okfgr2.png" align="right" />
 author: "Kleanthis Koupidis, Charalampos Bratsas, Jaroslav Kuchar" 
 date: "November 9, 2016"
 output:
@@ -7,260 +7,72 @@ output:
     fig_width: 8
     fig_height: 8
     dev: png
-    html_preview: false
+    html_preview: no
   number_sections: yes
-subtitle: A Short Guide in R and OpenCPU environments
 ---
+
 [![Build Status](https://travis-ci.org/okgreece/Cluster.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/Cluster.OBeu)
 [![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/pulls.svg)](https://github.com/okgreece/Cluster.OBeu/pulls)
 [![Github Issues](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/issues.svg)](https://github.com/okgreece/Cluster.OBeu/issues)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![packageversion](https://img.shields.io/badge/Package%20version-1.1.5-orange.svg?style=flat-square)](commits/master)
+[![packageversion](https://img.shields.io/badge/Package%20version-1.2.1-orange.svg?style=flat-square)](commits/master)
 [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-3.1-6666ff.svg)](https://cran.r-project.org/)
 
+#[Cluster.OBeu ](https://okgreece.github.io/Cluster.OBeu/)
+Εstimate and return the necessary parameters for cluster analysis visualizations, used in [OpenBudgets.eu](http://openbudgets.eu/). 
+It involves a set of techniques and algorithms used to find and divide into groups the Budget data of municipalities across Europe, described by the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model).
 
-This document describes the use of the functions implemented in Cluster.OBeu package in OpenCPU environment. 
+The available clustering algorithms are hierarchical, kmeans from R base, pam, clara, fuzzy from [cluster package](https://CRAN.R-project.org/package=cluster) and model based algorithms from [mclust package](https://CRAN.R-project.org/package=mclust). It can be used to find the appropriate clustering algorithm and/or the appropriate clustering number of the input data according to the internal and stability measures from [clValid package](https://CRAN.R-project.org/package=clValid).
 
+This package can generally be used to estimate clustering parameters, extract and convert them to JSON format and use them as input in a different graphical interface and also can be used in data that are not described by the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model).
 
-#Install:
+You can see detailed information [here](https://okgreece.github.io/Cluster.OBeu/).
 
-Load *devtools* library or install it if not already:
-
-```{r, eval=FALSE, include=T}
-install.packages("devtools")
+```{r, eval=FALSE, include=TRUE}
+# install Cluster.OBeu- cran stable version
+install.packages(Cluster.OBeu) 
+# or
+# alternatively install the development version from github
+devtools::install_github("okgreece/Cluster.OBeu")
 ```
 
-Then install *Cluster.OBeu* from [Github](https://github.com/okgreece/Cluster.OBeu)
-
-```{r, eval=FALSE, include=T}
-# devtools::install_github("okgreece/Cluster.OBeu")
-```
-
-And load the library
+Load library `Cluster.OBeu` <img src="obeu_logo.png" align="right" />
 
 ```{r}
-# library(Cluster.OBeu)
+library(Cluster.OBeu)
+```
+
+#Cluster Analysis in a call
+
+`cl.analysis` can be used to estimate clustering model parameters and/or number of clusters needed for visualization of clusters and other clustering measures as list object.
+
+
+```{r message=FALSE, warning=FALSE, paged.print=TRUE}
+cluster_data = cl.analysis( sample_city_data, cl.aggregate = "sum", 
+                            cl.meth = "pam", clust.numb = NULL, dist = "euclidean", tojson = T) # json string format
+
+jsonlite::prettify(cluster_data) # use prettify of jsonlite library to add indentation to the returned JSON string
 ```
 
 
+#Cluster Analysis on OpenBudgets.eu platform
 
-### R Example
+`open_spending.cl` is designed to estimate and return the clustering model measures of [OpenBudgets.eu](http://openbudgets.eu/) datasets.
 
-The package includes the following data: 
+The input data must be a JSON link according to the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model). There are different parameters that a user could specify, e.g. `dimensions`, `measured.dimensions` and `amounts` should be defined by the user, to form the dimensions of the dataset. `open_spending.cl` estimates and returns the json data that are described with the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model), using `cl.analysis` function.
 
-```{r}
-# 1. a link to json file-openspending
-# to add
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=TRUE}
+#Store the link in a variable
+json_link='http://ws307.math.auth.gr/rudolf/public/api/3/cubes/budget-athens-revenue-2007__93458/aggregate?drilldown=budgetPhase.prefLabel%7CadministrativeClassification.prefLabel&aggregates=amount.sum'
+
+clustering = open_spending.cl(
+  json_data =  json_link, 
+  dimensions ="administrativeClassification.prefLabel",
+  measured.dimensions ="budgetPhase.prefLabel",
+  amounts = "amount.sum",
+  cl.method = "fanny",
+  cl.num = 3
+  )
+# Pretty output using prettify of jsonlite library
+jsonlite::prettify(clustering,indent = 2)
 ```
-
-```{r}
-# 2. a link to json file-rudolf
-# to add
-```
-
-
-
-# OpenCPU Short Guide - Cluster.OBeu
-
-Go to: http://okfnrg.math.auth.gr/ocpu/test/
-
-## How to use functions:
-
-Type to the endpoint:
-
-```{r, eval=FALSE, include=TRUE}
- ../library/ {name of the library} /R/ {function}
-```
-
-If you want to see the function parameters you should: 
-
-+ Select Method:
-```{r, eval=FALSE, include=TRUE}
-Get
-```
-
-and in order to run a function you should:
-
-+ Select Method:
-```{r, eval=FALSE, include=TRUE}
-Post
-```
-
-
-
-
-
-
-## Example #1 - Open Spending-Cluster Analysis
-
-1 Go to http://okfnrg.math.auth.gr/ocpu/test/
-
-2 Copy and paste the following function to the endpoint 
-```{r, eval=FALSE, include=TRUE}
-../library/Cluster.OBeu/R/open_spending.cl
-```
-
-3 *Select Method*:
-```{r, eval=FALSE, include=TRUE}
-Post
-```
-
-4 **Add parameters** and set:
-
-Define the input time series data:
-
-+ *Param Name*:
- 
-```{r, eval=FALSE, include=TRUE}
-json_data
-```
-
-+ *Param Value* -the **URL** of json data:
-```{r, eval=FALSE, include=TRUE}
-# a link with json file-openspending
-# to add
-```
-
-
-Define the dimensions:
-
-+ *Param Name*:
- 
-```{r, eval=FALSE, include=TRUE}
-dimensions
-```
-
-+ *Param Value*:
-```{r, eval=FALSE, include=TRUE}
-# to add
-```
-
-
-Define the amount parameter:
-
-+ *Param Name*:
- 
-```{r, eval=FALSE, include=TRUE}
-amounts 
-```
-
-+ *Param Value*:
-```{r, eval=FALSE, include=TRUE}
-# to add
-```
-
-
-5 Ready! Click on **Ajax request**!
-
-6 To see the results: 
-
-copy the */ocpu/tmp/{this}/R/.val* (the first choice on the right panel)
-
-7 and paste http://okfnrg.math.auth.gr/ocpu/tmp/ {this} /R/.val on a new tab.
-
-
-
-
-
-
-
-
-
-## Example #2 - Rudolf Cluster Analysis
-
-1 Go to http://okfnrg.math.auth.gr/ocpu/test/
-
-2 Copy and paste the following function to the endpoint 
-```{r, eval=FALSE, include=TRUE}
-../library/Cluster.OBeu/R/open_spending.cl
-```
-
-3 *Select Method*:
-```{r, eval=FALSE, include=TRUE}
-Post
-```
-
-4 **Add parameters** and set:
-
-Define the input time series data:
-
-+ *Param Name*:
- 
-```{r, eval=FALSE, include=TRUE}
-json_data
-```
-
-+ *Param Value* -the following output from rudolf/ open spending api or you can provide the also **json URL**:
-```{r, eval=FALSE, include=TRUE}
-# 1. json link
-# to add
-```
-
-
-Define the what:
-
-+ *Param Name*:
- 
-```{r, eval=FALSE, include=TRUE}
-dimensions
-```
-
-+ *Param Value*:
-```{r, eval=FALSE, include=TRUE}
-# to add
-```
-
-Define the measured dimensions parameter (e.g. budgetPhase dimension includes variables that are measurable/numeric variables):
-
-+ *Param Name*:
- 
-```{r, eval=FALSE, include=TRUE}
-measured.dimensions
-```
-
-+ *Param Value*:
-```{r, eval=FALSE, include=TRUE}
-# to add
-```
-
-
-Define the amount parameter:
-
-+ *Param Name*:
- 
-```{r, eval=FALSE, include=TRUE}
-amounts
-```
-
-+ *Param Value*:
-```{r, eval=FALSE, include=TRUE}
-# to add
-```
-
-
-
-
-
-5 Ready! Click on **Ajax request**!
-
-6 To see the results: 
-
-copy the */ocpu/tmp/{this}/R/.val* (the first choice on the right panel)
-
-7 and paste http://okfnrg.math.auth.gr/ocpu/tmp/ {this} /R/.val on a new tab.
-
-
-
-# Further Details:
-
-+ https://www.opencpu.org/help.html
-
-+ https://cran.r-project.org/web/packages/opencpu/vignettes/opencpu-server.pdf
-
-+ https://www.opencpu.org/jslib.html
-
-# Github:
-
-+ https://github.com/okgreece/Cluster.OBeu
-<img src="okfgr2.png" align="right" />

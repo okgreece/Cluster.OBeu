@@ -96,7 +96,7 @@ cl.plot <- function(clustering.model, parameters = list()) {
     sort(unique(clustering.model$clusters),decreasing = FALSE),
     
     function(clId){
-      dat <- data.pca$x[which(clustering.model$clusters==5),1:2]
+      dat <- data.pca$x[which(clustering.model$clusters==clId),1:2]
       pts <- grDevices::chull(dat)
       
       if (length(dat[pts])>2) dat[c(pts,pts[1]), 1:2] else dat[pts]

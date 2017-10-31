@@ -199,7 +199,7 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
    
    ## model parameters
    
-   modelparam = utils::modifyList( list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls), modelparam )
+   modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls) )
    
    
    ## Pam (Partitioning Around Medoids)
@@ -240,7 +240,7 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
    
    ## model parameters
    
-   modelparam = utils::modifyList( list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ), modelparam )
+   modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ) )
    
    ## Clara (Clustering Large Applications)
    
@@ -279,7 +279,7 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
    
    ## model parameters
    
-   modelparam = utils::modifyList( list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ), modelparam)
+   modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ))
    
    
    ## Fanny (Fuzzy Analysis Clustering)
@@ -319,7 +319,7 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
    
    ## model parameters
    
-   modelparam = utils::modifyList( list( cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ), modelparam )
+   modelparam = utils::modifyList( modelparam, list( cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ) )
    
    
    ## Model Based Clustering

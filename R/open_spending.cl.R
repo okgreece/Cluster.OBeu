@@ -4,13 +4,13 @@
 #' @description
 #' Extract and analyze the input data provided from Open Spending API, using the \code{\link{cl.analysis}} function.
 #' 
-#' @usage open_spending.cl(json_data, dimensions=NULL, amounts=NULL, measured.dim=NULL,
+#' @usage open_spending.cl(json_data, dimensions=NULL, amounts=NULL, measured.dimensions=NULL,
 #' cl.aggregate="sum", cl.method=NULL, cl.num=NULL, cl.dist="euclidean")
 #' 
 #' @param json_data The json string, URL or file from Open Spending API
 #' @param dimensions The dimensions/feature of the input data
 #' @param amounts The measures of the input data
-#' @param measured.dim The dimensions to which correspond amount/numeric variables
+#' @param measured.dimensions The dimensions to which correspond amount/numeric variables
 #' @param cl.aggregate The desired aggregation of the input data
 #' @param cl.method The clustering method algorithm
 #' @param cl.num The number of clusters
@@ -30,7 +30,7 @@
 #'
 #' @export
 
-open_spending.cl <- function(json_data, dimensions = NULL, amounts = NULL, measured.dim = NULL,
+open_spending.cl <- function(json_data, dimensions = NULL, amounts = NULL, measured.dimensions = NULL,
                              cl.aggregate = "sum", cl.method = NULL, cl.num = NULL, cl.dist = "euclidean") {
   
   linkexist <- RCurl::url.exists(json_data)
@@ -66,21 +66,21 @@ open_spending.cl <- function(json_data, dimensions = NULL, amounts = NULL, measu
     
     names(dt) = gsub("cells.", "", names(dt) )
     
-    dt = dt[,c(dimensions,measured.dim,amounts)]
+    dt = dt[,c(dimensions,measured.dimensions,amounts)]
     
-    melt = reshape::melt.data.frame(dt, id.vars = c(dimensions,measured.dim))
+    melt = reshape::melt.data.frame(dt, id.vars = c(dimensions,measured.dimensions))
     
     melt$value = as.numeric(melt$value)
     
     if ( length(dimensions > 1) ) dimensions2 = paste(dimensions,collapse = "+" ) else dimensions2 = dimensions
     
-    if ( length(measured.dim > 1) ) measured.dim2 = paste(measured.dim,collapse = "+") else measured.dim2 = measured.dim
+    if ( length(measured.dimensions > 1) ) measured.dimensions2 = paste(measured.dimensions,collapse = "+") else measured.dimensions2 = measured.dimensions
     
-    formula = paste(dimensions2, measured.dim2, sep = "~") 
+    formula = paste(dimensions2, measured.dimensions2, sep = "~") 
     
     dt2 = reshape2::dcast(data = melt, formula = formula, fun.aggregate = sum, drop = FALSE)
     
-    amounts2 = unique( dt[,paste0(measured.dim)] )
+    amounts2 = unique( dt[,paste0(measured.dimensions)] )
     
   }
   
