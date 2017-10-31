@@ -5,8 +5,8 @@ November 9, 2016
 
 [![Build Status](https://travis-ci.org/okgreece/Cluster.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/Cluster.OBeu) [![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/pulls.svg)](https://github.com/okgreece/Cluster.OBeu/pulls) [![Github Issues](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/issues.svg)](https://github.com/okgreece/Cluster.OBeu/issues) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![packageversion](https://img.shields.io/badge/Package%20version-1.2.1-orange.svg?style=flat-square)](commits/master) [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 
-Cluster.OBeu <img src="okfgr2.png" align="right" />
-===================================================
+[Cluster.OBeu](https://okgreece.github.io/Cluster.OBeu/index.html)
+==================================================================
 
 Εstimate and return the necessary parameters for cluster analysis visualizations, used in [OpenBudgets.eu](http://openbudgets.eu/). It involves a set of techniques and algorithms used to find and divide into groups the Budget data of municipalities across Europe, described by the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model).
 
