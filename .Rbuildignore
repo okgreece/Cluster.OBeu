@@ -6,3 +6,5 @@
 ^okfgr2\.png$
 ^readme2\.Rmd$
 ^docs$
+^_pkgdown\.yml$
+^pkgdown$

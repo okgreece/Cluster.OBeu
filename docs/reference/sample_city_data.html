@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Clustering model plotting — cl.plot â€¢ Cluster.OBeu</title>
+<title>Sample city data — sample_city_data â€¢ Cluster.OBeu</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -92,54 +92,32 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Clustering model plotting</h1>
+    <h1>Sample city data</h1>
     </div>
 
     
-    <p><code>cl.plot</code> function plots the clustering model constructed by the <code><a href='cl.analysis.html'>cl.analysis</a></code> function.</p>
+    <p>This dataset is an example data frame of the budget phase data</p><ul>
+<li><p>Administrative_Unit</p></li>
+<li><p>Approved</p></li>
+<li><p>Draft</p></li>
+<li><p>Executed</p></li>
+<li><p>Revised</p></li>
+</ul>
     
 
-    <pre class="usage"><span class='fu'>cl.plot</span>(<span class='no'>clustering.model</span>, <span class='kw'>parameters</span> <span class='kw'>=</span> <span class='fu'>list</span>())</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>clustering.model</th>
-      <td><p>Object returned by the <code><a href='cl.analysis.html'>cl.analysis</a></code> function.</p></td>
-    </tr>
-    <tr>
-      <th>parameters</th>
-      <td><p>List of parameters to indicate plotting of ellipses or convex hulls. Default values: <code>list(ellipses=FALSE, convex.hulls=FALSE)</code>.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p><code><a href='cl.analysis.html'>cl.analysis</a></code></p>
+    <p>A data frame with the previous characteristics as columns</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>#data("iris")
-#inputs.data <- scale(iris[,1:4])
-#inputs.clustering <- cl.analysis(inputs.data, cl.meth="kmeans", clust.numb=3)
-#cl.plot(inputs.clustering, parameters = list(convex.hulls=TRUE))
-
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    
-Jaroslav Kuchar &lt;https://github.com/jaroslav-kuchar&gt;
+      <li><a href="#format">Format</a></li>
+          </ul>
 
   </div>
 </div>

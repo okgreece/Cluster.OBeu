@@ -1,0 +1,44 @@
+template:
+  - assets: C:/Users/Kleanthis-Okf/Documents/Cluster.OBeu/pkgdown/extra.css
+navbar:
+  title: ""
+  left:
+    - text: "Home"
+      icon:  fa-home
+      href: index.html
+    - text: "Function Reference"
+      icon:   fa-info-circle
+      href: reference/index.html
+    - text: "News"
+      icon: fa-newspaper-o
+      href: news/index.html
+      
+  right:
+    - icon: fa-github
+      href: https://github.com/okgreece/Cluster.OBeu
+reference:
+  - title: "Cluster Analysis"
+    contents: 
+      - cl.analysis
+      
+  - title: "Open Budgets"
+    contents: 
+      - open_spending.cl
+      
+  - title: "Helpers"
+    contents: 
+      - nums
+      - cl.features
+      - cl.plot
+      - cl.summary
+      
+  - title: "Data"
+    contents:
+      - sample_city_data
+authors:
+  Kleanthis Koupidis:
+    href: https://github.com/kleanthisk10
+  Charalampos Bratsas:
+    href: https://github.com/cbratsas
+  Jaroslav Kuchar:
+    href: https://github.com/jaroslav-kuchar
