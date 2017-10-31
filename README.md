@@ -35,13 +35,6 @@ Cluster Analysis in a call
 
 `cl.analysis` can be used to estimate clustering model parameters and/or number of clusters needed for visualization of clusters and other clustering measures as list object.
 
-``` r
-cluster_data = cl.analysis( sample_city_data, cl.aggregate = "sum", 
-                            cl.meth = "pam", clust.numb = NULL, dist = "euclidean", tojson = T) # json string format
-
-jsonlite::prettify(cluster_data) # use prettify of jsonlite library to add indentation to the returned JSON string
-```
-
     ## {
     ##     "cluster.method": [
     ##         "pam"
@@ -545,22 +538,6 @@ Cluster Analysis on OpenBudgets.eu platform
 `open_spending.cl` is designed to estimate and return the clustering model measures of [OpenBudgets.eu](http://openbudgets.eu/) datasets.
 
 The input data must be a JSON link according to the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model). There are different parameters that a user could specify, e.g. `dimensions`, `measured.dimensions` and `amounts` should be defined by the user, to form the dimensions of the dataset. `open_spending.cl` estimates and returns the json data that are described with the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model), using `cl.analysis` function.
-
-``` r
-#Store the link in a variable
-json_link='http://ws307.math.auth.gr/rudolf/public/api/3/cubes/budget-athens-revenue-2007__93458/aggregate?drilldown=budgetPhase.prefLabel%7CadministrativeClassification.prefLabel&aggregates=amount.sum'
-
-clustering = open_spending.cl(
-  json_data =  json_link, 
-  dimensions ="administrativeClassification.prefLabel",
-  measured.dimensions ="budgetPhase.prefLabel",
-  amounts = "amount.sum",
-  cl.method = "fanny",
-  cl.num = 3
-  )
-# Pretty output using prettify of jsonlite library
-jsonlite::prettify(clustering,indent = 2)
-```
 
     ## {
     ##   "cluster.method": [
