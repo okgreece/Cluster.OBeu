@@ -18,7 +18,7 @@ output:
 [![packageversion](https://img.shields.io/badge/Package%20version-1.2.1-orange.svg?style=flat-square)](commits/master)
 [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 
-#[Cluster.OBeu ](https://okgreece.github.io/Cluster.OBeu/)
+#Cluster.OBeu
 Εstimate and return the necessary parameters for cluster analysis visualizations, used in [OpenBudgets.eu](http://openbudgets.eu/). 
 It involves a set of techniques and algorithms used to find and divide into groups the Budget data of municipalities across Europe, described by the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model).
 
