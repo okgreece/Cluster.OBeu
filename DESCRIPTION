@@ -7,7 +7,7 @@ Description: Estimate and return the needed parameters for visualizations design
 Authors@R: c(
     person("Kleanthis", "Koupidis", , "koupidis@okfn.gr", role = c("aut", "cre")),
     person("Charalampos", "Bratsas", , "charalampos.bratsas@okfn.org", role = "aut"),
-    person("Jaroslav", "Kuchar", , "to@add.ed", role = "ctb")
+    person("Jaroslav", "Kuchar", , "jaroslav.kuchar@gmail.com", role = "ctb")
     )
 Maintainer: Kleanthis Koupidis <koupidis.okfgr@gmail.com>
 URL: https://github.com/okgreece/Cluster.OBeu
