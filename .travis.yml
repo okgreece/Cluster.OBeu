@@ -1,6 +1,5 @@
 language: r
-sudo: required
-dist: trusty
+sudo: false
 group: deprecated-2017Q4
 cache: packages
 r:
