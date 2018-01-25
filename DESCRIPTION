@@ -9,7 +9,7 @@ Authors@R: c(
     person("Charalampos", "Bratsas", , "charalampos.bratsas@okfn.org", role = "aut"),
     person("Jaroslav", "Kuchar", , "jaroslav.kuchar@gmail.com", role = "ctb")
     )
-Maintainer: Kleanthis Koupidis <koupidis.okfgr@gmail.com>
+Maintainer: Kleanthis Koupidis <koupidis@okfn.gr>
 URL: https://github.com/okgreece/Cluster.OBeu
 BugReports: https://github.com/okgreece/Cluster.OBeu/issues
 License: GPL-2 | file LICENSE
