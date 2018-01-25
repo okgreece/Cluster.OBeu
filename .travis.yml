@@ -7,7 +7,5 @@ r:
   - oldrel
   - release
   - devel
-before_install:
-  - tlmgr install index
 warnings_are_errors: false
 install: travis_wait mvn install
