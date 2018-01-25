@@ -1,5 +1,5 @@
 language: r
-sudo: required
+ sudo: required
 dist: trusty
 group: deprecated-2017Q4
 cache: packages
@@ -8,4 +8,3 @@ r:
   - release
   - devel
 warnings_are_errors: false
-install: travis_wait mvn install
