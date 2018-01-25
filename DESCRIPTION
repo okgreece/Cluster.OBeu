@@ -17,3 +17,6 @@ Encoding: UTF-8
 LazyData: TRUE
 Imports: car, cluster, clValid, data.tree, dendextend, graphics, jsonlite, mclust, RCurl, reshape, reshape2, stringr, tibble, utils, methods
 RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

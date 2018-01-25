@@ -11,8 +11,8 @@
 #' @param dimensions The dimensions/feature of the input data
 #' @param amounts The measures of the input data
 #' @param measured.dimensions The dimensions to which correspond amount/numeric variables
-#' @param cl.aggregate The desired aggregation of the input data
-#' @param cl.method The clustering method algorithm
+#' @param cl.aggregate Aggregate function of the input data
+#' @param cl.method The clustering algorithm
 #' @param cl.num The number of clusters
 #' @param cl.dist The distance metric
 #' 

@@ -75,7 +75,7 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
                                        clMethods = c("hierarchical", "kmeans", "pam", "clara", "fanny", "model"),
                                        validation = c("internal", "stability"),
                                        metric = "euclidean", maxitems = nrow(cl.data)
-                                     )
+    )
     
     clust.numb = cl.summary(method_clvalid)$nb.clust
     
@@ -92,7 +92,7 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
                                        validation = c("internal", "stability"),
                                        metric = "euclidean",
                                        maxitems = nrow(cl.data)
-                                     )
+    )
     
     cl.meth = cl.summary(method_clvalid)$method.cluster
     
@@ -107,16 +107,16 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
                                        validation = c("internal", "stability"),
                                        metric = "euclidean",
                                        maxitems = nrow(cl.data)
-                                       )
+    )
     
     clust.numb = cl.summary(method_clvalid)$nb.clust
     
   }
   
   
-
+  
   ## Hierarchical 
-
+  
   if (cl.meth %in% c("hierarchical", "diana", "agnes") ) {
     
     # hierarchical
@@ -157,14 +157,14 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
     # Model Parameters
     
     modelparam = list( cluster.method = cl.meth,
-                     raw.data = data,
-                     tree = tree, 
-                     list(clusters = create.clust) )
-
-
-  ## K-Means
-  
- } else if (cl.meth == "kmeans") {
+                       raw.data = data,
+                       tree = tree, 
+                       list(clusters = create.clust) )
+    
+    
+    ## K-Means
+    
+  } else if (cl.meth == "kmeans") {
     
     kmeans = kmeans(cl.data, clust.numb)
     
@@ -175,7 +175,7 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
                             total.within.sumofsquares = kmeans$tot.withinss,
                             between.sumofsquares = kmeans$betweenss,
                             cluster.size = kmeans$size
-                            )
+    )
     
     # PCA
     
@@ -189,182 +189,182 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
                        clusters = kmeans$cluster,
                        cluster.centers = kmeans$centers,
                        compare = comp.parameters
-                     )
+    )
     
-   # ellipses + convex hulls
+    # ellipses + convex hulls
     
-   cluster.ellipses = .ellipses(modelparam, data.pca)
-   
-   cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
-   
-   ## model parameters
-   
-   modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls) )
-   
-   
-   ## Pam (Partitioning Around Medoids)
-   
- } else if ( cl.meth == "pam" ) {
-   
-   pam = cluster::pam( cl.data, clust.numb, metric = "euclidean" )
-   
-   # comparative parameters
-   
-   comp.parameters = list( cluster.size = pam$clusinfo[,"size"],
-                           cluster.max_diss = pam$clusinfo[,"max_diss"],
-                           cluster.av_diss = pam$clusinfo[,"av_diss"],
-                           cluster.diameter = pam$clusinfo[,"diameter"],
-                           cluster.separation = pam$clusinfo[,"separation"],
-                           silhouette.info = pam$silinfo
-                           )
-   # PCA
-   
-   data.pca = stats::prcomp( cl.data, scale. = TRUE, center = TRUE )
-   
-   #model parameters
-   
-   modelparam = list( cluster.method=cl.meth,
-                      raw.data= cl.data,
-                      data.pca=data.pca$x[,1:2],
-                      medoids=pam$medoids,
-                      medoids.id=pam$id.med,
-                      clusters=pam$clustering,
-                      compare=comp.parameters
-                      )
-   
-   ### ellipses + convex hulls
-   
-   cluster.ellipses = .ellipses( modelparam, data.pca )
-   
-   cluster.convex.hulls = .convex.hulls( modelparam, data.pca )
-   
-   ## model parameters
-   
-   modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ) )
-   
-   ## Clara (Clustering Large Applications)
-   
- } else if ( cl.meth == "clara" ) {
-   
-   clara = cluster::clara( cl.data, clust.numb, metric = "euclidean", samples=100 )
-   
-   # comparative parameters
-   
-   comp.parameters = list( cluster.size = clara$clusinfo[,"size"],
-                           cluster.max_diss = clara$clusinfo[,"max_diss"],
-                           cluster.av_diss = clara$clusinfo[,"av_diss"],
-                           cluster.diameter = clara$clusinfo[,"isolation"],
-                           silhouette.info = clara$silinfo
-                           )
-   
-   # PCA
-   
-   data.pca = stats::prcomp(cl.data, scale. = TRUE, center = TRUE)
-   
-   # model parameters
-   
-   modelparam = list( cluster.method = cl.meth,
-                      raw.data = cl.data,
-                      data.pca = data.pca$x[,1:2],
-                      medoids = clara$medoids,
-                      medoids.id = clara$i.med,
-                      clusters = clara$clustering,
-                      compare = comp.parameters
-                      )
-   ## ellipses + convex hulls
-   
-   cluster.ellipses = .ellipses(modelparam, data.pca)
-   
-   cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
-   
-   ## model parameters
-   
-   modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ))
-   
-   
-   ## Fanny (Fuzzy Analysis Clustering)
+    cluster.ellipses = .ellipses(modelparam, data.pca)
     
- } else if ( cl.meth == "fanny" ) {
-   
-   fanny = cluster::fanny( cl.data, clust.numb, metric = "euclidean")
-   
-   # comparative parameters
-   
-   comp.parameters = list( membership = fanny$membership,
-                           coeff = fanny$coeff,
-                           memb.exp = fanny$memb.exp,
-                           fanny$k.crisp,
-                           fanny$objective,
-                           fanny$convergence,
-                           fanny$silinfo
-                           )
-   # PCA
-   
-   data.pca = stats::prcomp(cl.data, scale. = TRUE, center = TRUE)
-   
-   # model parameters
-   
-   modelparam = list( cluster.method = cl.meth,
-                      raw.data = cl.data,
-                      data.pca = data.pca$x[ ,1:2],
-                      clusters = fanny$clustering,
-                      compare = comp.parameters
-                      )
-   
-   ## ellipses + convex hulls
-   
-   cluster.ellipses = .ellipses(modelparam, data.pca)
-   
-   cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
-   
-   ## model parameters
-   
-   modelparam = utils::modifyList( modelparam, list( cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ) )
-   
-   
-   ## Model Based Clustering
-   
- } else if ( cl.meth == "model" ) {
-   
-   # mclust = c(cl.data, clust.numb)
-   
-   # data.list = utils::combn(cl.data, 2, simplify = FALSE)
+    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
     
-   # data.list.colnames = lapply(data.list, colnames)
-   
-   mclust = mclust::Mclust(cl.data, G = clust.numb)
-   
-   # comparative parameters
-   
-   comp.parameters = list( model.name = mclust$modelName,
-                           observations = mclust$n,
-                           data.dimension = mclust$d,
-                           clust.numb = mclust$G,
-                           all.Bics = data.frame( matrix( mclust$BIC, dimnames = list( c(colnames(mclust$BIC)),"bic"))),
-                           optimal.bic = mclust$bic,
-                           optimal.loglik = mclust$loglik,
-                           numb.estimated.parameters = mclust$df,
-                           hypervolume.parameter = mclust$hypvol,
-                           mixing.proportion = mclust$parameters$pro,
-                           mean.component = mclust$parameters$mean,
-                           variance.components = mclust$parameters$variance,
-                           class.probs = mclust$z,
-                           uncertainty = mclust$uncertainty
-                           )
-   
-   
-   # model parameters
-   
-   modelparam = list( cluster.method = cl.meth,
-                      raw.data = data,
-                      data.pca = mclust$data,
-                      #data.list = data.list,
-                      #data.list.colnames = data.list.colnames,
-                      clusters = mclust$classification,
-                      compare = comp.parameters
-                      )
+    ## model parameters
     
- }
+    modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls) )
+    
+    
+    ## Pam (Partitioning Around Medoids)
+    
+  } else if ( cl.meth == "pam" ) {
+    
+    pam = cluster::pam( cl.data, clust.numb, metric = "euclidean" )
+    
+    # comparative parameters
+    
+    comp.parameters = list( cluster.size = pam$clusinfo[,"size"],
+                            cluster.max_diss = pam$clusinfo[,"max_diss"],
+                            cluster.av_diss = pam$clusinfo[,"av_diss"],
+                            cluster.diameter = pam$clusinfo[,"diameter"],
+                            cluster.separation = pam$clusinfo[,"separation"],
+                            silhouette.info = pam$silinfo
+    )
+    # PCA
+    
+    data.pca = stats::prcomp( cl.data, scale. = TRUE, center = TRUE )
+    
+    #model parameters
+    
+    modelparam = list( cluster.method=cl.meth,
+                       raw.data= cl.data,
+                       data.pca=data.pca$x[,1:2],
+                       medoids=pam$medoids,
+                       medoids.id=pam$id.med,
+                       clusters=pam$clustering,
+                       compare=comp.parameters
+    )
+    
+    ### ellipses + convex hulls
+    
+    cluster.ellipses = .ellipses( modelparam, data.pca )
+    
+    cluster.convex.hulls = .convex.hulls( modelparam, data.pca )
+    
+    ## model parameters
+    
+    modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ) )
+    
+    ## Clara (Clustering Large Applications)
+    
+  } else if ( cl.meth == "clara" ) {
+    
+    clara = cluster::clara( cl.data, clust.numb, metric = "euclidean", samples=100 )
+    
+    # comparative parameters
+    
+    comp.parameters = list( cluster.size = clara$clusinfo[,"size"],
+                            cluster.max_diss = clara$clusinfo[,"max_diss"],
+                            cluster.av_diss = clara$clusinfo[,"av_diss"],
+                            cluster.diameter = clara$clusinfo[,"isolation"],
+                            silhouette.info = clara$silinfo
+    )
+    
+    # PCA
+    
+    data.pca = stats::prcomp(cl.data, scale. = TRUE, center = TRUE)
+    
+    # model parameters
+    
+    modelparam = list( cluster.method = cl.meth,
+                       raw.data = cl.data,
+                       data.pca = data.pca$x[,1:2],
+                       medoids = clara$medoids,
+                       medoids.id = clara$i.med,
+                       clusters = clara$clustering,
+                       compare = comp.parameters
+    )
+    ## ellipses + convex hulls
+    
+    cluster.ellipses = .ellipses(modelparam, data.pca)
+    
+    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
+    
+    ## model parameters
+    
+    modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ))
+    
+    
+    ## Fanny (Fuzzy Analysis Clustering)
+    
+  } else if ( cl.meth == "fanny" ) {
+    
+    fanny = cluster::fanny( cl.data, clust.numb, metric = "euclidean")
+    
+    # comparative parameters
+    
+    comp.parameters = list( membership = fanny$membership,
+                            coeff = fanny$coeff,
+                            memb.exp = fanny$memb.exp,
+                            fanny$k.crisp,
+                            fanny$objective,
+                            fanny$convergence,
+                            fanny$silinfo
+    )
+    # PCA
+    
+    data.pca = stats::prcomp(cl.data, scale. = TRUE, center = TRUE)
+    
+    # model parameters
+    
+    modelparam = list( cluster.method = cl.meth,
+                       raw.data = cl.data,
+                       data.pca = data.pca$x[ ,1:2],
+                       clusters = fanny$clustering,
+                       compare = comp.parameters
+    )
+    
+    ## ellipses + convex hulls
+    
+    cluster.ellipses = .ellipses(modelparam, data.pca)
+    
+    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
+    
+    ## model parameters
+    
+    modelparam = utils::modifyList( modelparam, list( cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ) )
+    
+    
+    ## Model Based Clustering
+    
+  } else if ( cl.meth == "model" ) {
+    
+    # mclust = c(cl.data, clust.numb)
+    
+    # data.list = utils::combn(cl.data, 2, simplify = FALSE)
+    
+    # data.list.colnames = lapply(data.list, colnames)
+    
+    mclust = mclust::Mclust(cl.data, G = clust.numb)
+    
+    # comparative parameters
+    
+    comp.parameters = list( model.name = mclust$modelName,
+                            observations = mclust$n,
+                            data.dimension = mclust$d,
+                            clust.numb = mclust$G,
+                            all.Bics = data.frame( matrix( mclust$BIC, dimnames = list( c(colnames(mclust$BIC)),"bic"))),
+                            optimal.bic = mclust$bic,
+                            optimal.loglik = mclust$loglik,
+                            numb.estimated.parameters = mclust$df,
+                            hypervolume.parameter = mclust$hypvol,
+                            mixing.proportion = mclust$parameters$pro,
+                            mean.component = mclust$parameters$mean,
+                            variance.components = mclust$parameters$variance,
+                            class.probs = mclust$z,
+                            uncertainty = mclust$uncertainty
+    )
+    
+    
+    # model parameters
+    
+    modelparam = list( cluster.method = cl.meth,
+                       raw.data = data,
+                       data.pca = mclust$data,
+                       #data.list = data.list,
+                       #data.list.colnames = data.list.colnames,
+                       clusters = mclust$classification,
+                       compare = comp.parameters
+    )
+    
+  }
   
   if ( tojson == TRUE ) {
     

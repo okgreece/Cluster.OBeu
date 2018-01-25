@@ -35,11 +35,11 @@ cl.features = function(data, features = NULL, amounts = NULL, aggregate = "sum",
   # If all numeric variables 
   
   #if ( all(sapply(data, is.double) | sapply(data, is.numeric))==T ){
-    
+  
   #  cluster.data = data
-    
+  
   #}else{
-    
+  
   #If features is not provided
   
   #sel = which(sapply(data, is.factor) | sapply(data, is.character) )
@@ -68,7 +68,7 @@ cl.features = function(data, features = NULL, amounts = NULL, aggregate = "sum",
   # Form Dataset
   
   cluster.data = reshape2::dcast(molten_data, noquote( paste(features, "~" , "variable")), fun.aggregate = sum) # , expression, fun.aggregate = aggregate)    
-      
+  
   #else cluster.data=data
   
   #}

@@ -16,9 +16,9 @@ cl.aggregate="sum", cl.method=NULL, cl.num=NULL, cl.dist="euclidean")
 
 \item{measured.dimensions}{The dimensions to which correspond amount/numeric variables}
 
-\item{cl.aggregate}{The desired aggregation of the input data}
+\item{cl.aggregate}{Aggregate function of the input data}
 
-\item{cl.method}{The clustering method algorithm}
+\item{cl.method}{The clustering algorithm}
 
 \item{cl.num}{The number of clusters}
 

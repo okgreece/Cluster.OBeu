@@ -4,7 +4,8 @@
 ^NEWS\.rmd$
 ^obeu_logo\.png$
 ^okfgr2\.png$
-^readme2\.Rmd$
+^README\.rmd$
 ^docs$
 ^_pkgdown\.yml$
 ^pkgdown$
+^Cluster\.OBeu\.pdf$

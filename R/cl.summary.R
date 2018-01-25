@@ -29,26 +29,26 @@ cl.summary<-function(clv) {
                                rep("Connectivity", length(rownames(df[which(df$Connectivity == max(df$Connectivity)),]))),
                                rep("Dunn", length(rownames(df[which(df$Dunn == max(df$Dunn)),]))),
                                rep("Silhouette", length(rownames(df[which(df$Silhouette == max(df$Silhouette)),])))
-                               ),
-                    
-                    model = c( rownames(df[which(df$APN == min(df$APN)),]),
-                               rownames(df[which(df$AD == min(df$AD)),]),
-                               rownames(df[which(df$ADM == min(df$ADM)),]),
-                               rownames(df[which(df$FOM == min(df$FOM)),]),
-                               rownames(df[which(df$Connectivity == max(df$Connectivity)),]),
-                               rownames(df[which(df$Dunn == max(df$Dunn)),]),
-                               rownames(df[which(df$Silhouette == max(df$Silhouette)),])
-                               ),
-                    
-                    value = c( rep(min(df$APN), length(rownames(df[which(df$APN == min(df$APN)),]))),
-                               rep(min(df$AD), length(rownames(df[which(df$AD == min(df$AD)),]))),
-                               rep(min(df$ADM), length(rownames(df[which(df$ADM == min(df$ADM)),]))),
-                               rep(min(df$FOM), length(rownames(df[which(df$FOM == min(df$FOM)),]))),
-                               rep(max(df$Connectivity), length(rownames(df[which(df$Connectivity == max(df$Connectivity)),]))),
-                               rep(max(df$Dunn), length(rownames(df[which(df$Dunn == max(df$Dunn)),]))),
-                               rep(max(df$Silhouette), length(rownames(df[which(df$Silhouette == max(df$Silhouette)),])))
-                               )
-                    )
+  ),
+  
+  model = c( rownames(df[which(df$APN == min(df$APN)),]),
+             rownames(df[which(df$AD == min(df$AD)),]),
+             rownames(df[which(df$ADM == min(df$ADM)),]),
+             rownames(df[which(df$FOM == min(df$FOM)),]),
+             rownames(df[which(df$Connectivity == max(df$Connectivity)),]),
+             rownames(df[which(df$Dunn == max(df$Dunn)),]),
+             rownames(df[which(df$Silhouette == max(df$Silhouette)),])
+  ),
+  
+  value = c( rep(min(df$APN), length(rownames(df[which(df$APN == min(df$APN)),]))),
+             rep(min(df$AD), length(rownames(df[which(df$AD == min(df$AD)),]))),
+             rep(min(df$ADM), length(rownames(df[which(df$ADM == min(df$ADM)),]))),
+             rep(min(df$FOM), length(rownames(df[which(df$FOM == min(df$FOM)),]))),
+             rep(max(df$Connectivity), length(rownames(df[which(df$Connectivity == max(df$Connectivity)),]))),
+             rep(max(df$Dunn), length(rownames(df[which(df$Dunn == max(df$Dunn)),]))),
+             rep(max(df$Silhouette), length(rownames(df[which(df$Silhouette == max(df$Silhouette)),])))
+  )
+  )
   
   #tab$model = gsub("[0-9]\\.", "", tab$model)
   cl_meth = stringr::str_split(tab$model,"\\.",simplify = TRUE)
