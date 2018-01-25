@@ -7,6 +7,4 @@ r:
   - devel
 before_install:
   - tlmgr install index
-apt_packages:
-  - libxml2-dev
 warnings_are_errors: false
