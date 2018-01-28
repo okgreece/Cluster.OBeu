@@ -7,11 +7,4 @@ r:
   - devel  
 before_install:
   - tlmgr install index
-repos:
-  CRAN: http://cran.rstudio.com
-addons:
-  apt:
-    packages:
-      - libxml2-dev
-      - libv8-dev
 warnings_are_errors: false
