@@ -10,9 +10,9 @@
 #' @seealso \code{\link{cl.analysis}}
 #' 
 #' @examples 
-#' library(Cluster.OBeu)
-#' inputs.clustering <- cl.analysis(sample_city_data, cl.meth="kmeans", clust.numb=3)
-#' cl.plot(inputs.clustering, parameters = list(ellipses=TRUE))
+#' #library(Cluster.OBeu)
+#' #inputs.clustering <- cl.analysis(sample_city_data, cl.meth="kmeans", clust.numb=3)
+#' #cl.plot(inputs.clustering, parameters = list(ellipses=TRUE))
 #' 
 #' @import car
 #' @importFrom grDevices chull palette 
