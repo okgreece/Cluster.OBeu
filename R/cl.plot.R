@@ -10,9 +10,9 @@
 #' @seealso \code{\link{cl.analysis}}
 #' 
 #' @examples 
-#' #library(Cluster.OBeu)
-#' #inputs.clustering <- cl.analysis(sample_city_data, cl.meth="kmeans", clust.numb=3)
-#' #cl.plot(inputs.clustering, parameters = list(ellipses=TRUE))
+#' ## library(Cluster.OBeu)
+#' ## inputs.clustering <- cl.analysis(sample_city_data, cl.meth="kmeans", clust.numb=3)
+#' ## cl.plot(inputs.clustering, parameters = list(ellipses=TRUE))
 #' 
 #' @import car
 #' @importFrom grDevices chull palette 
@@ -68,6 +68,7 @@ cl.plot <- function(clustering.model, parameters = list()) {
 #' @param clustering.model Object returned by the \code{\link{cl.analysis}} function.
 #' @param data.pca data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
 #' @return List of vectors with points for each ellipse.
+#' @export
 .ellipses <- function(clustering.model, data.pca) {
   lapply(
     unique(clustering.model$clusters), 
@@ -92,6 +93,7 @@ cl.plot <- function(clustering.model, parameters = list()) {
 #' @param clustering.model Object returned by the \code{\link{cl.analysis}} function.
 #' @param data.pca data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
 #' @return List of vectors with points for each convex hull.
+#' @export
 .convex.hulls <- function(clustering.model, data.pca) {
   
   lapply(
