@@ -1,6 +1,5 @@
- install: travis_wait mvn install
 language: r
-sudo: false
+sudo: required
 group: deprecated-2017Q4
 cache: packages
 r:
