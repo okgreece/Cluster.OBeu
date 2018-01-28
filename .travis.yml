@@ -7,4 +7,3 @@ r:
   - release
   - devel
 warnings_are_errors: false
-install: travis_wait mvn install
