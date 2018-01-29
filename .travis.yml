@@ -7,4 +7,8 @@ r:
   - devel  
 before_install:
   - tlmgr install index
+addons:
+  apt:
+    packages:
+    - libnlopt-dev
 warnings_are_errors: false
