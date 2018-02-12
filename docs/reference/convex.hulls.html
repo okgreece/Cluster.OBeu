@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • Cluster.OBeu</title>
+<title>Convex hull points � convex.hulls • Cluster.OBeu</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -107,109 +107,44 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;1.2.1</small>
-      </h1>
+    <h1>Convex hull points</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    
+    <p>Computes points to plot a convex hull for each cluster of the clustering model</p>
+    
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <pre class="usage"><span class='fu'>convex.hulls</span>(<span class='no'>clustering.model</span>, <span class='no'>data.pca</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>clustering.model</th>
+      <td><p>Object returned by the <code><a href='cl.analysis.html'>cl.analysis</a></code> function.</p></td>
+    </tr>
+    <tr>
+      <th>data.pca</th>
+      <td><p>data as result of the <code><a href='http://www.rdocumentation.org/packages/stats/topics/prcomp'>stats::prcomp(clustering.model$data, scale. = T, center = T)</a></code>.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-cluster-analysis" class="hasAnchor"><a href="#section-cluster-analysis" class="anchor"></a>Cluster Analysis</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cl.analysis.html">cl.analysis</a></code> </p>
-          </td>
-          <td><p>Cluster analusis</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-open-budgets" class="hasAnchor"><a href="#section-open-budgets" class="anchor"></a>Open Budgets</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="open_spending.cl.html">open_spending.cl</a></code> </p>
-          </td>
-          <td><p>Read and Calculate the Basic Information for Cluster Analysis Tasks from Open Spending API</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-helpers" class="hasAnchor"><a href="#section-helpers" class="anchor"></a>Helpers</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="nums.html">nums</a></code> </p>
-          </td>
-          <td><p>Select the numeric columns of a given dataset</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cl.features.html">cl.features</a></code> </p>
-          </td>
-          <td><p>Clustering features</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cl.plot.html">cl.plot</a></code> </p>
-          </td>
-          <td><p>Clustering model plotting</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cl.summary.html">cl.summary</a></code> </p>
-          </td>
-          <td><p>Extract the proposed clustering method and the number of clusters from clvalid method</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sample_city_data.html">sample_city_data</a></code> </p>
-          </td>
-          <td><p>Sample city data</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <p>List of vectors with points for each convex hull.</p>
+    
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-cluster-analysis">Cluster Analysis</a></li>
-      <li><a href="#section-open-budgets">Open Budgets</a></li>
-      <li><a href="#section-helpers">Helpers</a></li>
-      <li><a href="#section-data">Data</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
+
   </div>
 </div>
 

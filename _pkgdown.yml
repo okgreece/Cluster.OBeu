@@ -9,6 +9,14 @@ navbar:
     - text: "Function Reference"
       icon:   fa-info-circle
       href: reference/index.html
+    - text: "Vignettes"
+      icon:  fa-book
+      href: articles/index.html
+      menu:
+        - text: "Cluster analysis in OpenBudget.eu"
+          href: articles/ClusterOBeu.html
+        - text: "Using Cluster.OBeu with OpenCPU"
+          href: articles/Cluster.OBeuOpenCPU.html
     - text: "News"
       icon: fa-newspaper-o
       href: news/index.html
