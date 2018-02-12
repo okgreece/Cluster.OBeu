@@ -193,9 +193,9 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
     
     # ellipses + convex hulls
     
-    cluster.ellipses = .ellipses(modelparam, data.pca)
+    cluster.ellipses = ellipses(modelparam, data.pca)
     
-    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
+    cluster.convex.hulls = convex.hulls(modelparam, data.pca)
     
     ## model parameters
     
@@ -234,9 +234,9 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
     
     ### ellipses + convex hulls
     
-    cluster.ellipses = .ellipses( modelparam, data.pca )
+    cluster.ellipses = ellipses( modelparam, data.pca )
     
-    cluster.convex.hulls = .convex.hulls( modelparam, data.pca )
+    cluster.convex.hulls = convex.hulls( modelparam, data.pca )
     
     ## model parameters
     
@@ -273,9 +273,9 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
     )
     ## ellipses + convex hulls
     
-    cluster.ellipses = .ellipses(modelparam, data.pca)
+    cluster.ellipses = ellipses(modelparam, data.pca)
     
-    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
+    cluster.convex.hulls = convex.hulls(modelparam, data.pca)
     
     ## model parameters
     
@@ -313,9 +313,9 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
     
     ## ellipses + convex hulls
     
-    cluster.ellipses = .ellipses(modelparam, data.pca)
+    cluster.ellipses = ellipses(modelparam, data.pca)
     
-    cluster.convex.hulls = .convex.hulls(modelparam, data.pca)
+    cluster.convex.hulls = convex.hulls(modelparam, data.pca)
     
     ## model parameters
     

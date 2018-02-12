@@ -2,7 +2,7 @@
 title: "Using Cluster.OBeu with OpenCPU"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Using Cluster.OBeu with OpenCPU}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -100,3 +100,6 @@ For larger datasets you can specify likewise a specific clustering feature (*cl_
 # Github
 + [OpenCPU package *development version*](https://github.com/opencpu/opencpu)
 + [Cluster.OBeu package *development version*](https://github.com/okgreece/Cluster.OBeu)
+
+# CRAN
++ [Cluster.OBeu on CRAN](https://cran.r-project.org/package=Cluster.OBeu)

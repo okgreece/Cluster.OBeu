@@ -69,7 +69,7 @@ cl.plot <- function(clustering.model, parameters = list()) {
 #' @param data.pca data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
 #' @return List of vectors with points for each ellipse.
 #' @export
-.ellipses <- function(clustering.model, data.pca) {
+ellipses <- function(clustering.model, data.pca) {
   lapply(
     unique(clustering.model$clusters), 
     function(cl) {
@@ -94,7 +94,7 @@ cl.plot <- function(clustering.model, parameters = list()) {
 #' @param data.pca data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
 #' @return List of vectors with points for each convex hull.
 #' @export
-.convex.hulls <- function(clustering.model, data.pca) {
+convex.hulls <- function(clustering.model, data.pca) {
   
   lapply(
     
