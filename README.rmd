@@ -12,6 +12,7 @@ output:
 ---
 
 [![Build Status](https://travis-ci.org/okgreece/Cluster.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/Cluster.OBeu)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/Cluster.OBeu)](https://cran.r-project.org/package=Cluster.OBeu)
 [![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/pulls.svg)](https://github.com/okgreece/Cluster.OBeu/pulls)
 [![Github Issues](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/issues.svg)](https://github.com/okgreece/Cluster.OBeu/issues)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
