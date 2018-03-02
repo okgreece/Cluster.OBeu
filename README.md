@@ -36,7 +36,7 @@ Cluster Analysis in a call
 `cl.analysis` can be used to estimate clustering model parameters and/or number of clusters needed for visualization of clusters and other clustering measures as list object.
 
 ``` r
-cluster_data = cl.analysis( sample_city_data, cl.aggregate = "sum", 
+cluster_data = cl.analysis( city_data, cl.aggregate = "sum", 
                             cl.meth = "pam", clust.numb = NULL, dist = "euclidean", tojson = T) # json string format
 
 jsonlite::prettify(cluster_data) # use prettify of jsonlite library to add indentation to the returned JSON string
