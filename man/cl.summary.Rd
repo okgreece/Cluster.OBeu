@@ -19,5 +19,5 @@ Extract the most frequent
 This function returns the proposed method or number of clusters or both according to the majority clustering indices of a clValid process
 }
 \author{
-Kleanthis Koupidis
+Kleanthis Koupidis, Charalampos Bratsas
 }

@@ -31,5 +31,5 @@ and the aggregation function.
 \code{\link{cl.analysis}}
 }
 \author{
-Kleanthis Koupidis
+Kleanthis Koupidis, Charalampos Bratsas
 }

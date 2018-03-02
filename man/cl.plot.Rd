@@ -15,9 +15,8 @@ cl.plot(clustering.model, parameters = list())
 \code{cl.plot} function plots the clustering model constructed by the \code{\link{cl.analysis}} function.
 }
 \examples{
-## library(Cluster.OBeu)
-## inputs.clustering <- cl.analysis(sample_city_data, cl.meth="kmeans", clust.numb=3)
-## cl.plot(inputs.clustering, parameters = list(ellipses=TRUE))
+inputs.clustering <- cl.analysis(city_data, cl.meth="pam", clust.numb=2)
+cl.plot(inputs.clustering, parameters = list(ellipses=TRUE))
 
 }
 \seealso{

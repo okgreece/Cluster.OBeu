@@ -11,7 +11,7 @@
 #'  
 #' @return A value that indicates the proposed method and number of clusters.
 #' 
-#' @author Kleanthis Koupidis
+#' @author Kleanthis Koupidis, Charalampos Bratsas
 #' 
 #' @rdname cl.summary
 #' @export

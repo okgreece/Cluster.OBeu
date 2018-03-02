@@ -10,9 +10,8 @@
 #' @seealso \code{\link{cl.analysis}}
 #' 
 #' @examples 
-#' ## library(Cluster.OBeu)
-#' ## inputs.clustering <- cl.analysis(sample_city_data, cl.meth="kmeans", clust.numb=3)
-#' ## cl.plot(inputs.clustering, parameters = list(ellipses=TRUE))
+#' inputs.clustering <- cl.analysis(city_data, cl.meth="pam", clust.numb=2)
+#' cl.plot(inputs.clustering, parameters = list(ellipses=TRUE))
 #' 
 #' @import car
 #' @importFrom grDevices chull palette 
@@ -28,32 +27,22 @@ cl.plot <- function(clustering.model, parameters = list()) {
   if(is(clustering.model,"json")){
     clustering.model <- jsonlite::fromJSON(clustering.model)
   }
-  # message(clustering.model$cluster.method)
   # kmeans
-  if(clustering.model$cluster.method %in% c("kmeans","pam","clara","funny")) {
+  if(clustering.model$cluster.method %in% c("kmeans","pam","clara","fanny")) {
     # initialize
     parameters <- utils::modifyList(list(ellipses=FALSE, convex.hulls=FALSE), parameters)
     # PCA
-    #inputs.pca <- stats::prcomp(clustering.model$data, scale. = T, center = T)
-    #message("PCA summary:")
-    #print(summary(inputs.pca))
     par(oma=c(0, 0, 0, 5))
-    #graphics::plot(inputs.pca$x[,1:2], main = clustering.model$cl.meth)
     graphics::plot(clustering.model$data.pca, main = clustering.model$cluster.method)
-    #sapply(seq_along(unique(clustering.model$clusters)), function(clId) points(inputs.pca$x[which(clustering.model$clusters==unique(clustering.model$clusters)[clId]),1:2],col=palette()[clId]))
     sapply(seq_along(unique(clustering.model$clusters)), function(clId) points(clustering.model$data.pca[which(clustering.model$clusters==unique(clustering.model$clusters)[clId]),1:2],col=palette()[clId]))
     legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA,
            unique(clustering.model$clusters), lwd = 1, lty = 1, pch = 1, col = palette()[unique(clustering.model$clusters)])
     # Ellipses
     if(parameters$ellipses == TRUE){
-      #inputs.ellipses <- .ellipses(clustering.model, inputs.pca)
-      #sapply(seq_along(inputs.ellipses), function(clId) lines(inputs.ellipses[[clId]], col=palette()[clId]))
       sapply(seq_along(clustering.model$cluster.ellipses), function(clId) lines(clustering.model$cluster.ellipses[[clId]], col=palette()[clId]))
     }
     # Convex hulls
     if(parameters$convex.hulls == TRUE) {
-      #inputs.convexHulls <- .convex.hulls(clustering.model, inputs.pca)
-      #sapply(seq_along(inputs.convexHulls), function(clId) lines(inputs.convexHulls[[clId]], col=palette()[clId]))
       sapply(seq_along(clustering.model$cluster.convex.hulls), function(clId) lines(clustering.model$cluster.convex.hulls[[clId]], col=palette()[clId]))
     }
   } else {
@@ -68,6 +57,7 @@ cl.plot <- function(clustering.model, parameters = list()) {
 #' @param clustering.model Object returned by the \code{\link{cl.analysis}} function.
 #' @param data.pca data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
 #' @return List of vectors with points for each ellipse.
+#' @rdname ellipses
 #' @export
 ellipses <- function(clustering.model, data.pca) {
   lapply(
@@ -93,6 +83,7 @@ ellipses <- function(clustering.model, data.pca) {
 #' @param clustering.model Object returned by the \code{\link{cl.analysis}} function.
 #' @param data.pca data as result of the \code{stats::prcomp(clustering.model$data, scale. = T, center = T)}.
 #' @return List of vectors with points for each convex hull.
+#' @rdname convex.hulls
 #' @export
 convex.hulls <- function(clustering.model, data.pca) {
   
@@ -105,8 +96,6 @@ convex.hulls <- function(clustering.model, data.pca) {
       pts <- grDevices::chull(dat)
       
       if (length(dat[pts])>2) dat[c(pts,pts[1]), 1:2] else dat[pts]
-      #return(dat[c(pts,pts[1]), 1:2])
     }
   )
 }
-
