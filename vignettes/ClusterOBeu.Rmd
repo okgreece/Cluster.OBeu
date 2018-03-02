@@ -71,10 +71,10 @@ The dataset in the following example is being used in [OpenBudgets.eu platform](
 `open_spending.cl` function's input are data as json link and described with [OpenBudgets.eu data model](https://github.com/openbudgets/data-model).
 
 ```{r data}
-aragon_income = "https://apps.openbudgets.eu//api/3/cubes/aragon-2007-income__3209b/aggregate?drilldown=fundingClassification.prefLabel%7CeconomicClassification.prefLabel&aggregates=amount.sum"
+aragon_income = "http://apps.openbudgets.eu/api/3/cubes/aragon-2007-income__3209b/aggregate?drilldown=fundingClassification.prefLabel%7CeconomicClassification.prefLabel&aggregates=amount.sum"
 ```
 
-```{r open_spending,  eval=FALSE, include=TRUE}
+```{r open_spending, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
 results = open_spending.cl(
   json_data =  aragon_income, 
   dimensions ="economicClassification.prefLabel",
@@ -150,5 +150,3 @@ You add likewise further parameters and change the default parameters of `cl.met
 + [OpenCPU package *development version*](https://github.com/opencpu/opencpu)
 + [Cluster.OBeu package *development version*](https://github.com/okgreece/Cluster.OBeu)
 
-# CRAN
-+ [Cluster.OBeu on CRAN](https://cran.r-project.org/package=Cluster.OBeu)

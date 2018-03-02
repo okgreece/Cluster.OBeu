@@ -42,7 +42,7 @@ reference:
       
   - title: "Data"
     contents:
-      - sample_city_data
+      - city_data
 authors:
   Kleanthis Koupidis:
     href: https://github.com/kleanthisk10

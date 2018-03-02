@@ -3,9 +3,9 @@
 library(Cluster.OBeu)
 
 ## ----data----------------------------------------------------------------
-aragon_income = "https://apps.openbudgets.eu//api/3/cubes/aragon-2007-income__3209b/aggregate?drilldown=fundingClassification.prefLabel%7CeconomicClassification.prefLabel&aggregates=amount.sum"
+aragon_income = "http://apps.openbudgets.eu/api/3/cubes/aragon-2007-income__3209b/aggregate?drilldown=fundingClassification.prefLabel%7CeconomicClassification.prefLabel&aggregates=amount.sum"
 
-## ----open_spending,  eval=FALSE, include=TRUE----------------------------
+## ----open_spending, eval=FALSE, message=FALSE, warning=FALSE, include=TRUE----
 #  results = open_spending.cl(
 #    json_data =  aragon_income,
 #    dimensions ="economicClassification.prefLabel",

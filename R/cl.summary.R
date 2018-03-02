@@ -11,8 +11,15 @@
 #'  
 #' @return A value that indicates the proposed method and number of clusters.
 #' 
-#' @author Kleanthis Koupidis, Charalampos Bratsas
-#' 
+#' @author Kleanthis Koupidis
+#' @examples 
+#' cl.data = nums(city_data)
+#' method_clvalid = clValid::clValid(as.matrix(cl.data), 2:4,
+#'                                   clMethods = c("pam", "kmeans"),
+#'                                   validation = c("internal","stability"),
+#'                                   metric = "euclidean")
+#' cl.meth = cl.summary(method_clvalid)
+#' cl.meth
 #' @rdname cl.summary
 #' @export
 

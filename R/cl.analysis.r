@@ -25,33 +25,23 @@
 #' as long as some comparison measure matrices.
 #' 
 #' \itemize{
-#' 
 #' \item cluster.method - Label of the clustering algorithm
 #' \item raw.data - Input data
 #' \item data.pca - The principal components to visualize the input data
 #' \item modelparam - The results of this parameter depend of the selected clustering model
-#' \item compare - Clustering measures
-#' 
-#' }
+#' \item compare - Clustering measures}
 #' 
 #' @author Kleanthis Koupidis, Jaroslav Kuchar
-#' 
+#' @examples
+#' cl.analysis(city_data, cl.meth = "pam", clust.numb = 3)
 #' @seealso \code{\link{cl.features}}, \code{\link[clValid]{clValid}}, \code{\link[cluster]{diana}}, \code{\link[cluster]{agnes}},
 #' \code{\link[cluster]{pam}}, \code{\link[cluster]{clara}}, \code{\link[cluster]{fanny}}, \code{\link[mclust]{Mclust}} 
-#' 
 #' @rdname cl.analysis
 #' 
 #' @export
 
 cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate = "sum",
                        cl.meth = NULL, clust.numb = NULL, dist = "euclidean", tojson = FALSE) {
-  
-  # if( ncol(cl.data) < 2 ) {
-  #   
-  #   stop("The dimension (number of columns) of dataset must be at least 2 numeric variables.")
-  #   
-  # }
-  
   
   # Select clustering feature
   
@@ -193,13 +183,13 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
     
     # ellipses + convex hulls
     
-    cluster.ellipses = ellipses(modelparam, data.pca)
+    clusterellipses = ellipses(modelparam, data.pca)
     
-    cluster.convex.hulls = convex.hulls(modelparam, data.pca)
+    clusterconvex.hulls = convex.hulls(modelparam, data.pca)
     
     ## model parameters
     
-    modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls) )
+    modelparam = utils::modifyList( modelparam, list(clusterellipses = clusterellipses, clusterconvex.hulls = clusterconvex.hulls) )
     
     
     ## Pam (Partitioning Around Medoids)
@@ -234,13 +224,13 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
     
     ### ellipses + convex hulls
     
-    cluster.ellipses = ellipses( modelparam, data.pca )
+    clusterellipses = ellipses( modelparam, data.pca )
     
-    cluster.convex.hulls = convex.hulls( modelparam, data.pca )
+    clusterconvex.hulls = convex.hulls( modelparam, data.pca )
     
     ## model parameters
     
-    modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ) )
+    modelparam = utils::modifyList( modelparam, list(clusterellipses = clusterellipses, clusterconvex.hulls = clusterconvex.hulls ) )
     
     ## Clara (Clustering Large Applications)
     
@@ -273,13 +263,13 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
     )
     ## ellipses + convex hulls
     
-    cluster.ellipses = ellipses(modelparam, data.pca)
+    clusterellipses = ellipses(modelparam, data.pca)
     
-    cluster.convex.hulls = convex.hulls(modelparam, data.pca)
+    clusterconvex.hulls = convex.hulls(modelparam, data.pca)
     
     ## model parameters
     
-    modelparam = utils::modifyList( modelparam, list(cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ))
+    modelparam = utils::modifyList( modelparam, list(clusterellipses = clusterellipses, clusterconvex.hulls = clusterconvex.hulls ))
     
     
     ## Fanny (Fuzzy Analysis Clustering)
@@ -313,13 +303,13 @@ cl.analysis = function(cl.data, cl_feature = NULL, amount = NULL, cl.aggregate =
     
     ## ellipses + convex hulls
     
-    cluster.ellipses = ellipses(modelparam, data.pca)
+    clusterellipses = ellipses(modelparam, data.pca)
     
-    cluster.convex.hulls = convex.hulls(modelparam, data.pca)
+    clusterconvex.hulls = convex.hulls(modelparam, data.pca)
     
     ## model parameters
     
-    modelparam = utils::modifyList( modelparam, list( cluster.ellipses = cluster.ellipses, cluster.convex.hulls = cluster.convex.hulls ) )
+    modelparam = utils::modifyList( modelparam, list( clusterellipses = clusterellipses, clusterconvex.hulls = clusterconvex.hulls ) )
     
     
     ## Model Based Clustering

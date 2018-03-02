@@ -27,9 +27,15 @@ Select clustering characteristic to form the clustering data
 This function adapts the dataset according to the selected dimension of the dataset 
 and the aggregation function.
 }
+\examples{
+cl.features(city_data, features = 'Administrative_Unit')
+
+# works also for other datasets
+cl.features(iris, features = 'Species')
+}
 \seealso{
 \code{\link{cl.analysis}}
 }
 \author{
-Kleanthis Koupidis, Charalampos Bratsas
+Kleanthis Koupidis
 }

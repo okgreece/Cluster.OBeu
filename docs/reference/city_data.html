@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract the proposed clustering method and the number of clusters from clvalid method — cl.summary â€¢ Cluster.OBeu</title>
+<title>city data example — city_data â€¢ Cluster.OBeu</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -109,54 +109,32 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract the proposed clustering method and the number of clusters from clvalid method</h1>
+    <h1>city data example</h1>
     </div>
 
     
-    <p>Extract the most frequent</p>
+    <p>This dataset is an example data frame of the budget phase data</p><ul>
+<li><p>Administrative_Unit</p></li>
+<li><p>Approved</p></li>
+<li><p>Draft</p></li>
+<li><p>Executed</p></li>
+<li><p>Revised</p></li>
+</ul>
     
 
-    <pre class="usage"><span class='fu'>cl.summary</span>(<span class='no'>clv</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>clv</th>
-      <td><p>A clValid object</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A value that indicates the proposed method and number of clusters.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function returns the proposed method or number of clusters or both according to the majority clustering indices of a clValid process</p>
+    <p>A data frame with the previous characteristics as columns</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>cl.data</span> <span class='kw'>=</span> <span class='fu'><a href='nums.html'>nums</a></span>(<span class='no'>city_data</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as.data.frame(data): object 'city_data' not found</span></div><div class='input'><span class='no'>method_clvalid</span> <span class='kw'>=</span> <span class='kw pkg'>clValid</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/clValid/topics/clValid'>clValid</a></span>(<span class='fu'>as.matrix</span>(<span class='no'>cl.data</span>), <span class='fl'>2</span>:<span class='fl'>4</span>,
-                                  <span class='kw'>clMethods</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"pam"</span>, <span class='st'>"kmeans"</span>),
-                                  <span class='kw'>validation</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"internal"</span>,<span class='st'>"stability"</span>),
-                                  <span class='kw'>metric</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as.matrix(cl.data): object 'cl.data' not found</span></div><div class='input'><span class='no'>cl.meth</span> <span class='kw'>=</span> <span class='fu'>cl.summary</span>(<span class='no'>method_clvalid</span>)</div><div class='output co'>#&gt; <span class='error'>Error in inherits(clv, "clValid"): object 'method_clvalid' not found</span></div><div class='input'><span class='no'>cl.meth</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'cl.meth' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    
-Kleanthis Koupidis
+      <li><a href="#format">Format</a></li>
+          </ul>
 
   </div>
 </div>

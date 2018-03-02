@@ -9,9 +9,9 @@
 #' @param data The input data frame, matrix
 #' 
 #' @return This function returns a data frame with the numeric columns of the input dataset.
-#'
+#' @examples 
+#' nums(city_data)
 #' @author Kleanthis Koupidis
-#' 
 #' @rdname nums
 #' 
 #' @export

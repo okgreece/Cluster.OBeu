@@ -167,7 +167,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="in-r-environment" class="section level2">
 <h2>In R environment</h2>
 <p><code>open_spending.cl</code> function’s input are data as json link and described with <a href="https://github.com/openbudgets/data-model">OpenBudgets.eu data model</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aragon_income =<span class="st"> &quot;https://apps.openbudgets.eu//api/3/cubes/aragon-2007-income__3209b/aggregate?drilldown=fundingClassification.prefLabel%7CeconomicClassification.prefLabel&amp;aggregates=amount.sum&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aragon_income =<span class="st"> &quot;http://apps.openbudgets.eu/api/3/cubes/aragon-2007-income__3209b/aggregate?drilldown=fundingClassification.prefLabel%7CeconomicClassification.prefLabel&amp;aggregates=amount.sum&quot;</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results =<span class="st"> </span><span class="kw">open_spending.cl</span>(
   <span class="dt">json_data =</span>  aragon_income, 
   <span class="dt">dimensions =</span><span class="st">&quot;economicClassification.prefLabel&quot;</span>,
@@ -245,12 +245,6 @@ jsonlite<span class="op">::</span><span class="kw">prettify</span>(results)</cod
 <ul>
 <li><a href="https://github.com/opencpu/opencpu">OpenCPU package <em>development version</em></a></li>
 <li><a href="https://github.com/okgreece/Cluster.OBeu">Cluster.OBeu package <em>development version</em></a></li>
-</ul>
-</div>
-<div id="cran" class="section level1">
-<h1>CRAN</h1>
-<ul>
-<li><a href="https://cran.r-project.org/package=Cluster.OBeu">Cluster.OBeu on CRAN</a></li>
 </ul>
 </div>
 

@@ -15,6 +15,9 @@ This function returns a data frame with the numeric columns of the input dataset
 \description{
 Extract and return a data frame with the columns that include only numeric values
 }
+\examples{
+nums(city_data)
+}
 \author{
 Kleanthis Koupidis
 }

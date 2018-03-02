@@ -192,7 +192,7 @@
 <h2 class="hasAnchor">
 <a href="#in-r-environment" class="anchor"></a>In R environment</h2>
 <p><code>open_spending.cl</code> function’s input are data as json link and described with <a href="https://github.com/openbudgets/data-model">OpenBudgets.eu data model</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aragon_income =<span class="st"> "https://apps.openbudgets.eu//api/3/cubes/aragon-2007-income__3209b/aggregate?drilldown=fundingClassification.prefLabel%7CeconomicClassification.prefLabel&amp;aggregates=amount.sum"</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aragon_income =<span class="st"> "http://apps.openbudgets.eu/api/3/cubes/aragon-2007-income__3209b/aggregate?drilldown=fundingClassification.prefLabel%7CeconomicClassification.prefLabel&amp;aggregates=amount.sum"</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results =<span class="st"> </span><span class="kw"><a href="../reference/open_spending.cl.html">open_spending.cl</a></span>(
   <span class="dt">json_data =</span>  aragon_income, 
   <span class="dt">dimensions =</span><span class="st">"economicClassification.prefLabel"</span>,
@@ -303,13 +303,6 @@ jsonlite<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <li><a href="https://github.com/okgreece/Cluster.OBeu">Cluster.OBeu package <em>development version</em></a></li>
 </ul>
 </div>
-<div id="cran" class="section level1">
-<h1 class="hasAnchor">
-<a href="#cran" class="anchor"></a>CRAN</h1>
-<ul>
-<li><a href="https://cran.r-project.org/package=Cluster.OBeu">Cluster.OBeu on CRAN</a></li>
-</ul>
-</div>
 </div>
   </div>
 
@@ -328,7 +321,6 @@ jsonlite<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 </li>
       <li><a href="#further-details">Further Details</a></li>
       <li><a href="#github">Github</a></li>
-      <li><a href="#cran">CRAN</a></li>
       </ul>
 </div>
       </div>

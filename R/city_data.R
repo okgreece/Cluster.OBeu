@@ -1,4 +1,4 @@
-#' Sample city data
+#' city data example
 #' 
 #' @description 
 #' This dataset is an example data frame of the budget phase data
@@ -12,7 +12,7 @@
 #'   }
 #' 
 #' @format A data frame with the previous characteristics as columns
-#' @name sample_city_data
+#' @name city_data
 #' 
 #' 
 NULL

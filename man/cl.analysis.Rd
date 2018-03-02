@@ -29,14 +29,11 @@ The final returns are the parameters needed for visualizing the cluster data dep
 as long as some comparison measure matrices.
 
 \itemize{
-
 \item cluster.method - Label of the clustering algorithm
 \item raw.data - Input data
 \item data.pca - The principal components to visualize the input data
 \item modelparam - The results of this parameter depend of the selected clustering model
-\item compare - Clustering measures
-
-}
+\item compare - Clustering measures}
 }
 \description{
 Clustering Analysis for OBEU datasets.
@@ -47,6 +44,9 @@ The user should define the cl_feature, cl.aggregate and amount parameters to for
 The clustering algorithm, the number of clusters and the distance metric of the clustering model are set
 to the best selection using internal and stability measures. 
 The end user can also interact with the cluster analysis and these parameters by specifying the cl.method, cl.num and cl.dist parameters respectively.
+}
+\examples{
+cl.analysis(city_data, cl.meth = "pam", clust.numb = 3)
 }
 \seealso{
 \code{\link{cl.features}}, \code{\link[clValid]{clValid}}, \code{\link[cluster]{diana}}, \code{\link[cluster]{agnes}},
