@@ -18,6 +18,7 @@ output:
 [![Github Issues](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/issues.svg)](https://github.com/okgreece/Cluster.OBeu/issues)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/Cluster.OBeu)](http://cran.rstudio.com/web/packages/Cluster.OBeu/index.html)
 [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+[![Rdoc](http://www.rdocumentation.org/badges/version/Cluster.OBeu)](http://www.rdocumentation.org/packages/Cluster.OBeu)
 [![DOI](https://zenodo.org/badge/65309457.svg)](https://zenodo.org/badge/latestdoi/65309457)
 
 #[Cluster.OBeu](https://okgreece.github.io/Cluster.OBeu/index.html)
