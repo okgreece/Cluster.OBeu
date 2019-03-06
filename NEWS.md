@@ -1,3 +1,8 @@
+Cluster.OBeu 1.2.2
+------------------
+
+fix bugs in functions, code format
+
 Cluster.OBeu 1.2.1
 ------------------
 

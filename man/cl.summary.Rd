@@ -19,13 +19,14 @@ Extract the most frequent
 This function returns the proposed method or number of clusters or both according to the majority clustering indices of a clValid process
 }
 \examples{
-cl.data = nums(city_data)
-method_clvalid = clValid::clValid(as.matrix(cl.data), 2:4,
+cl.data <- nums(city_data)
+method_clvalid <- clValid::clValid(as.matrix(cl.data), 2:4,
                                   clMethods = c("pam", "kmeans"),
                                   validation = c("internal","stability"),
                                   metric = "euclidean")
-cl.meth = cl.summary(method_clvalid)
+cl.meth <- cl.summary(method_clvalid)
 cl.meth
+
 }
 \author{
 Kleanthis Koupidis

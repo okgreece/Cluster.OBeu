@@ -1,8 +1,8 @@
 Package: Cluster.OBeu
 Type: Package
-Title: Cluster Analysis 'OpenBudgets'
-Version: 1.2.1
-Date: 2018-01-25
+Title: Cluster Analysis 'OpenBudgets.eu'
+Version: 1.2.2
+Date: 2019-01-20
 Description: Estimate and return the needed parameters for visualisations designed for 'OpenBudgets' <http://openbudgets.eu/> data. Calculate cluster analysis measures in Budget data of municipalities across Europe, according to the 'OpenBudgets' data model. It involves a set of techniques and algorithms used to find and divide the data into groups of similar observations. Also, can be used generally to extract visualisation parameters convert them to 'JSON' format and use them as input in a different graphical interface.
 Authors@R: c(
     person("Kleanthis", "Koupidis", , "koupidis@okfn.gr", role = c("aut", "cre")),
@@ -29,9 +29,8 @@ Imports:
     reshape, 
     reshape2, 
     stringr, 
-    tibble, 
     utils
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Suggests: 
     knitr,
     rmarkdown

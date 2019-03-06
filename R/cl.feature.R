@@ -23,27 +23,31 @@
 #' cl.features(iris, features = 'Species')
 #' @rdname cl.features
 #' @export
+#' 
 
-
-cl.features = function(data, features = NULL, amounts = NULL, aggregate = "sum", tojson = FALSE ) {
+cl.features <- function(data, features = NULL, amounts = NULL, aggregate = "sum", tojson = FALSE ) {
   
   # Convert to data frame
-  data=as.data.frame(data)
+  data <- as.data.frame(data)
   
-  if ( is.null(features) ) features = names(which(sapply(data, is.factor) | sapply(data, is.character)) ) 
-  if ( is.null(amounts) ) amounts = names(which(sapply(data, is.double) | sapply(data, is.numeric)) ) 
+  if (is.null(features)) {
+    features <- names(which(sapply(data, is.factor) | sapply(data, is.character))) 
+  }
+  
+  if (is.null(amounts)) { 
+    amounts <- names(which(sapply(data, is.double) | sapply(data, is.numeric)))
+  }
   
   # Melt data
+  molten_data <- reshape2::melt(data, id.vars = features, measure.vars = amounts)
   
-  molten_data = reshape2::melt(data, id.vars = features, measure.vars = amounts )
-  
-  if ( length(features) > 1 ) {
-    features = stringr::str_c(features, collapse = "+")
+  if (length(features) > 1) {
+    features <- stringr::str_c(features, collapse = "+")
   }
   
   # Form Dataset
-  
-  cluster.data = reshape2::dcast(molten_data, noquote( paste(features, "~" , "variable")), fun.aggregate = sum)
+  cluster.data <- reshape2::dcast(molten_data, 
+                                  noquote(paste(features, "~" , "variable")), fun.aggregate = sum)
   
   return(cluster.data)
 }

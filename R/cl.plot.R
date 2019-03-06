@@ -21,29 +21,62 @@
 #' @rdname cl.plot
 #' 
 #' @export
+#' 
 
 cl.plot <- function(clustering.model, parameters = list()) {
+  
   # convert json to list if passed as json
-  if(is(clustering.model,"json")){
+  if (is(clustering.model,"json")) {
     clustering.model <- jsonlite::fromJSON(clustering.model)
   }
+  
   # kmeans
-  if(clustering.model$cluster.method %in% c("kmeans","pam","clara","fanny")) {
+  if (clustering.model$cluster.method %in% c("kmeans","pam","clara","fanny")) {
+    
     # initialize
-    parameters <- utils::modifyList(list(ellipses=FALSE, convex.hulls=FALSE), parameters)
+    parameters <- utils::modifyList(list(ellipses = FALSE, convex.hulls = FALSE), parameters)
+    
     # PCA
-    par(oma=c(0, 0, 0, 5))
+    par(oma = c(0, 0, 0, 5))
     graphics::plot(clustering.model$data.pca, main = clustering.model$cluster.method)
-    sapply(seq_along(unique(clustering.model$clusters)), function(clId) points(clustering.model$data.pca[which(clustering.model$clusters==unique(clustering.model$clusters)[clId]),1:2],col=palette()[clId]))
-    legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA,
-           unique(clustering.model$clusters), lwd = 1, lty = 1, pch = 1, col = palette()[unique(clustering.model$clusters)])
+    
+    sapply(
+      seq_along(unique(clustering.model$clusters)), 
+      function(clId) {
+        points(clustering.model$data.pca[which(clustering.model$clusters == 
+                                                 unique(clustering.model$clusters)[clId]), 1:2], 
+               col = palette()[clId])
+      })
+    
+    legend(
+      par('usr')[2], 
+      par('usr')[4], 
+      bty = 'n', 
+      xpd = NA,
+      unique(clustering.model$clusters), 
+      lwd = 1, 
+      lty = 1, 
+      pch = 1, 
+      col = palette()[unique(clustering.model$clusters)])
+    
     # Ellipses
-    if(parameters$ellipses == TRUE){
-      sapply(seq_along(clustering.model$cluster.ellipses), function(clId) lines(clustering.model$cluster.ellipses[[clId]], col=palette()[clId]))
+    if (parameters$ellipses == TRUE) {
+      sapply(
+        seq_along(clustering.model$cluster.ellipses), 
+        function(clId) {
+          lines(clustering.model$cluster.ellipses[[clId]], 
+                col=palette()[clId])
+        })
     }
+    
     # Convex hulls
     if(parameters$convex.hulls == TRUE) {
-      sapply(seq_along(clustering.model$cluster.convex.hulls), function(clId) lines(clustering.model$cluster.convex.hulls[[clId]], col=palette()[clId]))
+      sapply(
+        seq_along(clustering.model$cluster.convex.hulls), 
+        function(clId) {
+          lines(clustering.model$cluster.convex.hulls[[clId]], 
+                col = palette()[clId])
+        })
     }
   } else {
     message(paste("Clusterring model", clustering.model$cluster.method, "is not supported!"))
@@ -59,23 +92,25 @@ cl.plot <- function(clustering.model, parameters = list()) {
 #' @return List of vectors with points for each ellipse.
 #' @rdname ellipses
 #' @export
+#' 
+
 ellipses <- function(clustering.model, data.pca) {
   lapply(
     unique(clustering.model$clusters), 
     function(cl) {
-      
       if (length(data.pca$x[which(clustering.model$clusters==cl), 1] ) > 1) {
         car::dataEllipse(
-          x=data.pca$x[which(clustering.model$clusters==cl),1],
-          y=data.pca$x[which(clustering.model$clusters==cl),2],
-          draw=F, 
-          levels=0.95, 
-          segments=4) } else data.pca$x[which(clustering.model$clusters==cl),1:2]
+          x = data.pca$x[which(clustering.model$clusters==cl),1],
+          y = data.pca$x[which(clustering.model$clusters==cl),2],
+          draw = FALSE, 
+          levels = 0.95, 
+          segments = 4) 
+      } else {
+        data.pca$x[which(clustering.model$clusters==cl),1:2]
+      }
     }
   )
 }
-
-
 
 #' @title Convex hull points
 #' @description 
@@ -85,17 +120,21 @@ ellipses <- function(clustering.model, data.pca) {
 #' @return List of vectors with points for each convex hull.
 #' @rdname convex.hulls
 #' @export
+#' 
+
 convex.hulls <- function(clustering.model, data.pca) {
   
   lapply(
-    
-    sort(unique(clustering.model$clusters),decreasing = FALSE),
-    
-    function(clId){
-      dat <- data.pca$x[which(clustering.model$clusters==clId),1:2]
+    sort(unique(clustering.model$clusters), decreasing = FALSE),
+    function(clId) {
+      dat <- data.pca$x[which(clustering.model$clusters == clId), 1:2]
       pts <- grDevices::chull(dat)
       
-      if (length(dat[pts])>2) dat[c(pts,pts[1]), 1:2] else dat[pts]
+      if (length(dat[pts]) > 2) { 
+        dat[c(pts,pts[1]), 1:2]
+      } else { 
+        dat[pts]
+      }
     }
   )
 }
