@@ -6,3 +6,6 @@ r:
   - release
   - devel  
 warnings_are_errors: false
+## Use patched devtools
+r_github_packages:
+  - hadley/devtools
