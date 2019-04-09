@@ -19,7 +19,6 @@ Imports:
     car, 
     cluster, 
     clValid, 
-    devtools,
     data.tree, 
     dendextend, 
     graphics, 
@@ -33,6 +32,7 @@ Imports:
     utils
 RoxygenNote: 6.1.1
 Suggests: 
+    devtools,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
