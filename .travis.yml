@@ -4,8 +4,14 @@ cache: packages
 r:
   - oldrel
   - release
-  - devel  
-warnings_are_errors: false
+  - devel
 ## Use patched devtools
 r_github_packages:
   - hadley/devtools
+before_install:
+  - tlmgr install index
+addons:
+  apt:
+    packages:
+    - libnlopt-dev
+warnings_are_errors: false
