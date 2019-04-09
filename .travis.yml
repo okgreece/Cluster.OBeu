@@ -8,8 +8,4 @@ r:
   - release
   - devel  
 before_install: R -e 'source("https://install-github.me/r-lib/remotes")'
-addons:
-  apt:
-    packages:   
-    - libnlopt-dev
 warnings_are_errors: false
