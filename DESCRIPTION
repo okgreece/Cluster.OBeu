@@ -25,14 +25,13 @@ Imports:
     jsonlite, 
     mclust,
     methods,
-    mvtnorm,
     RCurl, 
     reshape, 
     reshape2, 
     stringr, 
     utils
 RoxygenNote: 6.1.1
-Depends: R (>  3.4.4)
+Depends: R (>=  3.5.0)
 Suggests: 
     knitr,
     rmarkdown
