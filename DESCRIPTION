@@ -25,6 +25,7 @@ Imports:
     jsonlite, 
     mclust,
     methods,
+    mvtnorm,
     RCurl, 
     reshape, 
     reshape2, 
