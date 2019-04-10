@@ -9,7 +9,6 @@ r:
   - devel  
 before_install:
   - tlmgr install index
-  - R -e 'source("https://install-github.me/r-lib/remotes")'
 repos:
   CRAN: http://cran.rstudio.com
 addons:
