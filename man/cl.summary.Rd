@@ -22,7 +22,7 @@ This function returns the proposed method or number of clusters or both accordin
 cl.data <- nums(city_data)
 method_clvalid <- clValid::clValid(as.matrix(cl.data), 2:4,
                                   clMethods = "pam",
-                                  validation = c("internal","stability"),
+                                  validation = "internal",
                                   metric = "euclidean")
 cl.meth <- cl.summary(method_clvalid)
 cl.meth
