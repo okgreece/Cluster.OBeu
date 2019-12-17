@@ -1,3 +1,8 @@
+Cluster.OBeu 1.2.3
+------------------
+
+fix error of cl.summary example, rd files
+
 Cluster.OBeu 1.2.2
 ------------------
 

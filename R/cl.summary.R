@@ -15,8 +15,8 @@
 #' @examples 
 #' cl.data <- nums(city_data)
 #' method_clvalid <- clValid::clValid(as.matrix(cl.data), 2:4,
-#'                                   clMethods = c("pam", "kmeans"),
-#'                                   validation = c("internal","stability"),
+#'                                   clMethods = "pam",
+#'                                   validation = "internal",
 #'                                   metric = "euclidean")
 #' cl.meth <- cl.summary(method_clvalid)
 #' cl.meth
