@@ -3,18 +3,40 @@ Cluster.OBeu <img src="okfgr2.png" align="right" />
 Kleanthis Koupidis, Charalampos Bratsas, Jaroslav Kuchar
 November 9, 2016
 
-[![Build Status](https://travis-ci.org/okgreece/Cluster.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/Cluster.OBeu) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/Cluster.OBeu)](https://cran.r-project.org/package=Cluster.OBeu) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/pulls.svg)](https://github.com/okgreece/Cluster.OBeu/pulls) [![Github Issues](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/issues.svg)](https://github.com/okgreece/Cluster.OBeu/issues) [![](http://cranlogs.r-pkg.org/badges/grand-total/Cluster.OBeu)](http://cran.rstudio.com/web/packages/Cluster.OBeu/index.html) [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) [![Rdoc](http://www.rdocumentation.org/badges/version/Cluster.OBeu)](http://www.rdocumentation.org/packages/Cluster.OBeu) [![DOI](https://zenodo.org/badge/65309457.svg)](https://zenodo.org/badge/latestdoi/65309457)
+[![R-CMD-check](https://github.com/okgreece/Cluster.OBeu/workflows/R-CMD-check/badge.svg)](https://github.com/okgreece/Cluster.OBeu/actions)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/Cluster.OBeu)](https://cran.r-project.org/package=Cluster.OBeu)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/Cluster.OBeu)](http://cran.rstudio.com/web/packages/Cluster.OBeu/index.html)
+[![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+[![DOI](https://zenodo.org/badge/65309457.svg)](https://zenodo.org/badge/latestdoi/65309457)
 
-[Cluster.OBeu](https://okgreece.github.io/Cluster.OBeu/index.html)
-==================================================================
+\#[Cluster.OBeu](https://okgreece.github.io/Cluster.OBeu/index.html)
+Εstimate and return the necessary parameters for cluster analysis
+visualizations, used in [OpenBudgets.eu](http://openbudgets.eu/). It
+involves a set of techniques and algorithms used to find and divide into
+groups the Budget data of municipalities across Europe, described by the
+[OpenBudgets.eu data model](https://github.com/openbudgets/data-model).
 
-Εstimate and return the necessary parameters for cluster analysis visualizations, used in [OpenBudgets.eu](http://openbudgets.eu/). It involves a set of techniques and algorithms used to find and divide into groups the Budget data of municipalities across Europe, described by the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model).
+The available clustering algorithms are hierarchical, kmeans from R
+base, pam, clara, fuzzy from [cluster
+package](https://CRAN.R-project.org/package=cluster) and model based
+algorithms from [mclust
+package](https://CRAN.R-project.org/package=mclust). It can be used to
+find the appropriate clustering algorithm and/or the appropriate
+clustering number of the input data according to the internal and
+stability measures from [clValid
+package](https://CRAN.R-project.org/package=clValid).
 
-The available clustering algorithms are hierarchical, kmeans from R base, pam, clara, fuzzy from [cluster package](https://CRAN.R-project.org/package=cluster) and model based algorithms from [mclust package](https://CRAN.R-project.org/package=mclust). It can be used to find the appropriate clustering algorithm and/or the appropriate clustering number of the input data according to the internal and stability measures from [clValid package](https://CRAN.R-project.org/package=clValid).
+This package can generally be used to estimate clustering parameters,
+extract and convert them to JSON format and use them as input in a
+different graphical interface and also can be used in data that are not
+described by the [OpenBudgets.eu data
+model](https://github.com/openbudgets/data-model).
 
-This package can generally be used to estimate clustering parameters, extract and convert them to JSON format and use them as input in a different graphical interface and also can be used in data that are not described by the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model).
-
-You can see detailed information [here](https://okgreece.github.io/Cluster.OBeu/).
+You can see detailed information
+[here](https://okgreece.github.io/Cluster.OBeu/).
 
 ``` r
 # install Cluster.OBeu- cran stable version
@@ -30,10 +52,11 @@ Load library `Cluster.OBeu` <img src="obeu_logo.png" align="right" />
 library(Cluster.OBeu)
 ```
 
-Cluster Analysis in a call
-==========================
+\#Cluster Analysis in a call
 
-`cl.analysis` can be used to estimate clustering model parameters and/or number of clusters needed for visualization of clusters and other clustering measures as list object.
+`cl.analysis` can be used to estimate clustering model parameters and/or
+number of clusters needed for visualization of clusters and other
+clustering measures as list object.
 
 ``` r
 cluster_data = cl.analysis( city_data, cl.aggregate = "sum", 
@@ -42,12 +65,19 @@ cluster_data = cl.analysis( city_data, cl.aggregate = "sum",
 jsonlite::prettify(cluster_data) # use prettify of jsonlite library to add indentation to the returned JSON string
 ```
 
-Cluster Analysis on OpenBudgets.eu platform
-===========================================
+\#Cluster Analysis on OpenBudgets.eu platform
 
-`open_spending.cl` is designed to estimate and return the clustering model measures of [OpenBudgets.eu](http://openbudgets.eu/) datasets.
+`open_spending.cl` is designed to estimate and return the clustering
+model measures of [OpenBudgets.eu](http://openbudgets.eu/) datasets.
 
-The input data must be a JSON link according to the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model). There are different parameters that a user could specify, e.g. `dimensions`, `measured.dimensions` and `amounts` should be defined by the user, to form the dimensions of the dataset. `open_spending.cl` estimates and returns the json data that are described with the [OpenBudgets.eu data model](https://github.com/openbudgets/data-model), using `cl.analysis` function.
+The input data must be a JSON link according to the [OpenBudgets.eu data
+model](https://github.com/openbudgets/data-model). There are different
+parameters that a user could specify, e.g. `dimensions`,
+`measured.dimensions` and `amounts` should be defined by the user, to
+form the dimensions of the dataset. `open_spending.cl` estimates and
+returns the json data that are described with the [OpenBudgets.eu data
+model](https://github.com/openbudgets/data-model), using `cl.analysis`
+function.
 
 ``` r
 #Store the link in a variable

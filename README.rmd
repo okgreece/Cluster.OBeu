@@ -11,14 +11,11 @@ output:
   number_sections: yes
 ---
 
-[![Build Status](https://travis-ci.org/okgreece/Cluster.OBeu.svg?branch=master)](https://travis-ci.org/okgreece/Cluster.OBeu)
+[![R-CMD-check](https://github.com/okgreece/Cluster.OBeu/workflows/R-CMD-check/badge.svg)](https://github.com/okgreece/Cluster.OBeu/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/Cluster.OBeu)](https://cran.r-project.org/package=Cluster.OBeu)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Pending Pull-Requests](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/pulls.svg)](https://github.com/okgreece/Cluster.OBeu/pulls)
-[![Github Issues](http://githubbadges.herokuapp.com/okgreece/Cluster.OBeu/issues.svg)](https://github.com/okgreece/Cluster.OBeu/issues)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/Cluster.OBeu)](http://cran.rstudio.com/web/packages/Cluster.OBeu/index.html)
 [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-[![Rdoc](http://www.rdocumentation.org/badges/version/Cluster.OBeu)](http://www.rdocumentation.org/packages/Cluster.OBeu)
 [![DOI](https://zenodo.org/badge/65309457.svg)](https://zenodo.org/badge/latestdoi/65309457)
 
 #[Cluster.OBeu](https://okgreece.github.io/Cluster.OBeu/index.html)

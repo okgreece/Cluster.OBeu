@@ -1,6 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\.travis\.yml$
 ^NEWS\.rmd$
 ^obeu_logo\.png$
 ^okfgr2\.png$
@@ -9,3 +8,4 @@
 ^_pkgdown\.yml$
 ^pkgdown$
 ^Cluster\.OBeu\.pdf$
+^\.github$
